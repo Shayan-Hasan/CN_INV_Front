@@ -1,0 +1,110 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+/*   
+  .label {
+    margin-left: 10px;
+  } */
+
+.css-13cymwt-control1 {
+  width: 100%;
+}
+
+.css-13cymwt-control2 {
+  width: 98%;
+}
+.css-13cymwt-control02 {
+  width: 87%;
+}
+
+.article-container-select2 {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  justify-content: space-around;
+  /* flex-wrap: wrap; */
+}
+
+.article-container1 {
+  display: flex;
+  /* flex-wrap: wrap; */
+}
+
+.article1 {
+  flex: 0 0 34%;
+  padding: 14px;
+}
+
+.css-b62m3t-container {
+  height: 20px;
+  margin: 0;
+}
+
+.card {
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* padding: 14px; */
+  border-radius: 10px;
+  overflow: hidden; /* Hide any content that overflows the container */
+}
+
+.card12 {
+  height: 300px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  overflow: hidden; /* Hide any content that overflows the container */
+}
+
+.table-container {
+  margin-top: 20px;
+  max-width: 100%;
+  height: 300px; /* Set a fixed height for the container */
+  overflow-y: auto; /* Add vertical scroll for the container */
+}
+
+.table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  table-layout: fixed; /* Fix the table layout */
+}
+.tableColor {
+  font: "#03C9D7";
+}
+
+.table th,
+.table td {
+  /* border: 1px solid #ddd; */
+  padding: 3px;
+  text-align: left;
+
+  /* white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;  */
+}
+
+.table th {
+  /* background-color: #4caf50; */
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.outer-card {
+  /* Adjust the outer card size based on inner card */
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* * {
+    
+    margin: 0;
+    box-sizing: border-box;
+  }
+     */

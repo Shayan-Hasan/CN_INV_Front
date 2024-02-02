@@ -1,0 +1,59 @@
+.custom-grid .e-headercell {
+  height: 72px !important;
+  color: #03c9d7;
+  /* font-size: 18px !important; */
+}
+.custom-grid .e-gridpager .e-numericitem {
+  background-color: #77bdff;
+  color: #ffffff;
+  cursor: pointer;
+}
+.custom-grid .e-gridpager .e-numericitem:hover {
+  background-color: white;
+  color: #80bdff;
+}
+.e-grid .e-gridpager .e-currentitem {
+  background-color: #005193;
+  color: #fff;
+}
+.custom-grid .e-headercelldiv {
+  line-height: 30px !important;
+  font-size: 16px !important;
+  text-align: center !important;
+}
+.custom-grid .e-rowcell {
+  height: 30px !important;
+  font-size: 14px !important;
+}
+.custom-grid .e-altrow {
+  background-color: #e4faff;
+}
+.custom-grid .e-selectionbackground {
+  background-color: #ffd7a3 !important;
+}
+
+.button-row {
+  padding: 0;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.select-custom {
+  min-width: 140px;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 18px;
+  padding: 6px;
+  margin: 6px;
+}
+
+#BrandSelect option {
+  /* Styles for each option */
+  background-color: #fff; /* Background color */
+  color: #000; /* Text color */
+  padding: 8px; /* Padding */
+}
+
+#BrandSelect option:hover {
+  /* Styles for a hovered option */
+  background-color: #e0e0e0; /* Hover background color */
+}
