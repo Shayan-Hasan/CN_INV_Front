@@ -187,7 +187,7 @@ const Products = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      navigate("/product/addproduct");
+      navigate("/Product/AddProduct");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -198,7 +198,7 @@ const Products = () => {
     try {
       console.log("Edit Product");
       if (p_id !== "") {
-        navigate(`/product/editproduct/${p_id}`);
+        navigate(`/Product/EditProduct/${p_id}`);
       } else {
         alert("Please select product to edit");
       }
@@ -221,7 +221,7 @@ const Products = () => {
     try {
       console.log("View Product Details");
       if (p_id !== "") {
-        navigate(`/product/viewproduct/${p_id}`);
+        navigate(`/Product/ViewProduct/${p_id}`);
       } else {
         alert("Please select product to view.");
       }

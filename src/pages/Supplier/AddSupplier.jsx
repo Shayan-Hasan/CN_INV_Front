@@ -52,7 +52,7 @@ const AddSupplier = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/supplier");
+      navigate("/Supplier");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -438,7 +438,7 @@ const AddSupplier = () => {
     );
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/supplier");
+      navigate("/Supplier");
       alert("Supplier added successfully.");
     } else {
       alert("Supplier failed to add.");
@@ -476,7 +476,7 @@ const AddSupplier = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     GENERAL INFOMARTION
@@ -595,7 +595,7 @@ const AddSupplier = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     CONTACT INFORMATION
@@ -674,7 +674,7 @@ const AddSupplier = () => {
                         style={{
                           fontSize: "19px",
                           fontStyle: "bold",
-                          color: "#03C9D7",
+                          color: currentColor,
                         }}
                       >
                         REMITTING ADDRESS
@@ -686,7 +686,7 @@ const AddSupplier = () => {
                   <button
                     style={{
                       padding: "4px",
-                      backgroundColor: "#03C9D7",
+                      backgroundColor: currentColor,
                       color: "#fff",
                       border: "none",
                       fontWeight: "bold",
@@ -803,7 +803,7 @@ const AddSupplier = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     SHIPPING ADDRESS

@@ -33,7 +33,7 @@ const AddStore = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/stores");
+      navigate("/Stores");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -216,7 +216,7 @@ const AddStore = () => {
     );
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/stores");
+      navigate("/Stores");
       alert("Store added successfully.");
     } else {
       alert("Store failed to add.");
@@ -275,7 +275,7 @@ const AddStore = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     GENERAL INFORMATION
@@ -371,7 +371,7 @@ const AddStore = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     LOCATION DETAIL

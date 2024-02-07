@@ -326,7 +326,7 @@ const EditCustomer = () => {
 
     try {
       console.log("Back");
-      navigate("/customers");
+      navigate("/Customers");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -589,7 +589,7 @@ const EditCustomer = () => {
 
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/customers");
+      navigate("/Customers");
       alert("Customer updated successfully.");
     } else {
       alert("Customer failed to update.");
@@ -680,7 +680,7 @@ const EditCustomer = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     GENERAL INFOMARTION
@@ -847,7 +847,7 @@ const EditCustomer = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     CONTACT INFORMATION
@@ -931,7 +931,7 @@ const EditCustomer = () => {
                         style={{
                           fontSize: "19px",
                           fontStyle: "bold",
-                          color: "#03C9D7",
+                          color: currentColor,
                         }}
                       >
                         BILLING ADDRESS
@@ -943,7 +943,7 @@ const EditCustomer = () => {
                   <button
                     style={{
                       padding: "4px",
-                      backgroundColor: "#03C9D7",
+                      backgroundColor: currentColor,
                       color: "#fff",
                       border: "none",
                       fontWeight: "bold",
@@ -1090,7 +1090,7 @@ const EditCustomer = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     SHIPPING ADDRESS

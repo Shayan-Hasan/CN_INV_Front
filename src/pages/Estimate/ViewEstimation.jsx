@@ -92,7 +92,7 @@ const ViewEstimation = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/sales");
+      navigate("/Estimates");
     } catch (error) {
       console.error("Error:", error);
     }

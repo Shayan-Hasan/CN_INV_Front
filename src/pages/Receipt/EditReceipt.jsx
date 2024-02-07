@@ -129,7 +129,7 @@ const EditReceipt = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/receipt");
+      navigate("/Receipt");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -200,7 +200,7 @@ const EditReceipt = () => {
     );
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/receipt");
+      navigate("/Receipt");
       alert("Receipt update successfully.");
     } else {
       alert("Receipt failed to update.");

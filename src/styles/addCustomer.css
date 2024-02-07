@@ -205,7 +205,7 @@ thead {
 .table th,
 .table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 4px !important;
   text-align: left;
 }
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://147.182.241.192:3001";
-//const BASE_URL = "http://localhost:3001";
+//const BASE_URL = "http://147.182.241.192:3001";
+const BASE_URL = "http://localhost:3001";
 
 export const LoginApi = async (username, password) => {
   try {
@@ -14,6 +14,23 @@ export const LoginApi = async (username, password) => {
   } catch (err) {
     console.log(err);
     return false;
+  }
+};
+
+export const GetOrderProductDetailById = async (product_id, store_id) => {
+  try {
+    console.log("GetOrderProductDetailById");
+    const response = await axios.post(
+      `${BASE_URL}/product/GetOrderProductDetailById`,
+      {
+        product_id: product_id,
+        store_id: store_id,
+      }
+    );
+    return response;
+  } catch (err) {
+    console.log(err);
+    return err;
   }
 };
 
@@ -384,6 +401,67 @@ export const GetAllSalesByID = async (store_id, est_sale) => {
   }
 };
 
+export const SpecialOrderApi = async (store_id) => {
+  try {
+    console.log("SpecialOrder");
+    const response = await axios.post(`${BASE_URL}/supplier/SpecialOrder`, {
+      store_id: store_id,
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+export const GetSpecialOrderProdDetail = async (store_id, vendor_id) => {
+  try {
+    console.log("SpecialOrder");
+    const response = await axios.post(
+      `${BASE_URL}/purchase/GetSpecialOrderProdDetail`,
+      {
+        store_id: store_id,
+        vendor_id: vendor_id,
+      }
+    );
+    return response;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+export const GetInvoiceProdBySoId = async (so_id) => {
+  try {
+    console.log("GetInvoiceProdBySoId");
+    const response = await axios.post(
+      `${BASE_URL}/Invoice/GetInvoiceProdBySoId`,
+      {
+        so_id: so_id,
+      }
+    );
+    return response;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+export const GetInvoiceDetailBySoId = async (so_id) => {
+  try {
+    console.log("GetInvoiceDetailBySoId");
+    const response = await axios.post(
+      `${BASE_URL}/Invoice/GetInvoiceDetailBySoId`,
+      {
+        so_id: so_id,
+      }
+    );
+    return response;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 export const GetAllPurchaseByID = async (store_id) => {
   try {
     console.log("GetAllPurchaseByID");
@@ -622,6 +700,20 @@ export const GetAllProducts = async () => {
   }
 };
 
+export const GetAllProductListSup = async () => {
+  try {
+    console.log("GetAllProducts");
+    const response = await axios.get(
+      `${BASE_URL}/product/GetAllProductListSup`,
+      {}
+    );
+    return response;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 export const GetAllProductsInv = async () => {
   try {
     console.log("GetAllProductsInv");
@@ -629,6 +721,19 @@ export const GetAllProductsInv = async () => {
       `${BASE_URL}/product/getAllProductsInv`,
       {}
     );
+    return response;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+export const GetVendorDetail = async (vendor_id) => {
+  try {
+    console.log("GetVendorDetail");
+    const response = await axios.post(`${BASE_URL}/supplier/GetVendorDetail`, {
+      vendor_id: vendor_id,
+    });
+    //console.log(response.data);
     return response;
   } catch (err) {
     console.log(err);
@@ -1604,6 +1709,22 @@ export const AddSaleOrderApi = async (JsonObject) => {
     // console.log(JSON.stringify(JsonObject));
     const response = await axios.post(
       `${BASE_URL}/sale/addSaleOrder`,
+      JsonObject,
+      {}
+    );
+    console.log(response);
+    return response;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+};
+
+export const addAssignProductVen = async (JsonObject) => {
+  try {
+    // console.log(JSON.stringify(JsonObject));
+    const response = await axios.post(
+      `${BASE_URL}/supplier/addAssignProductVen`,
       JsonObject,
       {}
     );

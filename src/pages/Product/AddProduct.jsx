@@ -201,7 +201,7 @@ const AddProduct = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/product");
+      navigate("/Product");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -285,7 +285,7 @@ const AddProduct = () => {
     event.preventDefault();
     try {
       console.log("AddUnit");
-      navigate("/product/AddEditUnit");
+      navigate("/Product/AddEditUnit");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -295,7 +295,7 @@ const AddProduct = () => {
     event.preventDefault();
     try {
       console.log("AddBrand");
-      navigate("/product/AddEditBrand");
+      navigate("/Product/AddEditBrand");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -305,7 +305,7 @@ const AddProduct = () => {
     event.preventDefault();
     try {
       console.log("AddCategory");
-      navigate("/product/AddEditCategory");
+      navigate("/Product/AddEditCategory");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -467,7 +467,7 @@ const AddProduct = () => {
         // }
       }
 
-      navigate("/product");
+      navigate("/Product");
       alert("Product added successfully.");
     } else {
       alert("Product failed to add.");
@@ -738,7 +738,7 @@ const AddProduct = () => {
                   checked={DisplayProduct === 1}
                   onChange={handleChangeDisplay}
                 />
-                {` `}Display Product
+                Display Product
               </label>
 
               <br />

@@ -43,7 +43,7 @@ const ViewAccount = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/account");
+      navigate("/Account");
     } catch (error) {
       console.error("Error:", error);
     }

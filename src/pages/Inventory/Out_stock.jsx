@@ -118,7 +118,7 @@ const Out_stock = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/inventory");
+      navigate("/Inventory");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -173,7 +173,7 @@ const Out_stock = () => {
 
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/inventory/outstock");
+      navigate("/Inventory/OutStock");
       alert("Out Stock Added Successfully");
     } else {
       alert("Out Stock Failed to Add");

@@ -114,7 +114,7 @@ const Account = () => {
     TimeoutUtility.resetTimeout();
     try {
       console.log("Add new");
-      navigate("/account/addaccount");
+      navigate("/Account/AddAccount");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -126,7 +126,7 @@ const Account = () => {
       console.log("edit new");
       if (defaultacc === 0) {
         if (Account_id !== "") {
-          navigate(`/account/editaccount/${Account_id}`);
+          navigate(`/Account/EditAccount/${Account_id}`);
         } else {
           alert("Please select account to edit.");
         }
@@ -144,7 +144,7 @@ const Account = () => {
     try {
       console.log("view account");
       if (Account_id !== "") {
-        navigate(`/account/viewaccount/${Account_id}`);
+        navigate(`/Account/ViewAccount/${Account_id}`);
       } else {
         alert("Please select account to view.");
       }

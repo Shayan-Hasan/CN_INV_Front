@@ -1,25 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  GridComponent,
-  ColumnsDirective,
-  ColumnDirective,
-  Page,
-  Selection,
-  Inject,
-  Edit,
-  Toolbar,
-  Sort,
-  Filter,
-} from "@syncfusion/ej2-react-grids";
 import { GetAllUnits, DeleteUnitById, AddUnitApi } from "../../api/Api";
 import Select from "react-select";
-import { customersData } from "../../data/dummy";
 import { Header, Button } from "../../components";
 import TimeoutUtility from "../../contexts/TimeoutUtility";
-import axios from "axios";
 import { useStateContext } from "../../contexts/ContextProvider";
-import "../../styles/product.css";
+import { Col, Container, Row } from "react-bootstrap";
+import "../../styles/AddProduct.css";
 
 const AddEditUnit = () => {
   const { currentColor } = useStateContext();
@@ -34,7 +21,7 @@ const AddEditUnit = () => {
     TimeoutUtility.resetTimeout();
     try {
       console.log("Back");
-      navigate("/product/addproduct");
+      navigate("/Product/AddProduct");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -54,7 +41,7 @@ const AddEditUnit = () => {
         AddUnitApi(unit_name.value)
           .then((res) => {
             if (res.status === 200) {
-              navigate("/product/addeditunit");
+              navigate("/Product/AddEditUnit");
               alert("Added successfully.");
               window.location.reload();
             } else {
@@ -84,7 +71,7 @@ const AddEditUnit = () => {
         DeleteUnitById(unit_id)
           .then((res) => {
             if (res.status === 200) {
-              navigate("/product/addeditunit");
+              navigate("/Product/AddEditUnit");
               alert("Removed successfully.");
               window.location.reload();
             } else {
@@ -140,102 +127,91 @@ const AddEditUnit = () => {
   }, [getunits]);
 
   return (
-    <div className="m-2 md:m-4 p-1 md:p-2 bg-white rounded-2xl">
-      <div style={{ paddingLeft: "140px" }}>
-        <Header title="AED UNIT" />
-      </div>
-      <div className="user-body">
-        <div className="offset-lg-3 col-lg-6">
-          <form className="container-trans">
-            <div
-              // className="card"
-              style={{
-                width: "700px",
-                height: "400px",
-                textAlign: "left",
-                paddingLeft: "20px",
-                backgroundColor: "Transparent",
-                color: "black",
-              }}
-            >
-              <div class="article-container">
-                <div>
-                  <div style={{ flex: "0 0 90%" }}>
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label htmlFor="ProductSelect">Unit: </label>
-                        {/* <div class="article-container-select"> */}
-                        <Select
-                          className="css-13cymwt-control1"
-                          value={unit}
-                          onChange={handleChangeUnit}
-                          options={unitOptions}
-                          isSearchable
-                          placeholder="Choose unit to delete"
-                          isClearable
-                          styles={{ width: "400px" }}
-                        />
-                        {/* </div> */}
-                      </div>
-                    </div>
-                    <br />
-                    <br />
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label>Add: </label>
-                        <br />
-                        <input
-                          type="text"
-                          className="input"
-                          name="unit_name"
-                          placeholder="Add new unit"
-                          style={{ width: "400px", height: "30px" }}
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <br />
-
-                    <Button
-                      color="white"
-                      margin="10px"
-                      padding="20px"
-                      bgColor={currentColor}
-                      text="Add"
-                      borderRadius="10px"
-                      className="custom-button ml-2"
-                      onClick={handleAddSubmit}
-                    />
-                    <Button
-                      color="white"
-                      margin="10px"
-                      padding="20px"
-                      bgColor={currentColor}
-                      text="Delete"
-                      borderRadius="10px"
-                      className="custom-button ml-2"
-                      onClick={handleDeleteSubmit}
-                    />
-                    <Button
-                      color="white"
-                      margin="10px"
-                      padding="20px"
-                      bgColor={currentColor}
-                      text="Back"
-                      borderRadius="10px"
-                      className="custom-button ml-2"
-                      onClick={handleBackClick}
-                    />
-                  </div>
+    <div className="m-0 md:m-4 p-4 md:p-8 bg-white rounded-3xl">
+      <Header title="ADD UNIT" />
+      <form>
+        <Container
+          className="g-0 justify-center"
+          fluid="true"
+          style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "18px" }}
+        >
+          <Row
+            xs={1}
+            sm={1}
+            className="justify-content-center"
+            style={{ padding: "0" }}
+          >
+            <Col md={4} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label" htmlFor="ProductSelect">
+                    Delete:{" "}
+                  </label>
+                  {/* <div class="article-container-select"> */}
+                  <Select
+                    className="myreact-select container-select"
+                    value={unit}
+                    onChange={handleChangeUnit}
+                    options={unitOptions}
+                    isSearchable
+                    placeholder="Choose unit to delete"
+                    isClearable
+                  />
                 </div>
               </div>
-            </div>
-          </form>
+              <br />
+              <br />
 
-          {/* <button >Submit</button> */}
-        </div>
-      </div>
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Add: </label>
+                  <br />
+                  <input
+                    type="text"
+                    className="input"
+                    name="unit_name"
+                    placeholder="Add new unit"
+                  />
+                </div>
+              </div>
+              <br />
+              <br />
+            </Col>
+          </Row>
+        </Container>
+      </form>
+      <Row md={"auto"} className="justify-content-center">
+        <Button
+          color="white"
+          margin="10px"
+          padding="20px"
+          bgColor={currentColor}
+          text="Add"
+          borderRadius="10px"
+          className="custom-button ml-2"
+          onClick={handleAddSubmit}
+        />
+        <Button
+          color="white"
+          margin="10px"
+          padding="20px"
+          bgColor={currentColor}
+          text="Delete"
+          borderRadius="10px"
+          className="custom-button ml-2"
+          onClick={handleDeleteSubmit}
+        />
+        <Button
+          color="white"
+          margin="10px"
+          padding="20px"
+          bgColor={currentColor}
+          text="Back"
+          borderRadius="10px"
+          className="custom-button ml-2"
+          onClick={handleBackClick}
+        />
+      </Row>
     </div>
   );
 };

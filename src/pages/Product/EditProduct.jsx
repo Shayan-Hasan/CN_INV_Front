@@ -218,7 +218,7 @@ const EditProduct = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/product");
+      navigate("/Product");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -418,7 +418,7 @@ const EditProduct = () => {
         }
       });
       // }
-      navigate("/product");
+      navigate("/Product");
       alert("Product updated successfully.");
     } else {
       alert("Product failed to update.");

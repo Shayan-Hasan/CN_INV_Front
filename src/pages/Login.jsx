@@ -61,7 +61,7 @@ const Login = () => {
 
         return navigate("/Overview");
       }
-      return navigate("/login");
+      return navigate("/Login");
     } else {
       updatedErrors[2] = "Incorrect Username / Password.";
       setValError(updatedErrors);
@@ -76,13 +76,13 @@ const Login = () => {
         role: null,
       };
       localStorage.setItem("userData", JSON.stringify(userData));
-      return navigate("/login");
+      return navigate("/Login");
     }
 
     const userData1 = JSON.parse(userDataString);
     if (!userData1) {
       // window.location.reload();
-      return navigate("/login");
+      return navigate("/Login");
     }
   }, []);
 

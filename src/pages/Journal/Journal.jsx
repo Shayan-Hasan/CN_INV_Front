@@ -128,7 +128,7 @@ const Journal = () => {
         ) {
           const resp = await deleteJournalById(r_id);
           if (resp.status === 200) {
-            navigate("/journal");
+            navigate("/Journal");
             alert("Journal deleted successfully.");
           } else {
             alert("Journal failed to delete.");

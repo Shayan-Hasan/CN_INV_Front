@@ -11,6 +11,7 @@ import {
   EditPurchaseStatusBYPo_id,
   getProductFilterSubString,
   getAccNamesCash,
+  GetSpecialOrderProdDetail,
 } from "../../api/Api";
 import { SuppliersData } from "../../data/dummy";
 import { Header, Button } from "../../components";
@@ -57,6 +58,8 @@ const AddPurchaseOrder = () => {
   const [acc_from_id, setacc_from_id] = useState("");
   const [acc_from_bal, setacc_from_bal] = useState("");
   const [ProductStr, setProductStr] = useState("");
+  const [Svendor_id, setSvendor_id] = useState("");
+  const [Sstore_id, setSstore_id] = useState("");
 
   let param = useParams();
 
@@ -710,7 +713,53 @@ const AddPurchaseOrder = () => {
 
   useEffect(() => {
     async function fetchData() {
-      getAccNamesCash()
+      var a = null,
+        b = null;
+      if (localStorage.getItem("SpecOrder_Tag")) {
+        const SpecOrder_Tag = localStorage.getItem("SpecOrder_Tag");
+        if (SpecOrder_Tag === "Y") {
+          if (JSON.parse(localStorage.getItem("Spec_Order_Page"))) {
+            const Spec_Order_Page = JSON.parse(
+              localStorage.getItem("Spec_Order_Page")
+            );
+            console.log(Spec_Order_Page["SpecVendor_id"]);
+            a = Spec_Order_Page["SpecVendor_id"];
+            b = Spec_Order_Page["Store_id"];
+            await GetSpecialOrderProdDetail(
+              Spec_Order_Page["Store_id"],
+              Spec_Order_Page["SpecVendor_id"]
+            )
+              .then(function (result) {
+                console.log(result.data);
+                const productList = result.data.map((item) => ({
+                  product_id: item.product_id,
+                  name: item.productname,
+                  code: item.code,
+                  unit_price: item.unit_price,
+                  quantity: item.quantity,
+                  discount: item.discount,
+                  total: item.quantity * item.unit_price,
+                  receive: 0,
+                  image: item.image,
+                  details: item.details,
+                }));
+
+                var ProductStr1 = ProductStr;
+                ProductStr1 = ProductStr1 + productList.product_id + " ";
+                setProductStr(ProductStr1);
+
+                setcartList((prevProductList) => [
+                  ...prevProductList,
+                  ...productList,
+                ]);
+              })
+              .catch((err) => {
+                console.log(err.message);
+              });
+          }
+        }
+      }
+      await getAccNamesCash()
         .then((resp) => {
           setGetacc_tos(resp.data || []);
         })
@@ -718,13 +767,19 @@ const AddPurchaseOrder = () => {
           console.log(err.message);
         });
 
-      GetAllVendorsName()
+      await GetAllVendorsName()
         .then((resp) => {
           setGetSupplier(resp.data || []);
         })
         .catch((err) => {
           console.log(err.message);
         });
+      if (b) {
+        setSstore_id(b);
+      }
+      if (a) {
+        setSvendor_id(a);
+      }
     }
     fetchData();
   }, []);
@@ -749,7 +804,7 @@ const AddPurchaseOrder = () => {
         account_id: item.account_id,
       }));
       setSupplierOptions(fetchedSupplierOption);
-      setcartList([]);
+      //setcartList([]);
     };
     fetchSupplierOptions();
   }, [GetSupplier]);
@@ -757,6 +812,31 @@ const AddPurchaseOrder = () => {
   useEffect(() => {
     CalculateAllFields();
   }, [CardList, tax]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        console.log(Svendor_id);
+        const toAccOption = GetSupplier.find(
+          (option) => option.vendor_id === parseInt(Svendor_id)
+        );
+        console.log(toAccOption);
+
+        const toAccOption1 = {
+          label: `${toAccOption.name}`,
+          value: toAccOption.vendor_id,
+          balance: toAccOption.balance,
+          account_id: toAccOption.account_id,
+        };
+        setSelectedSupplier(toAccOption1);
+        setacc_from_bal(toAccOption.balance);
+        setSupplier(toAccOption1);
+        setSupplier_ids(toAccOption1.value);
+        setacc_from_id(toAccOption.account_id);
+      } catch (err) {}
+    }
+    fetchData();
+  }, [Svendor_id]);
 
   const customStyles = {
     control: (provided) => ({
@@ -791,7 +871,7 @@ const AddPurchaseOrder = () => {
               style={{
                 fontWeight: "bold",
                 fontSize: "18px",
-                backgroundColor: "#03C9D7",
+                backgroundColor: currentColor,
                 color: "black",
               }}
             >
@@ -834,7 +914,7 @@ const AddPurchaseOrder = () => {
                     <label
                       className="label"
                       style={{
-                        border: "3px solid #03C9D7",
+                        border: "3px solid currentColor",
                         width: "13%",
                         fontWeight: "bold",
                         font: "100px",
@@ -881,7 +961,7 @@ const AddPurchaseOrder = () => {
                       // className="article-container1"
                       style={{
                         padding: "10px",
-                        backgroundColor: "#03C9D7",
+                        backgroundColor: currentColor,
                         color: "#fff",
                         borderRadius: "11px",
                         marginLeft: "10px",
@@ -903,7 +983,7 @@ const AddPurchaseOrder = () => {
                       <thead
                         className="thead-dark"
                         style={{
-                          color: "#03C9D7",
+                          color: currentColor,
                           textAlign: "center",
                           verticalAlign: "middle",
                           fontWeight: "bold",
@@ -1184,7 +1264,7 @@ const AddPurchaseOrder = () => {
                             // rowSpan="4"
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "10px",
@@ -1195,7 +1275,7 @@ const AddPurchaseOrder = () => {
                           <td
                             rowSpan="5"
                             style={{
-                              backgroundColor: "#03C9D7",
+                              backgroundColor: currentColor,
                               textAlign: "center",
                               fontWeight: "bold",
                               // width: "60px !important",
@@ -1236,7 +1316,7 @@ const AddPurchaseOrder = () => {
                           <td
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "10px",
@@ -1253,11 +1333,13 @@ const AddPurchaseOrder = () => {
                             AMOUNT PAID:
                           </td>
 
-                          <td style={{ fontWeight: "bold", color: "#03C9D7" }}>
+                          <td
+                            style={{ fontWeight: "bold", color: currentColor }}
+                          >
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 paddingLeft: "7px",
                                 fontSize: "20px",
                               }}
@@ -1281,7 +1363,7 @@ const AddPurchaseOrder = () => {
                                 width: "100px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                               }}
                             />
@@ -1295,11 +1377,13 @@ const AddPurchaseOrder = () => {
                             RECEIVED FROM:
                           </td>
 
-                          <td style={{ fontWeight: "bold", color: "#03C9D7" }}>
+                          <td
+                            style={{ fontWeight: "bold", color: currentColor }}
+                          >
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 paddingLeft: "18px",
                               }}
                             >
@@ -1311,7 +1395,7 @@ const AddPurchaseOrder = () => {
                                 width: "180px",
                                 height: "30px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 // fontWeight: "Bold",
                                 borderWidth: "2px",
                                 borderStyle: "solid",
@@ -1345,7 +1429,7 @@ const AddPurchaseOrder = () => {
                           <td
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "20px",
@@ -1376,7 +1460,7 @@ const AddPurchaseOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                       marginTop: "6px",
                     }}
                     onClick={handleSaleOrderClick}
@@ -1398,7 +1482,7 @@ const AddPurchaseOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                       marginTop: "6px",
                     }}
                   >
@@ -1421,7 +1505,7 @@ const AddPurchaseOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleNewClick}
                   >
@@ -1442,7 +1526,7 @@ const AddPurchaseOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleClearClick}
                   >
@@ -1466,7 +1550,7 @@ const AddPurchaseOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleStatusClick}
                   >
@@ -1487,7 +1571,7 @@ const AddPurchaseOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleBackClick}
                   >
@@ -1639,7 +1723,7 @@ const AddPurchaseOrder = () => {
                       <Card
                         style={{
                           fontWeight: "Bold",
-                          border: "2px solid #03C9D7",
+                          border: "2px solid currentColor",
                           margin: "2px",
                         }}
                         className="keypad-button1"

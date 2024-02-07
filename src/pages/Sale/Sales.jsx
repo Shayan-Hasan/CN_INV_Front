@@ -49,7 +49,7 @@ const Sales = () => {
         <button
           type="button"
           style={{ background: "green" }}
-          className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+          className="text-white py-3 px-2 capitalize rounded-2xl text-md"
         >
           <p1>Close</p1>
           {/* {props.active_product} */}
@@ -58,7 +58,7 @@ const Sales = () => {
         <button
           type="button"
           style={{ background: "red" }}
-          className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+          className="text-white py-3 px-2 capitalize rounded-2xl text-md"
         >
           <p1>Open</p1>
 
@@ -78,11 +78,11 @@ const Sales = () => {
   const customersGrid = [
     // { headerTemplate: ` `, type: "checkbox", width: "50" },
     {
-      headerText: "E/S#",
+      headerText: "S#",
       field: "Q-S #",
-      minWidth: "120",
-      width: "120",
-      maxWidth: "150",
+      minWidth: "110",
+      width: "110",
+      maxWidth: "120",
       textAlign: "right",
     },
 
@@ -99,18 +99,27 @@ const Sales = () => {
       field: "Customer",
       headerText: "Customer",
       minWidth: "160",
-      width: "220",
+      width: "180",
       maxWidth: "360",
       textAlign: "left",
     },
 
     {
       field: "Customer PO",
-      headerText: "Customer PO",
+      headerText: "Cust PO",
+      minWidth: "130",
+      width: "140",
+      maxWidth: "180",
+      textAlign: "right",
+    },
+
+    {
+      field: "Proj",
+      headerText: "Project Name",
       minWidth: "170",
       width: "170",
       maxWidth: "200",
-      textAlign: "right",
+      textAlign: "left",
     },
 
     {
@@ -127,7 +136,7 @@ const Sales = () => {
       field: "Sale Date",
       headerText: "Sale Date",
       minWidth: "160",
-      width: "160",
+      width: "170",
       maxWidth: "180",
       textAlign: "Center",
     },
@@ -136,8 +145,8 @@ const Sales = () => {
       field: `total`,
       headerText: "Total",
       format: "C2",
-      minWidth: "130",
-      width: "140",
+      minWidth: "120",
+      width: "130",
       maxWidth: "150",
       textAlign: "right",
     },
@@ -145,18 +154,18 @@ const Sales = () => {
       field: `amt`,
       headerText: "Amt Paid",
       format: "C2",
-      minWidth: "140",
-      width: "140",
+      minWidth: "135",
+      width: "135",
       maxWidth: "150",
       textAlign: "right",
     },
     {
       field: "amount_pending",
       format: "C2",
-      headerText: "Amt Pending",
-      minWidth: "160",
-      width: "160",
-      maxWidth: "160",
+      headerText: "Amt Pend",
+      minWidth: "140",
+      width: "140",
+      maxWidth: "150",
       textAlign: "right",
     },
   ];
@@ -167,11 +176,11 @@ const Sales = () => {
       console.log("Add new");
       const baseUrl = "http://localhost:3000";
       if (est_sale === "E") {
-        const path = `/sales/addEstimation/${store_id}`;
+        const path = `/Estimates/AddEstimation/${store_id}`;
         const url = `${baseUrl}${path}`;
         window.open(url, "_blank");
       } else {
-        const path = `/sales/addSaleOrder/${store_id}`;
+        const path = `/Sales/AddSaleOrder/${store_id}`;
         const url = `${baseUrl}${path}`;
         window.open(url, "_blank");
       }
@@ -188,11 +197,11 @@ const Sales = () => {
         const so_ids = so_id + "_" + store_id;
         const baseUrl = "http://localhost:3000";
         if (est_sale === "E") {
-          const path = `/sales/editEstimation/${so_ids}`;
+          const path = `/Estimates/EditEstimation/${so_ids}`;
           const url = `${baseUrl}${path}`;
           window.open(url, "_blank");
         } else {
-          const path = `/sales/editSaleOrder/${so_ids}`;
+          const path = `/Sales/EditSaleOrder/${so_ids}`;
           const url = `${baseUrl}${path}`;
           window.open(url, "_blank");
         }
@@ -204,23 +213,13 @@ const Sales = () => {
     }
   };
 
-  const handleest_saleChange = (event) => {
-    setest_sale(event.target.value);
-    console.log(event.target.value);
-
-    const Sale_Est = {
-      saleEst: event.target.value,
-    };
-    localStorage.setItem("Sale_Est", JSON.stringify(Sale_Est));
-  };
-
   const handleViewEmployeesClick = async (event) => {
     event.preventDefault();
     try {
       console.log("view saleorder");
       if (so_id != "") {
         const so_ids = so_id + "_" + store_id;
-        navigate(`/sales/Shipment/${so_ids}`);
+        navigate(`/Sales/Shipment/${so_ids}`);
       } else {
         alert("Please Select Order");
       }
@@ -235,7 +234,7 @@ const Sales = () => {
       console.log("view shipment");
       if (so_id != "") {
         const so_ids = so_id + "_" + store_id;
-        navigate(`/sales/viewShipment/${so_id}`);
+        navigate(`/Sales/ViewShipment/${so_id}`);
       } else {
         alert("Please Select Order");
       }
@@ -252,7 +251,7 @@ const Sales = () => {
         const so_ids = so_id + "_" + store_id;
         const baseUrl = "http://localhost:3000";
         if (est_sale === "E") {
-          const path = `/sales/ConvertEstimate/${so_ids}`;
+          const path = `/Estimates/ConvertEstimate/${so_ids}`;
           const url = `${baseUrl}${path}`;
           window.open(url, "_blank");
         }
@@ -271,9 +270,9 @@ const Sales = () => {
       if (so_id != "") {
         const so_ids = so_id + "_" + store_id;
         if (est_sale === "E") {
-          navigate(`/sales/viewEstimation/${so_id}`);
+          navigate(`/Estimates/ViewEstimation/${so_id}`);
         } else {
-          navigate(`/sales/viewSaleOrder/${so_id}`);
+          navigate(`/Sales/ViewSaleOrder/${so_id}`);
         }
       } else {
         alert("Please Select Order");
@@ -285,12 +284,14 @@ const Sales = () => {
 
   const handleChangeStore = (e) => {
     setstore(e.target.value);
-    const Sale_Store = {
-      SaleStore: e.target.value,
-    };
-    localStorage.setItem("Sale_Store", JSON.stringify(Sale_Store));
+
     const s_id = getstores.find((item) => item.name === e.target.value);
     setstore_id(s_id.store_id);
+    const Sale_Store = {
+      SaleStore: e.target.value,
+      SaleId: s_id.store_id,
+    };
+    localStorage.setItem("Sale_Store", JSON.stringify(Sale_Store));
   };
 
   const handleRowSelected = (args) => {
@@ -301,11 +302,15 @@ const Sales = () => {
 
   useEffect(() => {
     async function fetchData() {
+      var a = null,
+        b = null;
       await GetAllStores()
         .then((resp) => {
           setstores(resp.data || []);
           setstore(resp.data[0].name);
+          a = resp.data[0].name;
           setstore_id(resp.data[0].store_id);
+          b = resp.data[0].store_id;
         })
         .catch((err) => {
           console.log(err.message);
@@ -318,7 +323,8 @@ const Sales = () => {
       }
       if (!JSON.parse(localStorage.getItem("Sale_Store"))) {
         const Sale_Store = {
-          SaleStore: "",
+          SaleStore: a,
+          SaleId: b,
         };
         localStorage.setItem("Sale_Store", JSON.stringify(Sale_Store));
       }
@@ -326,7 +332,7 @@ const Sales = () => {
       const Sale_Store = JSON.parse(localStorage.getItem("Sale_Store"));
       setest_sale(Sale_Est["saleEst"]);
       console.log(Sale_Store["SaleStore"]);
-
+      setstore_id(Sale_Store["SaleId"]);
       setstore(Sale_Store["SaleStore"]);
     }
     fetchData();
@@ -435,7 +441,7 @@ const Sales = () => {
               />
             </Col>
           )}
-          <Col md="auto" style={{ padding: "0" }}>
+          {/* <Col md="auto" style={{ padding: "0" }}>
             <select
               className="select-custom"
               value={est_sale}
@@ -444,7 +450,7 @@ const Sales = () => {
               <option value="S">Sale Orders</option>
               <option value="E">Estimations</option>
             </select>
-          </Col>
+          </Col> */}
 
           <Col md="auto" style={{ padding: "0" }}>
             <select

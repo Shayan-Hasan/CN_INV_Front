@@ -368,7 +368,7 @@ const AddEstimation = () => {
     try {
       console.log("Add new");
       const baseUrl = "http://localhost:3000";
-      const path = `/sales/addEstimation/${param.store_id}`;
+      const path = `/Estimates/AddEstimation/${param.store_id}`;
       const url = `${baseUrl}${path}`;
       window.open(url, "_blank");
     } catch (error) {
@@ -727,7 +727,7 @@ const AddEstimation = () => {
                     <label
                       className="label"
                       style={{
-                        border: "3px solid #03C9D7",
+                        border: "3px solid currentColor",
                         width: "13%",
                         fontWeight: "bold",
                         font: "100px",
@@ -774,7 +774,7 @@ const AddEstimation = () => {
                       // className="article-container1"
                       style={{
                         padding: "10px",
-                        backgroundColor: "#03C9D7",
+                        backgroundColor: currentColor,
                         color: "#fff",
                         borderRadius: "11px",
                         marginLeft: "10px",
@@ -796,7 +796,7 @@ const AddEstimation = () => {
                       <thead
                         className="thead-dark"
                         style={{
-                          color: "#03C9D7",
+                          color: currentColor,
                           textAlign: "center",
                           verticalAlign: "middle",
                           fontWeight: "bold",
@@ -1044,7 +1044,7 @@ const AddEstimation = () => {
                             // colSpan="2"
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "10px",
@@ -1055,7 +1055,7 @@ const AddEstimation = () => {
                           <td
                             rowSpan="5"
                             style={{
-                              backgroundColor: "#03C9D7",
+                              backgroundColor: currentColor,
                               textAlign: "center",
                               fontWeight: "bold",
                               width: "60px !important",
@@ -1097,7 +1097,7 @@ const AddEstimation = () => {
                           <td
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "10px",
@@ -1121,7 +1121,7 @@ const AddEstimation = () => {
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 paddingLeft: "10px",
                                 fontSize: "20px",
                               }}
@@ -1144,7 +1144,7 @@ const AddEstimation = () => {
                                 width: "100px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                               }}
                             />
@@ -1158,11 +1158,13 @@ const AddEstimation = () => {
                             SHIPMENT:
                           </td>
 
-                          <td style={{ fontWeight: "bold", color: "#03C9D7" }}>
+                          <td
+                            style={{ fontWeight: "bold", color: currentColor }}
+                          >
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 paddingLeft: "10px",
                                 fontSize: "20px",
                               }}
@@ -1184,7 +1186,7 @@ const AddEstimation = () => {
                                 width: "100px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                               }}
                             />
@@ -1199,7 +1201,7 @@ const AddEstimation = () => {
                           <td
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "20px",
@@ -1230,7 +1232,7 @@ const AddEstimation = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                       marginTop: "6px",
                     }}
                     onClick={handleSaleOrderClick}
@@ -1252,7 +1254,7 @@ const AddEstimation = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                       marginTop: "6px",
                     }}
                   >
@@ -1275,7 +1277,7 @@ const AddEstimation = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleNewClick}
                   >
@@ -1296,7 +1298,7 @@ const AddEstimation = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleClearClick}
                   >
@@ -1320,7 +1322,7 @@ const AddEstimation = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     // onClick={handleStatusClick}
                   >
@@ -1331,7 +1333,7 @@ const AddEstimation = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleBackClick}
                   >
@@ -1411,7 +1413,7 @@ const AddEstimation = () => {
                       <Card
                         style={{
                           fontWeight: "Bold",
-                          border: "2px solid #03C9D7",
+                          border: "2px solid currentColor",
                           margin: "2px",
                         }}
                         className="keypad-button1"

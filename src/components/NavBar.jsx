@@ -10,7 +10,7 @@ import { IoMdLogOut } from "react-icons/io";
 import avatar from "../data/avatar.jpg";
 // import { Cart, Chat, Notification, UserProfile } from '.';
 import { useStateContext } from "../contexts/ContextProvider";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -95,7 +95,7 @@ const Navbar = () => {
         >
           {/* <NavButton
           title="Chat"
-          dotColor="#03C9D7"
+          dotColor=currentColor
           customFunc={() => handleClick("chat")}
           color={currentColor}
           icon={<AiOutlineLogout />}

@@ -84,7 +84,7 @@ const ViewInventory = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/inventory");
+      navigate("/Inventory");
     } catch (error) {
       console.error("Error:", error);
     }

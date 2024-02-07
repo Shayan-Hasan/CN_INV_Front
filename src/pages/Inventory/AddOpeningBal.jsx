@@ -131,7 +131,7 @@ const AddOpeningBal = () => {
     TimeoutUtility.resetTimeout();
     try {
       console.log("Back");
-      navigate("/inventory");
+      navigate("/Inventory");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -214,7 +214,7 @@ const AddOpeningBal = () => {
 
       console.log(response, "Response");
       if (response.status === 200) {
-        navigate("/inventory");
+        navigate("/Inventory");
         alert("Opening balance added successfully.");
       } else {
         alert("Opening balance failed to add.");
@@ -230,7 +230,7 @@ const AddOpeningBal = () => {
 
       console.log(response, "Response");
       if (response.status === 200) {
-        navigate("/inventory");
+        navigate("/Inventory");
         alert("Opening balance update successfully.");
       } else {
         alert("Opening balance failed to update.");

@@ -50,7 +50,7 @@ const ViewCustomer = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/customers");
+      navigate("/Customers");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -121,7 +121,7 @@ const ViewCustomer = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     GENERAL INFOMARTION
@@ -230,7 +230,7 @@ const ViewCustomer = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     CONTACT INFORMATION
@@ -303,7 +303,7 @@ const ViewCustomer = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     BILLING ADDRESS
@@ -419,7 +419,7 @@ const ViewCustomer = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     SHIPPING ADDRESS

@@ -42,7 +42,7 @@ const EditStore = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/stores");
+      navigate("/Stores");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -250,7 +250,7 @@ const EditStore = () => {
     );
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/stores");
+      navigate("/Stores");
       alert("Store updated successfully.");
     } else {
       alert("Store failed to update.");
@@ -322,7 +322,7 @@ const EditStore = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     GENERAL INFORMATION
@@ -417,7 +417,7 @@ const EditStore = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     LOCATION DETAIL

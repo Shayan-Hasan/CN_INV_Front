@@ -37,7 +37,7 @@ const ViewProduct = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/product");
+      navigate("/Product");
     } catch (error) {
       console.error("Error:", error);
     }

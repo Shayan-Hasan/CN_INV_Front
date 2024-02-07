@@ -1,6 +1,10 @@
+:root {
+  --my-current-color: #03c9d7;
+}
+
 .custom-grid .e-headercell {
   height: 72px !important;
-  color: #03c9d7;
+  color: var(--my-current-color);
   /* font-size: 18px !important; */
 }
 .custom-grid .e-gridpager .e-numericitem {
@@ -24,6 +28,8 @@
 .custom-grid .e-rowcell {
   height: 30px !important;
   font-size: 14px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
 }
 .custom-grid .e-altrow {
   background-color: #e4faff;

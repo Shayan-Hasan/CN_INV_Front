@@ -14,7 +14,7 @@ import {
   Filter,
   Resize,
 } from "@syncfusion/ej2-react-grids";
-import { GetAllPurchaseByID, GetAllStores } from "../../api/Api";
+import { GetAllSalesByID, GetAllStores } from "../../api/Api";
 import Select from "react-select";
 import { Header, Button } from "../../components";
 import "../../styles/viewCustomer.css";
@@ -22,29 +22,22 @@ import "../../styles/viewCustomer.css";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { Col, Container, Row } from "react-bootstrap";
 
-const Purchase = () => {
+const Sales = () => {
   const [AllAccounts, setAllAccounts] = useState("");
-  const [po_id, setpo_id] = useState("");
+  const [so_id, setso_id] = useState("");
   const { currentColor } = useStateContext();
   const navigate = useNavigate();
   const [store, setstore] = useState("");
   const [store_id, setstore_id] = useState("");
   const [getstores, setstores] = useState([]);
-
-  const formatCurrency = (number) => {
-    return number.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    });
-  };
+  const [est_sale, setest_sale] = useState("E");
 
   const ProductGridactiveStatus = (props) => (
     <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
       {/* <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
       <p>{props.active_product}</p> */}
-      {/* {props.Status} */}
-      {props.status === "Approved" ? (
+      {props.status}
+      {props.Status === "Shipped" ? (
         <button
           type="button"
           style={{ background: "green" }}
@@ -67,53 +60,55 @@ const Purchase = () => {
     </div>
   );
 
-  const customerGridImage1 = (props) => (
-    <div>{formatCurrency(props.total)}</div>
-  );
-  const customerGridImage = (props) => (
-    <div>{formatCurrency(props.amount_pending)}</div>
-  );
-
   const customersGrid = [
     // { headerTemplate: ` `, type: "checkbox", width: "50" },
     {
-      headerText: "PO#",
-      field: "po",
-      minWidth: "120",
-      width: "120",
-      maxWidth: "150",
+      headerText: "E#",
+      field: "Q-S #",
+      minWidth: "110",
+      width: "110",
+      maxWidth: "120",
       textAlign: "right",
     },
 
     {
-      field: "order_date",
-      headerText: "Order Date",
-      minWidth: "160",
-      width: "160",
+      field: "Quote Date",
+      headerText: "Estimate Date",
+      minWidth: "170",
+      width: "170",
       maxWidth: "180",
       textAlign: "center",
     },
 
     {
-      field: "vendor",
-      headerText: "Supplier",
+      field: "Customer",
+      headerText: "Customer",
       minWidth: "160",
-      width: "220",
+      width: "180",
       maxWidth: "360",
       textAlign: "left",
     },
 
     {
-      field: "vendor_invoice_no",
-      headerText: "Vendor Inv#",
-      minWidth: "170",
-      width: "180",
-      maxWidth: "200",
+      field: "Customer PO",
+      headerText: "Cust PO",
+      minWidth: "130",
+      width: "140",
+      maxWidth: "180",
       textAlign: "right",
     },
 
     {
-      field: "status",
+      field: "project",
+      headerText: "Project Name",
+      minWidth: "170",
+      width: "170",
+      maxWidth: "200",
+      textAlign: "left",
+    },
+
+    {
+      field: "Status",
       headerText: "Status",
       template: ProductGridactiveStatus,
       minWidth: "120",
@@ -123,30 +118,39 @@ const Purchase = () => {
     },
 
     {
+      field: "Sale Date",
+      headerText: "Sale Date",
+      minWidth: "160",
+      width: "170",
+      maxWidth: "180",
+      textAlign: "Center",
+    },
+
+    {
       field: `total`,
       headerText: "Total",
       format: "C2",
-      minWidth: "130",
-      width: "140",
+      minWidth: "120",
+      width: "130",
       maxWidth: "150",
       textAlign: "right",
     },
     {
-      field: "amt",
+      field: `amt`,
       headerText: "Amt Paid",
       format: "C2",
-      minWidth: "140",
-      width: "140",
+      minWidth: "135",
+      width: "135",
       maxWidth: "150",
       textAlign: "right",
     },
     {
       field: "amount_pending",
       format: "C2",
-      headerText: "Amt Pending",
-      minWidth: "160",
-      width: "160",
-      maxWidth: "160",
+      headerText: "Amt Pend",
+      minWidth: "140",
+      width: "140",
+      maxWidth: "150",
       textAlign: "right",
     },
   ];
@@ -156,9 +160,15 @@ const Purchase = () => {
     try {
       console.log("Add new");
       const baseUrl = "http://localhost:3000";
-      const path = `/Purchase/addPurchaseOrder/${store_id}`;
-      const url = `${baseUrl}${path}`;
-      window.open(url, "_blank");
+      if (est_sale === "E") {
+        const path = `/Estimates/AddEstimation/${store_id}`;
+        const url = `${baseUrl}${path}`;
+        window.open(url, "_blank");
+      } else {
+        const path = `/Sales/AddSaleOrder/${store_id}`;
+        const url = `${baseUrl}${path}`;
+        window.open(url, "_blank");
+      }
     } catch (error) {
       console.error("Error:", error);
     }
@@ -168,29 +178,20 @@ const Purchase = () => {
     event.preventDefault();
     try {
       console.log("edit new");
-      if (po_id != "") {
-        const po_ids = po_id + "_" + store_id;
+      if (so_id != "") {
+        const so_ids = so_id + "_" + store_id;
         const baseUrl = "http://localhost:3000";
-        const path = `/Purchase/editPurchaseOrder/${po_ids}`;
-        const url = `${baseUrl}${path}`;
-        window.open(url, "_blank");
+        if (est_sale === "E") {
+          const path = `/Estimates/EditEstimation/${so_ids}`;
+          const url = `${baseUrl}${path}`;
+          window.open(url, "_blank");
+        } else {
+          const path = `/Sales/EditSaleOrder/${so_ids}`;
+          const url = `${baseUrl}${path}`;
+          window.open(url, "_blank");
+        }
       } else {
-        alert("Please select purchase order.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const handleViewEmployeesClick = async (event) => {
-    event.preventDefault();
-    try {
-      console.log("view saleorder");
-      if (po_id != "") {
-        const po_ids = po_id + "_" + store_id;
-        navigate(`/Purchase/Receive_Log/${po_ids}`);
-      } else {
-        alert("Please select purchase order.");
+        alert("Please Select Order");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -200,12 +201,17 @@ const Purchase = () => {
   const handleViewEmployeesClick1 = async (event) => {
     event.preventDefault();
     try {
-      console.log("view ReceiveLog");
-      if (po_id != "") {
-        const po_ids = po_id + "_" + store_id;
-        navigate(`/Purchase/ViewReceiveLog/${po_id}`);
+      console.log("edit new");
+      if (so_id != "") {
+        const so_ids = so_id + "_" + store_id;
+        const baseUrl = "http://localhost:3000";
+        if (est_sale === "E") {
+          const path = `/Estimates/ConvertEstimate/${so_ids}`;
+          const url = `${baseUrl}${path}`;
+          window.open(url, "_blank");
+        }
       } else {
-        alert("Please select purchase order.");
+        alert("Please Select Order");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -215,12 +221,16 @@ const Purchase = () => {
   const handleViewSaleClick = async (event) => {
     event.preventDefault();
     try {
-      console.log("view purchaseorder");
-      if (po_id != "") {
-        const so_ids = po_id + "_" + store_id;
-        navigate(`/Purchase/ViewPurchaseOrder/${po_id}`);
+      console.log("view saleorder");
+      if (so_id != "") {
+        const so_ids = so_id + "_" + store_id;
+        if (est_sale === "E") {
+          navigate(`/Estimates/ViewEstimation/${so_id}`);
+        } else {
+          navigate(`/Sales/ViewSaleOrder/${so_id}`);
+        }
       } else {
-        alert("Please! Select Purchase Order");
+        alert("Please Select Order");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -229,67 +239,63 @@ const Purchase = () => {
 
   const handleChangeStore = (e) => {
     setstore(e.target.value);
-    console.log(e.target.value);
-    const Purchase_Store = {
-      PurchaseStore: e.target.value,
+    const Sale_Store = {
+      SaleStore: e.target.value,
     };
-    localStorage.setItem("Purchase_Store", JSON.stringify(Purchase_Store));
+    localStorage.setItem("Est_Store", JSON.stringify(Sale_Store));
     const s_id = getstores.find((item) => item.name === e.target.value);
     setstore_id(s_id.store_id);
   };
 
   const handleRowSelected = (args) => {
     const selectedRowData = args.data;
-    setpo_id(selectedRowData.po_id);
-    console.log(selectedRowData.po_id);
+    setso_id(selectedRowData.so_id);
+    console.log(selectedRowData.so_id);
   };
 
   useEffect(() => {
     async function fetchData() {
-      var a = null,
-        b = null;
       await GetAllStores()
         .then((resp) => {
           setstores(resp.data || []);
           setstore(resp.data[0].name);
           setstore_id(resp.data[0].store_id);
-          a = resp.data[0].name;
-          b = resp.data[0].store_id;
         })
         .catch((err) => {
           console.log(err.message);
         });
-
-      if (!JSON.parse(localStorage.getItem("Sale_Store1"))) {
-        const Sale_Store1 = {
-          SaleStore1: a,
-          SaleId: b,
+      if (!JSON.parse(localStorage.getItem("Est_Store"))) {
+        const Sale_Store = {
+          SaleStore: "",
         };
-        localStorage.setItem("Sale_Store1", JSON.stringify(Sale_Store1));
+        localStorage.setItem("Est_Store", JSON.stringify(Sale_Store));
       }
-      const Sale_Store1 = JSON.parse(localStorage.getItem("Sale_Store1"));
-      console.log(Sale_Store1["SaleStore1"]);
+      const Sale_Store = JSON.parse(localStorage.getItem("Est_Store"));
+      console.log(Sale_Store["SaleStore"]);
 
-      setstore(Sale_Store1["SaleStore1"]);
-      setstore_id(Sale_Store1["SaleId"]);
+      setstore(Sale_Store["SaleStore"]);
     }
     fetchData();
   }, []);
 
   useEffect(() => {
-    console.log(store_id);
-    GetAllPurchaseByID(store_id)
-      .then((result) => {
-        setAllAccounts(result.data || []);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, [store, store_id]);
+    async function fetchData() {
+      console.log(store_id);
+      await GetAllSalesByID(store_id, est_sale)
+        .then((result) => {
+          setAllAccounts([...result.data]);
+          // setAllAccounts(result.data || []);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+    fetchData();
+  }, [store_id, est_sale]);
 
   return (
     <div className="m-0 md:m-4 p-4 md:p-8 bg-white rounded-3xl">
-      <Header category="Orders" title="PURCHASE ORDERS" />
+      <Header category="Orders" title="ESTIMATES" />
       <Container fluid className="g-0 p-0 justify-end">
         <Row xs={2} className="button-row justify-content-end font-normal">
           <Col md="auto" style={{ padding: "0" }}>
@@ -307,7 +313,7 @@ const Purchase = () => {
               margin="6px"
               color="white"
               bgColor={currentColor}
-              text="Update"
+              text="Edit"
               borderRadius="10px"
               onClick={handleEditEmployeesClick}
             />
@@ -327,21 +333,20 @@ const Purchase = () => {
               margin="6px"
               color="white"
               bgColor={currentColor}
-              text="Receive"
-              borderRadius="10px"
-              onClick={handleViewEmployeesClick}
-            />
-          </Col>
-          <Col md="auto" style={{ padding: "0" }}>
-            <Button
-              margin="6px"
-              color="white"
-              bgColor={currentColor}
-              text="View Receive"
+              text="Convert to Sale"
               borderRadius="10px"
               onClick={handleViewEmployeesClick1}
             />
           </Col>
+          {/* <Col md="auto" style={{ padding: "0" }}>
+            <select
+              className="select-custom"
+              value={est_sale}
+              onChange={handleest_saleChange}
+            >
+              <option value="E">Estimations</option>
+            </select>
+          </Col> */}
 
           <Col md="auto" style={{ padding: "0" }}>
             <select
@@ -381,4 +386,4 @@ const Purchase = () => {
   );
 };
 
-export default Purchase;
+export default Sales;

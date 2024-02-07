@@ -124,7 +124,7 @@ const In_stock = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/inventory");
+      navigate("/Inventory");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -178,7 +178,7 @@ const In_stock = () => {
 
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/inventory");
+      navigate("/Inventory");
       alert("In Stock Added Successfully");
     } else {
       alert("In Stock Failed to Add");

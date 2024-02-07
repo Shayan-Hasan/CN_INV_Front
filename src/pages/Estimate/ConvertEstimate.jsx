@@ -1070,7 +1070,7 @@ const ConvertEstimate = () => {
               style={{
                 fontWeight: "bold",
                 fontSize: "18px",
-                backgroundColor: "#03C9D7",
+                backgroundColor: currentColor,
                 color: "black",
               }}
             >
@@ -1122,7 +1122,7 @@ const ConvertEstimate = () => {
                         fontWeight: "bold",
                         font: "100px",
                         fontSize: "20px",
-                        border: "3px solid #03C9D7",
+                        border: "3px solid currentColor",
                       }}
                     >
                       Bal:{" "}
@@ -1168,7 +1168,7 @@ const ConvertEstimate = () => {
                       // className="article-container1"
                       style={{
                         padding: "10px",
-                        backgroundColor: "#03C9D7",
+                        backgroundColor: currentColor,
                         color: "#fff",
                         borderRadius: "11px",
                         marginLeft: "10px",
@@ -1190,7 +1190,7 @@ const ConvertEstimate = () => {
                       <thead
                         className="thead-dark"
                         style={{
-                          color: "#03C9D7",
+                          color: currentColor,
                           textAlign: "center",
                           verticalAlign: "middle",
                           fontWeight: "bold",
@@ -1469,7 +1469,7 @@ const ConvertEstimate = () => {
                             // colSpan="2"
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "10px",
@@ -1480,7 +1480,7 @@ const ConvertEstimate = () => {
                           <td
                             rowSpan="7"
                             style={{
-                              backgroundColor: "#03C9D7",
+                              backgroundColor: currentColor,
                               textAlign: "center",
                               fontWeight: "bold",
                               width: "60px !important",
@@ -1521,7 +1521,7 @@ const ConvertEstimate = () => {
                           <td
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "10px",
@@ -1546,7 +1546,7 @@ const ConvertEstimate = () => {
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontSize: "20px",
                                 paddingLeft: "7px",
                               }}
@@ -1569,7 +1569,7 @@ const ConvertEstimate = () => {
                                 width: "100px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                               }}
                             />
@@ -1582,11 +1582,13 @@ const ConvertEstimate = () => {
                             SHIPMENT:
                           </td>
 
-                          <td style={{ fontWeight: "bold", color: "#03C9D7" }}>
+                          <td
+                            style={{ fontWeight: "bold", color: currentColor }}
+                          >
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontSize: "20px",
                                 paddingLeft: "7px",
                               }}
@@ -1608,7 +1610,7 @@ const ConvertEstimate = () => {
                                 width: "100px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                               }}
                             />
@@ -1622,11 +1624,13 @@ const ConvertEstimate = () => {
                             AMOUNT PAID:
                           </td>
 
-                          <td style={{ fontWeight: "bold", color: "#03C9D7" }}>
+                          <td
+                            style={{ fontWeight: "bold", color: currentColor }}
+                          >
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontSize: "20px",
                                 paddingLeft: "7px",
                               }}
@@ -1650,7 +1654,7 @@ const ConvertEstimate = () => {
                                 width: "100px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                               }}
                             />
@@ -1664,11 +1668,13 @@ const ConvertEstimate = () => {
                             RECEIVED IN:
                           </td>
 
-                          <td style={{ fontWeight: "bold", color: "#03C9D7" }}>
+                          <td
+                            style={{ fontWeight: "bold", color: currentColor }}
+                          >
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 paddingLeft: "18px",
                               }}
                             >
@@ -1680,7 +1686,7 @@ const ConvertEstimate = () => {
                                 width: "180px",
                                 height: "30px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 // fontWeight: "Bold",
                                 borderWidth: "2px",
                                 borderStyle: "solid",
@@ -1714,7 +1720,7 @@ const ConvertEstimate = () => {
                           <td
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "20px",
@@ -1745,7 +1751,7 @@ const ConvertEstimate = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                       marginTop: "6px",
                     }}
                     onClick={handleSaleOrderClick}
@@ -1767,7 +1773,7 @@ const ConvertEstimate = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                       marginTop: "6px",
                     }}
                   >
@@ -1790,7 +1796,7 @@ const ConvertEstimate = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleNewClick}
                   >
@@ -1811,7 +1817,7 @@ const ConvertEstimate = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleClearClick}
                   >
@@ -1835,7 +1841,7 @@ const ConvertEstimate = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleStatusClick}
                   >
@@ -1856,7 +1862,7 @@ const ConvertEstimate = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleBackClick}
                   >
@@ -2008,7 +2014,7 @@ const ConvertEstimate = () => {
                       <Card
                         style={{
                           fontWeight: "Bold",
-                          border: "2px solid #03C9D7",
+                          border: "2px solid currentColor",
                           margin: "2px",
                         }}
                         className="keypad-button1"

@@ -1027,7 +1027,7 @@ const EditSaleOrder = () => {
               style={{
                 fontWeight: "bold",
                 fontSize: "18px",
-                backgroundColor: "#03C9D7",
+                backgroundColor: currentColor,
                 color: "black",
               }}
             >
@@ -1079,7 +1079,7 @@ const EditSaleOrder = () => {
                         fontWeight: "bold",
                         font: "100px",
                         fontSize: "20px",
-                        border: "3px solid #03C9D7",
+                        border: "3px solid currentColor",
                       }}
                     >
                       Bal:{" "}
@@ -1125,7 +1125,7 @@ const EditSaleOrder = () => {
                       // className="article-container1"
                       style={{
                         padding: "10px",
-                        backgroundColor: "#03C9D7",
+                        backgroundColor: currentColor,
                         color: "#fff",
                         borderRadius: "11px",
                         marginLeft: "10px",
@@ -1147,7 +1147,7 @@ const EditSaleOrder = () => {
                       <thead
                         className="thead-dark"
                         style={{
-                          color: "#03C9D7",
+                          color: currentColor,
                           textAlign: "center",
                           verticalAlign: "middle",
                           fontWeight: "bold",
@@ -1430,7 +1430,7 @@ const EditSaleOrder = () => {
                             // colSpan="2"
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "10px",
@@ -1441,7 +1441,7 @@ const EditSaleOrder = () => {
                           <td
                             rowSpan="7"
                             style={{
-                              backgroundColor: "#03C9D7",
+                              backgroundColor: currentColor,
                               textAlign: "center",
                               fontWeight: "bold",
                               // width: "60px !important",
@@ -1482,7 +1482,7 @@ const EditSaleOrder = () => {
                           <td
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "10px",
@@ -1507,7 +1507,7 @@ const EditSaleOrder = () => {
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontSize: "20px",
                                 paddingLeft: "7px",
                               }}
@@ -1530,7 +1530,7 @@ const EditSaleOrder = () => {
                                 width: "100px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                               }}
                             />
@@ -1543,11 +1543,13 @@ const EditSaleOrder = () => {
                             SHIPMENT:
                           </td>
 
-                          <td style={{ fontWeight: "bold", color: "#03C9D7" }}>
+                          <td
+                            style={{ fontWeight: "bold", color: currentColor }}
+                          >
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontSize: "20px",
                                 paddingLeft: "7px",
                               }}
@@ -1569,7 +1571,7 @@ const EditSaleOrder = () => {
                                 width: "100px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                               }}
                             />
@@ -1583,11 +1585,13 @@ const EditSaleOrder = () => {
                             AMOUNT PAID:
                           </td>
 
-                          <td style={{ fontWeight: "bold", color: "#03C9D7" }}>
+                          <td
+                            style={{ fontWeight: "bold", color: currentColor }}
+                          >
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 paddingLeft: "7px",
                                 fontSize: "20px",
                               }}
@@ -1600,7 +1604,7 @@ const EditSaleOrder = () => {
                                 width: "100px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                                 // background: "lightgrey",
                               }}
@@ -1617,11 +1621,13 @@ const EditSaleOrder = () => {
                             RECEIVED IN:
                           </td>
 
-                          <td style={{ fontWeight: "bold", color: "#03C9D7" }}>
+                          <td
+                            style={{ fontWeight: "bold", color: currentColor }}
+                          >
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 // paddingLeft: "18px",
                               }}
                             >
@@ -1634,7 +1640,7 @@ const EditSaleOrder = () => {
                                   width: "180px",
                                   height: "27px",
                                   fontSize: "20px",
-                                  color: "#03C9D7",
+                                  color: currentColor,
                                   fontWeight: "Bold",
                                   // background: "lightgrey",
                                 }}
@@ -1659,7 +1665,7 @@ const EditSaleOrder = () => {
                           <td
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               paddingLeft: "20px",
                               fontWeight: "Bold",
@@ -1690,7 +1696,7 @@ const EditSaleOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                       marginTop: "6px",
                     }}
                     onClick={handleSaleOrderClick}
@@ -1712,7 +1718,7 @@ const EditSaleOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                       marginTop: "6px",
                     }}
                   >
@@ -1735,7 +1741,7 @@ const EditSaleOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleNewClick}
                   >
@@ -1756,7 +1762,7 @@ const EditSaleOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleClearClick}
                   >
@@ -1780,7 +1786,7 @@ const EditSaleOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleStatusClick}
                   >
@@ -1801,7 +1807,7 @@ const EditSaleOrder = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleBackClick}
                   >
@@ -1953,7 +1959,7 @@ const EditSaleOrder = () => {
                       <Card
                         style={{
                           fontWeight: "Bold",
-                          border: "2px solid #03C9D7",
+                          border: "2px solid currentColor",
                           margin: "2px",
                         }}
                         className="keypad-button1"

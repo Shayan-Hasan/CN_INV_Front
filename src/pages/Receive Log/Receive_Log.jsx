@@ -458,7 +458,7 @@ const Receive_Log = () => {
             backgroundColor:
               (isUpdateButtonDisabled && !isEditMode) || !so_id || isEditMode
                 ? "grey"
-                : "#03C9D7",
+                : currentColor,
             color: "#fff",
             border: "none",
             borderRadius: "5px",
@@ -500,7 +500,7 @@ const Receive_Log = () => {
         <button
           style={{
             padding: "10px",
-            backgroundColor: !isUpdateButtonDisabled ? "grey" : "#03C9D7",
+            backgroundColor: !isUpdateButtonDisabled ? "grey" : currentColor,
             color: "#fff",
             border: "none",
             borderRadius: "5px",
@@ -518,7 +518,7 @@ const Receive_Log = () => {
         <button
           style={{
             padding: "10px",
-            backgroundColor: !isUpdateButtonDisabled ? "grey" : "#03C9D7",
+            backgroundColor: !isUpdateButtonDisabled ? "grey" : currentColor,
             color: "#fff",
             border: "none",
             borderRadius: "5px",
@@ -679,7 +679,7 @@ const Receive_Log = () => {
         <button
           style={{
             padding: "10px",
-            backgroundColor: !forceUpdate ? "grey" : "#03C9D7",
+            backgroundColor: !forceUpdate ? "grey" : currentColor,
             color: "#fff",
             border: "none",
             borderRadius: "5px",
@@ -696,7 +696,7 @@ const Receive_Log = () => {
         <button
           style={{
             padding: "10px",
-            backgroundColor: "#03C9D7",
+            backgroundColor: currentColor,
             color: "#fff",
             border: "none",
             borderRadius: "5px",

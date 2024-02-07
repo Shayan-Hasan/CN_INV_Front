@@ -83,7 +83,7 @@ const ViewStore = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/stores");
+      navigate("/Stores");
     } catch (error) {
       console.error("Error:", error);
     }

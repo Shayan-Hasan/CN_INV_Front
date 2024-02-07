@@ -73,13 +73,13 @@
   table-layout: fixed; /* Fix the table layout */
 }
 .tableColor {
-  font: "#03C9D7";
+  font: currentColor;
 }
 
 .table th,
 .table td {
   /* border: 1px solid #ddd; */
-  padding: 3px;
+  padding: 1px;
   text-align: left;
 
   /* white-space: nowrap; 

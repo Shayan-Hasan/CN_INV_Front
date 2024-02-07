@@ -9,18 +9,12 @@ import {
   Page,
   Selection,
   Inject,
-  Edit,
   Toolbar,
   Sort,
   Filter,
   Resize,
 } from "@syncfusion/ej2-react-grids";
-import {
-  addJournalApi,
-  getAccNamesCash,
-  getAccNameCusVen,
-  getAcc1BalFrom,
-} from "../../api/Api";
+import { addJournalApi, getAccNamesCash } from "../../api/Api";
 import { Header, Button } from "../../components";
 import { useStateContext } from "../../contexts/ContextProvider";
 import "../../styles/AddProduct.css";
@@ -185,7 +179,7 @@ const AddJournal = () => {
     TimeoutUtility.resetTimeout();
     try {
       console.log("Back");
-      navigate("/journal");
+      navigate("/Journal");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -294,7 +288,7 @@ const AddJournal = () => {
     const response = await addJournalApi(journallist);
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/journal");
+      navigate("/Journal");
       alert("Journal Ledger Added Successfully");
     } else {
       alert("Journal Ledger Failed to Add");

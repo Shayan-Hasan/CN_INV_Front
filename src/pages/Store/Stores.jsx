@@ -100,7 +100,7 @@ const Stores = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      navigate("/stores/add");
+      navigate("/Stores/Add");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -110,7 +110,7 @@ const Stores = () => {
     try {
       console.log("edit new");
       if (Store_id != "") {
-        navigate(`/stores/edit/${Store_id}`);
+        navigate(`/Stores/Edit/${Store_id}`);
       } else {
         alert("Please! Select Store to Edit");
       }
@@ -124,7 +124,7 @@ const Stores = () => {
     try {
       console.log("view store");
       if (Store_id != "") {
-        navigate(`/stores/viewStore/${Store_id}`);
+        navigate(`/Stores/ViewStore/${Store_id}`);
       } else {
         alert("Please! Select Store to View");
       }

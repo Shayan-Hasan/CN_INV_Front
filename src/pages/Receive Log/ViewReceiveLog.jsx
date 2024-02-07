@@ -117,7 +117,7 @@ const ViewReceiveLog = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/purchase");
+      navigate("/Purchase");
     } catch (error) {
       console.error("Error:", error);
     }

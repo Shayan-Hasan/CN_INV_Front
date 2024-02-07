@@ -37,7 +37,7 @@ const ViewEmployee = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/employee");
+      navigate("/Employee");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -92,7 +92,7 @@ const ViewEmployee = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     GENERAL INFORMATION
@@ -181,7 +181,7 @@ const ViewEmployee = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     {"   "}
@@ -255,7 +255,7 @@ const ViewEmployee = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     LOCATION DETAIL

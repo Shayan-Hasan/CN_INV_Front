@@ -37,7 +37,7 @@ const Inventory = () => {
   const customerGridImage1 = (props) => <div>{"PORD" + props.product_id}</div>;
 
   const handleEdit = (productId) => {
-    navigate("/inventory/edit");
+    navigate("/Inventory/Edit");
     console.log(`Edit action for Product ID ${productId}`);
   };
 
@@ -120,7 +120,7 @@ const Inventory = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      navigate("/inventory/add");
+      navigate("/Inventory/Add");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -129,7 +129,7 @@ const Inventory = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      navigate("/inventory/instock");
+      navigate("/Inventory/InStock");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -138,7 +138,7 @@ const Inventory = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      navigate("/inventory/outstock");
+      navigate("/Inventory/OutStock");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -149,7 +149,7 @@ const Inventory = () => {
     try {
       console.log("View Inventory");
       if (p_id != "") {
-        navigate(`/inventory/ViewInventory/${p_id}`);
+        navigate(`/Inventory/ViewInventory/${p_id}`);
       } else {
         alert("Please select product to view.");
       }
@@ -162,7 +162,7 @@ const Inventory = () => {
     event.preventDefault();
     try {
       console.log("Products");
-      navigate(`/inventory/product`);
+      navigate(`/Inventory/Product`);
     } catch (error) {
       console.error("Error:", error);
     }

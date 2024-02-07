@@ -113,7 +113,7 @@ const Employee = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      navigate("/employee/addEmployee");
+      navigate("/Employee/AddEmployee");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -123,7 +123,7 @@ const Employee = () => {
     try {
       console.log("edit new");
       if (Employee_id != "") {
-        navigate(`/employee/editEmployee/${Employee_id}`);
+        navigate(`/Employee/EditEmployee/${Employee_id}`);
       } else {
         alert("Please select employee to edit");
       }
@@ -174,7 +174,7 @@ const Employee = () => {
     try {
       console.log("view employee");
       if (Employee_id != "") {
-        navigate(`/employee/viewemployee/${Employee_id}`);
+        navigate(`/Employee/ViewEmployee/${Employee_id}`);
       } else {
         alert("Please select employee to view");
       }

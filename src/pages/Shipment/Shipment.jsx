@@ -12,6 +12,7 @@ import {
   Toolbar,
   Sort,
   Filter,
+  Resize,
 } from "@syncfusion/ej2-react-grids";
 import {
   GetAllSalesByID,
@@ -22,7 +23,8 @@ import {
 } from "../../api/Api";
 import Select from "react-select";
 import { Header, Button } from "../../components";
-import "../../styles/AddCus.css";
+import "../../styles/AddProduct.css";
+import { Container, Col, Row } from "react-bootstrap";
 // import NumberFormat from 'react-number-format/NumberFormat';
 import { useStateContext } from "../../contexts/ContextProvider";
 
@@ -76,30 +78,29 @@ const Shipment = () => {
   };
   const customersGrid = [
     {
+      field: "code",
+      headerText: "Code",
+      width: "90",
+      textAlign: "Center",
+    },
+
+    {
       headerText: "Product",
       field: "product",
       width: "150",
+      textAlign: "Center",
+    },
+    {
+      field: "details",
+      headerText: "Description",
+      width: "320",
       textAlign: "Center",
     },
 
     {
       field: "total_qty",
       headerText: "Qty",
-      width: "150",
-      textAlign: "Center",
-    },
-
-    {
-      field: "code",
-      headerText: "Code",
-      width: "150",
-      textAlign: "Center",
-    },
-
-    {
-      field: "details",
-      headerText: "Description",
-      width: "150",
+      width: "80",
       textAlign: "Center",
     },
 
@@ -137,7 +138,7 @@ const Shipment = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/sales");
+      navigate("/Sales");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -215,18 +216,13 @@ const Shipment = () => {
       const response = await EditShipment(updatedFormData);
       if (response.status === 200) {
         alert("Shipment Updated Successfully");
+        navigate("/Sales");
       } else {
         alert("Shipment Failed to Update");
       }
     } catch (error) {
       console.error("Error:", error);
     }
-  };
-
-  const handleChangeStore = (e) => {
-    setstore(e.target.value);
-    const s_id = getstores.find((item) => item.name === e.target.value);
-    setstore_id(s_id.store_id);
   };
 
   const handleCancelClick = async (event) => {
@@ -299,252 +295,295 @@ const Shipment = () => {
   }, [store, store_id]);
 
   return (
-    <div className="user-body">
-      <div style={{ paddingLeft: "1px" }}>
-        <Header title="SHIPMENT" />
-      </div>
+    <div className="m-0 md:m-4 p-4 md:p-8 bg-white rounded-3xl">
+      <Header title="SHIPMENT" />
 
-      <div className="flex justify-left">
-        <div class="article-container-cus">
-          <div class="article-cus4">
-            <div className="col-lg-12">
-              <div className="form-group">
-                <label style={{ fontWeight: "bold" }}>SO #: </label>
-                <br />
-                <input
-                  className="input"
-                  required
-                  type="text"
-                  name="name"
-                  value={so_id_param}
-                  placeholder="Sale Order"
-                  readOnly
-                  style={{ width: "110%", marginBottom: "20px" }}
-                />
-              </div>
-            </div>
-            {/* </div>
-                    <div class="article"> */}
-
-            <div className="col-lg-12">
-              <div className="form-group">
-                <label style={{ fontWeight: "bold" }}>Customer: </label>
-                <br />
-                <input
-                  type="text"
-                  name="email"
-                  value={customer}
-                  placeholder="Customer Name"
-                  className="input"
-                  readOnly
-                  style={{ width: "110%" }}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="article-cus4">
-            <div className="col-lg-12">
-              <div className="form-group">
-                <label style={{ fontWeight: "bold" }}>SO Date: </label>
-                <br />
-                <input
-                  required
-                  type="text"
-                  name="phone"
-                  value={so_date}
-                  placeholder="SO Date"
-                  className="input"
-                  readOnly
-                  style={{ width: "110%", marginBottom: "20px" }}
-                />
-              </div>
-            </div>
-            {/* </div>
-                    <div class="article"> */}
-            <div className="col-lg-12">
-              <div className="form-group">
-                <label style={{ fontWeight: "bold" }}>Customer Invoice: </label>
-                <br />
-                <input
-                  type="text"
-                  name="invoice"
-                  value={invoice}
-                  placeholder="Invoice No."
-                  className="input"
-                  readOnly
-                  style={{ width: "110%" }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex justify-end">
-        <button
-          style={{
-            padding: "10px",
-            backgroundColor:
-              (isUpdateButtonDisabled && !isEditMode) || !so_id || isEditMode
-                ? "grey"
-                : "#03C9D7",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            margin: "3px",
-          }}
-          color="white"
-          borderRadius="10px"
-          onClick={handleAddEmployeesClick}
-          text="heh"
-          disabled={
-            (isUpdateButtonDisabled && !isEditMode) || !so_id || isEditMode
-          }
+      <form>
+        <Container
+          className="g-0 justify-center"
+          fluid="true"
+          style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "18px" }}
         >
-          Edit / Ship
-        </button>
-      </div>
-      <GridComponent
-        dataSource={AllAccounts}
-        allowPaging={true}
-        pageSettings={{ pageSize: 25 }}
-        allowSorting
-        allowTextWrap={true}
-        toolbar={["Search"]}
-        width="auto"
-        rowSelected={handleRowSelected}
-        height={300}
-        className="custom-grid"
-        onChange={onChangeGrid}
-      >
-        <ColumnsDirective>
-          {customersGrid.map((item, index) => (
-            <ColumnDirective key={index} {...item} />
-          ))}
-        </ColumnsDirective>
-        <Inject services={[Page, Toolbar, Selection, Edit, Sort, Filter]} />
-      </GridComponent>
-      <div className="flex justify-end">
-        <button
-          style={{
-            padding: "10px",
-            backgroundColor: !isUpdateButtonDisabled ? "grey" : "#03C9D7",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            margin: "3px",
-          }}
-          color="white"
-          borderRadius="10px"
-          disabled={!isUpdateButtonDisabled}
-          onClick={handleUpdateItemClick}
-          text="heh"
-        >
-          Update Item
-        </button>
-
-        <button
-          style={{
-            padding: "10px",
-            backgroundColor: !isUpdateButtonDisabled ? "grey" : "#03C9D7",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            margin: "3px",
-          }}
-          color="white"
-          borderRadius="10px"
-          disabled={!isUpdateButtonDisabled}
-          onClick={handleCancelClick}
-          text="heh"
-        >
-          Cancel
-        </button>
-      </div>
-
-      <div>
-        <div class="article-cus2">
-          <div class="article-container-cus">
-            <div className="col-lg-12" style={{ paddingRight: "170px" }}>
-              <div className="form-group">
-                <label>Ship Date: </label>
-                <br />
-                <input
-                  type="date"
-                  name="ship_date"
-                  value={formData.ship_date}
-                  className="input"
-                  onChange={handleChangeHireDate}
-                  disabled={!isUpdateButtonDisabled}
-                  style={{ width: "170%", paddingRight: "30px" }}
-                />
-              </div>
-            </div>
-
-            <div className="col-lg-12" style={{ paddingRight: "170px" }}>
-              <div className="form-group">
-                <label>New Qty Ship'd: </label>
-                <br />
-                <input
-                  required
-                  type="number"
-                  name="qty_shipped"
-                  step="1.00"
-                  value={qty_shipped}
-                  placeholder="Quantity Shipped"
-                  className="input"
-                  onChange={handleChangeqty_shipped}
-                  disabled={!isUpdateButtonDisabled}
-                  style={{ width: "170%", paddingRight: "30px" }}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="article-cus"
+          <Row
+            xs={1}
+            sm={1}
+            //className="justify-content-center"
             style={{
-              marginRight: "auto",
+              padding: "0",
             }}
           >
-            <div>{/* disabled={!so_id} */}</div>
-          </div>
-        </div>
+            <Col md={2} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">SO #: </label>
+                  <input
+                    className="input"
+                    required
+                    type="text"
+                    name="name"
+                    value={so_id_param}
+                    placeholder="Sale Order"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Customer: </label>
+                  <br />
+                  <input
+                    type="text"
+                    name="email"
+                    value={customer}
+                    placeholder="Customer Name"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={2} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">SO Date: </label>
+                  <br />
+                  <input
+                    required
+                    type="text"
+                    name="phone"
+                    value={so_date}
+                    placeholder="SO Date"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              {/* </div>
+                    <div class="article"> */}
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Customer Invoice: </label>
+                  <br />
+                  <input
+                    type="text"
+                    name="invoice"
+                    value={invoice}
+                    placeholder="Invoice No."
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <Row
+            xs={1}
+            sm={1}
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={12} className="container-col">
+              <div className="flex justify-end">
+                <button
+                  style={{
+                    padding: "10px",
+                    backgroundColor:
+                      (isUpdateButtonDisabled && !isEditMode) ||
+                      !so_id ||
+                      isEditMode
+                        ? "grey"
+                        : currentColor,
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "5px",
+                    margin: "3px",
+                  }}
+                  color="white"
+                  borderRadius="10px"
+                  onClick={handleAddEmployeesClick}
+                  text="heh"
+                  disabled={
+                    (isUpdateButtonDisabled && !isEditMode) ||
+                    !so_id ||
+                    isEditMode
+                  }
+                >
+                  Edit / Ship
+                </button>
+              </div>
+            </Col>
+          </Row>
+          <Row
+            xs={1}
+            sm={1}
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={12} className="container-col">
+              <GridComponent
+                className="custom-grid"
+                dataSource={AllAccounts}
+                allowPaging={true}
+                pageSettings={{ pageSize: 16 }}
+                allowSorting
+                allowResizing
+                rowSelected={handleRowSelected}
+                rowHeight={36}
+                onChange={onChangeGrid}
+              >
+                <ColumnsDirective>
+                  {customersGrid.map((item, index) => (
+                    <ColumnDirective key={index} {...item} />
+                  ))}
+                </ColumnsDirective>
+                <Inject
+                  services={[Resize, Page, Toolbar, Selection, Sort, Filter]}
+                />
+              </GridComponent>
+            </Col>
+          </Row>
+          <Row
+            xs={1}
+            sm={1}
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={12} className="container-col">
+              <div className="flex justify-end">
+                <button
+                  style={{
+                    padding: "10px",
+                    backgroundColor: !isUpdateButtonDisabled
+                      ? "grey"
+                      : currentColor,
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "5px",
+                    margin: "3px",
+                  }}
+                  color="white"
+                  borderRadius="10px"
+                  disabled={!isUpdateButtonDisabled}
+                  onClick={handleUpdateItemClick}
+                  text="heh"
+                >
+                  Update Item
+                </button>
 
-        <div className="col-lg-12">
-          <div className="form-group">
-            <label>Note: </label>
-          </div>
-        </div>
+                <button
+                  style={{
+                    padding: "10px",
+                    backgroundColor: !isUpdateButtonDisabled
+                      ? "grey"
+                      : currentColor,
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "5px",
+                    margin: "3px",
+                  }}
+                  color="white"
+                  borderRadius="10px"
+                  disabled={!isUpdateButtonDisabled}
+                  onClick={handleCancelClick}
+                  text="heh"
+                >
+                  Cancel
+                </button>
+              </div>
+            </Col>
+          </Row>
+          <Row
+            xs={1}
+            sm={1}
+            //className="justify-content-center"
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={2} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Ship Date: </label>
+                  <br />
+                  <input
+                    type="date"
+                    name="ship_date"
+                    value={formData.ship_date}
+                    className="input"
+                    onChange={handleChangeHireDate}
+                    disabled={!isUpdateButtonDisabled}
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={2} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">New Qty Ship'd: </label>
+                  <br />
+                  <input
+                    required
+                    type="number"
+                    name="qty_shipped"
+                    step="1.00"
+                    value={qty_shipped}
+                    placeholder="Quantity Shipped"
+                    className="input"
+                    onChange={handleChangeqty_shipped}
+                    disabled={!isUpdateButtonDisabled}
+                  />
+                </div>
+              </div>
+              <div
+                class="article-cus"
+                style={{
+                  marginRight: "auto",
+                }}
+              >
+                <div>{/* disabled={!so_id} */}</div>
+              </div>
+            </Col>
+          </Row>
 
-        <div className="col-lg-12">
-          <div className="form-group">
-            <textarea
-              style={{
-                width: "1700px",
-                height: "70px",
-              }}
-              placeholder="Note "
-              id="noteTextarea"
-              value={acc_notes}
-              onChange={handleChangeAccNote}
-              rows="2"
-              className="textarea"
-              disabled={!isUpdateButtonDisabled}
-            />
-          </div>
-        </div>
-      </div>
-      <div className="flex justify-center">
+          <Row
+            xs={1}
+            sm={1}
+            //className="justify-content-center"
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={4} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Note: </label>
+                  <textarea
+                    placeholder="Note "
+                    id="noteTextarea"
+                    value={acc_notes}
+                    onChange={handleChangeAccNote}
+                    className="textarea"
+                    disabled={!isUpdateButtonDisabled}
+                    style={{ width: "90%" }}
+                  />
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </form>
+      <Row md={"auto"} className="justify-content-center">
         <button
           style={{
-            padding: "10px",
-            backgroundColor: !forceUpdate ? "grey" : "#03C9D7",
+            backgroundColor: !forceUpdate ? "grey" : currentColor,
             color: "#fff",
             border: "none",
             borderRadius: "5px",
-            margin: "3px",
+            margin: "10px",
+            padding: "20px",
           }}
           color="white"
           borderRadius="10px"
@@ -556,12 +595,12 @@ const Shipment = () => {
         </button>
         <button
           style={{
-            padding: "10px",
-            backgroundColor: "#03C9D7",
+            backgroundColor: currentColor,
             color: "#fff",
             border: "none",
             borderRadius: "5px",
-            margin: "3px",
+            margin: "10px",
+            padding: "20px",
           }}
           color="white"
           borderRadius="10px"
@@ -570,7 +609,7 @@ const Shipment = () => {
         >
           Back
         </button>
-      </div>
+      </Row>
     </div>
   );
 };

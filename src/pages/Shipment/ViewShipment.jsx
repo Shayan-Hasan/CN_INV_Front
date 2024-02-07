@@ -17,6 +17,8 @@ import { GetShipmentDetailByid } from "../../api/Api";
 import { Header, Button } from "../../components";
 import { useStateContext } from "../../contexts/ContextProvider";
 import "../../styles/viewCustomer.css";
+import "../../styles/AddProduct.css";
+import { Container, Col, Row } from "react-bootstrap";
 
 const ViewShipment = () => {
   const navigate = useNavigate();
@@ -32,24 +34,20 @@ const ViewShipment = () => {
     });
   };
 
-  const customerGridImage1 = (props) => (
-    <div>{formatCurrency(props.opening_balance)}</div>
-  );
-
   const InventoryGrid = [
     //{ type: 'checkbox', width: '50' },
 
     {
       field: "shipment_id",
-      headerText: "Shipment ID",
-      width: "150",
+      headerText: "Ship ID",
+      width: "80",
       textAlign: "Center",
     },
 
     {
       field: "code",
       headerText: "Code",
-      width: "150",
+      width: "80",
       textAlign: "Center",
     },
     {
@@ -62,26 +60,26 @@ const ViewShipment = () => {
     {
       field: "qty_ship",
       headerText: "Qty Ship'd",
-      width: "150",
+      width: "90",
       textAlign: "Center",
     },
 
     {
       field: "running_qty_ship",
       headerText: "Running Qty Ship'd",
-      width: "150",
+      width: "110",
       textAlign: "Center",
     },
     {
       field: "date_shipped",
       headerText: "Ship Date",
-      width: "150",
+      width: "100",
       textAlign: "Center",
     },
     {
       field: "note",
       headerText: "Note",
-      width: "150",
+      width: "100",
       textAlign: "Center",
     },
   ];
@@ -89,7 +87,7 @@ const ViewShipment = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/sales");
+      navigate("/Sales");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -116,40 +114,57 @@ const ViewShipment = () => {
   }, []);
 
   return (
-    <div className="user-body">
+    <div className="m-0 md:m-4 p-4 md:p-8 bg-white rounded-3xl">
       <Header title="SHIPMENT DETAILS" />
-
-      <div className="flex justify-end">
-        <Button
-          margin="7px"
-          color="white"
-          bgColor={currentColor}
-          text="Back"
-          borderRadius="10px"
-          onClick={handleBackClick}
-        />
-      </div>
-
-      <GridComponent
-        dataSource={AllProductInStore}
-        allowPaging={true}
-        pageSettings={{ pageSize: 25 }}
-        allowSorting
-        allowTextWrap={true}
-        toolbar={["Search"]}
-        width="auto"
-        height={670}
-        className="custom-grid"
+      <Container
+        className="g-0 p-8 justify-center"
+        fluid="true"
+        style={{ paddingTop: "10px" }}
       >
-        {/* rowSelected={handleRowSelected} */}
-        <ColumnsDirective>
-          {InventoryGrid.map((item, index) => (
-            <ColumnDirective key={index} {...item} />
-          ))}
-        </ColumnsDirective>
-        <Inject services={[Page, Toolbar, Selection, Edit, Sort, Filter]} />
-      </GridComponent>
-      {/* <button onClick={handleSubmit}>Submit</button> */}
+        <Row xs={2} className="button-row justify-content-end font-normal">
+          <Col md="auto" style={{ padding: "0" }}>
+            <Button
+              margin="6px"
+              color="white"
+              bgColor={currentColor}
+              text="Back"
+              borderRadius="10px"
+              onClick={handleBackClick}
+            />
+          </Col>
+        </Row>
+        <Row
+          xs={1}
+          sm={1}
+          className="justify-content-center"
+          style={{
+            padding: "0",
+          }}
+        >
+          <Col md={12} className="container-col">
+            <GridComponent
+              className="custom-grid"
+              dataSource={AllProductInStore}
+              allowPaging={true}
+              pageSettings={{ pageSize: 16 }}
+              allowSorting
+              allowResizing
+              //toolbar={["Search"]}
+              rowHeight={36}
+            >
+              {/* rowSelected={handleRowSelected} */}
+              <ColumnsDirective>
+                {InventoryGrid.map((item, index) => (
+                  <ColumnDirective key={index} {...item} />
+                ))}
+              </ColumnsDirective>
+              <Inject
+                services={[Page, Toolbar, Selection, Edit, Sort, Filter]}
+              />
+            </GridComponent>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

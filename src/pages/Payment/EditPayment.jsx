@@ -130,7 +130,7 @@ const EditPayment = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/payment");
+      navigate("/Payment");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -200,7 +200,7 @@ const EditPayment = () => {
     );
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/payment");
+      navigate("/Payment");
       alert("Payment Update Successfully");
     } else {
       alert("Payment Failed to Update");

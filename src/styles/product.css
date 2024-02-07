@@ -235,25 +235,19 @@ thead {
   width: 100%;
   min-width: 800px;
   border-collapse: collapse;
-  table-layout: fixed; /* Fix the table layout */
+  table-layout: fixed;
 }
 .tableColor {
-  font: "#03C9D7";
+  font: currentColor;
 }
 
 .table th,
 .table td {
-  /* border: 1px solid #ddd; */
   padding: 3px;
   text-align: left;
-
-  /* white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis;  */
 }
 
 .table th {
-  /* background-color: #4caf50; */
   color: white;
   position: sticky;
   top: 0;
@@ -291,7 +285,7 @@ tfoot td {
 }
 
 .keypad-button {
-  /* color: #03C9D7; */
+  /* color: currentColor; */
   font-weight: Bold;
   font-size: 18px;
   text-align: center;

@@ -92,7 +92,7 @@ const AddEmployee = () => {
     TimeoutUtility.resetTimeout();
     try {
       console.log("Back");
-      navigate("/employee");
+      navigate("/Employee");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -320,7 +320,7 @@ const AddEmployee = () => {
       );
       console.log(response, "Response");
       if (response.status === 200) {
-        navigate("/employee");
+        navigate("/Employee");
         alert("Employee added successfully.");
       } else {
         alert("Employee failed to add.");
@@ -381,7 +381,7 @@ const AddEmployee = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     GENERAL INFORMATION{" "}
@@ -478,7 +478,7 @@ const AddEmployee = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     {"   "}
@@ -567,7 +567,7 @@ const AddEmployee = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     LOCATION DETAIL

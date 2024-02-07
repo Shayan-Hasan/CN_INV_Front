@@ -104,7 +104,7 @@ const Receipt = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      navigate("/receipt/AddReceipt");
+      navigate("/Receipt/AddReceipt");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -114,7 +114,7 @@ const Receipt = () => {
     try {
       console.log("edit new");
       if (r_id != "") {
-        navigate(`/receipt/EditReceipt/${r_id}`);
+        navigate(`/Receipt/EditReceipt/${r_id}`);
       } else {
         alert("Please select receipt to ddit.");
       }
@@ -133,7 +133,7 @@ const Receipt = () => {
         ) {
           const resp = await deletePayment(r_id);
           if (resp.status === 200) {
-            navigate("/receipt");
+            navigate("/Receipt");
             alert("Receipt deleted successfully.");
           } else {
             alert("Receipt failed to delete.");

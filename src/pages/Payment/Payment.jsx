@@ -103,7 +103,7 @@ const Payment = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      navigate("/payment/AddPayment");
+      navigate("/Payment/AddPayment");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -113,7 +113,7 @@ const Payment = () => {
     try {
       console.log("edit new");
       if (r_id != "") {
-        navigate(`/payment/EditPayment/${r_id}`);
+        navigate(`/Payment/EditPayment/${r_id}`);
       } else {
         alert("Please select payment to ddit.");
       }

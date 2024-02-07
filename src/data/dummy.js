@@ -20,6 +20,7 @@ import {
   FiCreditCard,
   FiStar,
   FiShoppingCart,
+  FiTag,
   FiPhoneForwarded,
   FiHome,
   FiBox,
@@ -577,6 +578,10 @@ export const links = [
   {
     title: "Orders",
     links: [
+      {
+        name: "Estimates",
+        icon: <FiTag />,
+      },
       {
         name: "Sales",
         icon: <FiShoppingCart />,

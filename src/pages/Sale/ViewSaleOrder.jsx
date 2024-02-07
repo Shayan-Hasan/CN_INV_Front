@@ -98,7 +98,7 @@ const ViewSaleOrder = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/sales");
+      navigate("/Sales");
     } catch (error) {
       console.error("Error:", error);
     }

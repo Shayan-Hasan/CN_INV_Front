@@ -222,7 +222,7 @@ const EditJournal = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/journal");
+      navigate("/Journal");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -327,7 +327,7 @@ const EditJournal = () => {
     const response = await editJournalApi(journallist);
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/journal");
+      navigate("/Journal");
       alert("Journal ledger updated successfully.");
     } else {
       alert("Journal ledger failed to update.");

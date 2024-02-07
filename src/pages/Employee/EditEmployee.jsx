@@ -185,7 +185,7 @@ const EditEmployee = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/employee");
+      navigate("/Employee");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -341,7 +341,7 @@ const EditEmployee = () => {
     );
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/employee");
+      navigate("/Employee");
       alert("Employee updated successfully.");
     } else {
       alert("Employee failed to update.");
@@ -428,7 +428,7 @@ const EditEmployee = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     GENERAL INFORMATION{" "}
@@ -531,7 +531,7 @@ const EditEmployee = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     {"   "}
@@ -623,7 +623,7 @@ const EditEmployee = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     LOCATION DETAIL{" "}

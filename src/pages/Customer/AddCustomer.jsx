@@ -55,7 +55,7 @@ const AddCustomer = () => {
     TimeoutUtility.resetTimeout();
     try {
       console.log("Back");
-      navigate("/customers");
+      navigate("/Customers");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -514,7 +514,7 @@ const AddCustomer = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     GENERAL INFOMARTION
@@ -655,7 +655,7 @@ const AddCustomer = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: currentColor,
                     }}
                   >
                     CONTACT INFORMATION{" "}
@@ -738,7 +738,7 @@ const AddCustomer = () => {
                         style={{
                           fontSize: "19px",
                           fontStyle: "bold",
-                          color: "#03C9D7",
+                          color: currentColor,
                         }}
                       >
                         BILLING ADDRESS
@@ -750,7 +750,7 @@ const AddCustomer = () => {
                   <button
                     style={{
                       padding: "4px",
-                      backgroundColor: "#03C9D7",
+                      backgroundColor: currentColor,
                       color: "#fff",
                       border: "none",
                       fontWeight: "bold",
@@ -884,7 +884,7 @@ const AddCustomer = () => {
                     style={{
                       fontSize: "19px",
                       fontStyle: "bold",
-                      color: "#03C9D7",
+                      color: "currentColor",
                     }}
                   >
                     SHIPPING ADDRESS

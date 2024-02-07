@@ -15,21 +15,33 @@ import {
   Filter,
   Resize,
 } from "@syncfusion/ej2-react-grids";
+import ReactDOM from "react-dom";
 import {
   GetAllSuppliers,
   CheckVenDeleteStatus,
   DeleteVendor,
+  GetInvoiceProdBySoId,
+  GetInvoiceDetailBySoId,
 } from "../../api/Api";
 import { Header, Button } from "../../components";
 import "../../styles/viewCustomer.css";
+import Invoice from "../Invoice";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { Col, Container, Row } from "react-bootstrap";
+import jsPDF from "jspdf";
 
 const Supplier = () => {
   const [AllSuppliers, setAllSuppliers] = useState("");
   const [Supplier_id, setSupplier_id] = useState("");
   const [acc_Status, setacc_Status] = useState(1);
   const { currentColor } = useStateContext();
+  const [formData, setFormData] = useState({
+    products: [],
+    bill_address: [],
+    from_address: [],
+    invoice_no: "",
+    date: "",
+  });
   const navigate = useNavigate();
 
   const customerGridImage = (props) => (
@@ -146,7 +158,7 @@ const Supplier = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      navigate("/supplier/addSupplier");
+      navigate("/Supplier/AddSupplier");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -156,7 +168,7 @@ const Supplier = () => {
     try {
       console.log("edit new");
       if (Supplier_id != "") {
-        navigate(`/supplier/editSupplier/${Supplier_id}`);
+        navigate(`/Supplier/EditSupplier/${Supplier_id}`);
       } else {
         alert("Please select supplier to edit.");
       }
@@ -204,12 +216,168 @@ const Supplier = () => {
     }
   };
 
+  const handleViewEmployeesClick2 = async (event) => {
+    event.preventDefault();
+    try {
+      console.log("assign product");
+      if (Supplier_id != "") {
+        navigate(`/Supplier/ProductAssign/${Supplier_id}`);
+      } else {
+        alert("Please select supplier.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const handleViewEmployeesClick3 = async (event) => {
+    event.preventDefault();
+    try {
+      // console.log("Special Order");
+      // if (Supplier_id != "") {
+      navigate(`/Supplier/SpecialOrder`);
+      // } else {
+      //   alert("Please select supplier.");
+      // }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const openNewTab = async () => {
+    try {
+      const fd = { ...formData };
+      fd.products = [];
+      fd.bill_address = [];
+      fd.from_address = [];
+      fd.shipping_address = [];
+      fd.invoice_no = "";
+      const result = await GetInvoiceProdBySoId(5000169);
+      const result1 = await GetInvoiceDetailBySoId(5000169);
+
+      const invoiceData = result.data;
+      const invoiceData1 = result1.data;
+      console.log(invoiceData1);
+      invoiceData.forEach((element) => {
+        const product = {
+          code: element.code,
+          details: element.details,
+          quantity_shipped: element.quantity_shipped,
+          price: element.price,
+          discount: element.discount,
+          total: element.price,
+        };
+        fd.products.push(product);
+      });
+      fd.invoice_no = result1.data[0].invoice_id;
+      invoiceData1.forEach((element) => {
+        const billing = {
+          customer: element.customer,
+          phone1: element.phone1,
+          phone2: element.phone2,
+          street: element.b_street,
+          city: element.b_city,
+          state: element.state,
+          zip: element.b_zip,
+          country: element.b_country,
+        };
+        fd.bill_address.push(billing);
+        const shipping = {
+          customer: element.customer,
+          phone: element.s_phone,
+          street: element.s_street,
+          city: element.s_city,
+          state: element.s_state,
+          zip: element.s_zip,
+          country: element.s_country,
+        };
+        fd.shipping_address.push(shipping);
+        const from = {
+          store: element.store,
+          email: element.store_email,
+          contact: element.store_contact,
+          manager: element.manager,
+          street: element.store_address,
+          city: element.store_city,
+          state: element.store_state,
+          zip: element.store_zip,
+        };
+        fd.from_address.push(from);
+      });
+
+      const contentDiv = document.createElement("div");
+      const invoiceComponent = <Invoice invoiceData={fd} />;
+      ReactDOM.render(invoiceComponent, contentDiv);
+
+      // html2pdf()
+      //   .from(contentDiv)
+      //   .set({
+      //     html2canvas: { scale: 10 },
+      //   })
+      //   .toPdf()
+      //   .get("pdf")
+      //   .then(function (pdf) {
+      //     window.open(pdf.output("bloburl"), "_blank");
+      //   });
+
+      const pdf = new jsPDF("p", "pt", "a4", true);
+      // pdf.addImage(hello, "JPEG", 40, 40, 100, 100);
+      await pdf.html(contentDiv, {
+        autoPaging: true,
+        margin: 8,
+        autoPaging: "text",
+        precision: 5,
+        html2canvas: {
+          scale: 0.64,
+          allowTaint: true,
+          letterRendering: true,
+          svgRendering: true,
+        },
+        callback: function (pdf) {
+          // Add page numbers to each page
+          const totalPages = pdf.internal.pages.length;
+          for (let i = 1; i < totalPages; i++) {
+            pdf.setPage(i);
+            pdf.setFontSize(12);
+            pdf.text(
+              `Page ${i} of ${totalPages - 1}`,
+              pdf.internal.pageSize.width - 70,
+              pdf.internal.pageSize.height - 10
+            );
+          }
+          window.open(pdf.output("bloburl"), "_blank");
+        },
+      });
+
+      // pdf.html(contentDiv, {
+      //   // autoPaging: true,
+      // });
+
+      // const options = {
+      //   margin: 10,
+      //   filename: "invoice.pdf",
+      //   image: { type: "jpeg", quality: 0.98 },
+      //   html2canvas: { scale: 2 },
+      //   jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      // };
+
+      // html2pdf()
+      //   .from(contentDiv)
+      //   .set(options)
+      //   .outputPdf()
+      //   .then((pdf) => {
+      //     window.open(pdf.output("bloburl"), "_blank");
+      //   });
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const handleViewSupplierClick = async (event) => {
     event.preventDefault();
     try {
       console.log("view supplier");
       if (Supplier_id != "") {
-        navigate(`/supplier/viewSupplier/${Supplier_id}`);
+        navigate(`/Supplier/ViewSupplier/${Supplier_id}`);
       } else {
         alert("Please select supplier to view.");
       }
@@ -280,14 +448,6 @@ const Supplier = () => {
             />
           </Col>
           <Col md="auto" style={{ padding: "0" }}>
-            {/* <Button
-          margin="7px"
-          color="white"
-          bgColor={currentColor}
-          text="Vendor Products"
-          borderRadius="10px"
-          // onClick={handleViewSupplierClick}
-        /> */}
             <Button
               margin="6px"
               color="white"
@@ -295,6 +455,36 @@ const Supplier = () => {
               text="Delete"
               borderRadius="10px"
               onClick={handleViewEmployeesClick1}
+            />
+          </Col>
+          <Col md="auto" style={{ padding: "0" }}>
+            <Button
+              margin="6px"
+              color="white"
+              bgColor={currentColor}
+              text="Special Order"
+              borderRadius="10px"
+              onClick={handleViewEmployeesClick3}
+            />
+          </Col>
+          <Col md="auto" style={{ padding: "0" }}>
+            <Button
+              margin="6px"
+              color="white"
+              bgColor={currentColor}
+              text="Assign Product"
+              borderRadius="10px"
+              onClick={handleViewEmployeesClick2}
+            />
+          </Col>
+          <Col md="auto" style={{ padding: "0" }}>
+            <Button
+              margin="6px"
+              color="white"
+              bgColor={currentColor}
+              text="Invoice"
+              borderRadius="10px"
+              onClick={openNewTab}
             />
           </Col>
         </Row>

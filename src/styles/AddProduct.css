@@ -52,7 +52,7 @@
 .myreact-select {
   margin: 0;
   font-weight: 200;
-  font-size: 14px;
+  font-size: 14px !important;
   flex: 80%;
 }
 .myreact-span {
@@ -147,6 +147,40 @@
   padding-left: 8px;
 }
 
+.sale-input-div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.myreact-select-prod {
+  margin: 0px;
+  font-weight: 200;
+  font-size: 14px !important;
+  flex: 80%;
+}
+.sale-input {
+  flex: 89%;
+  width: 100%;
+  padding: 0px;
+  /* border-radius: 5px; */
+}
+
+.sale-bal {
+  border-width: 0px;
+  border-radius: 5px;
+  flex: 11%;
+  align-self: flex-start;
+  font-size: 16px;
+  padding: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-align: center;
+  color: black;
+  font-weight: 500;
+}
 .custom-button {
   display: inline-block;
   padding: 10px 20px 40px;

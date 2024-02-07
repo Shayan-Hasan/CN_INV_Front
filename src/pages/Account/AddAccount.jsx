@@ -32,7 +32,7 @@ const AddAccount = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/account");
+      navigate("/Account");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -159,7 +159,7 @@ const AddAccount = () => {
     );
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/account");
+      navigate("/Account");
       alert("Account added successfully.");
     } else {
       alert("Account failed to add.");

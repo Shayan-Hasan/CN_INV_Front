@@ -498,7 +498,7 @@ const EditEstimation = () => {
     try {
       console.log("Add new");
       const baseUrl = "http://localhost:3000";
-      const path = `/sales/addEstimation/${store_id_param}`;
+      const path = `/Estimates/AddEstimation/${store_id_param}`;
       const url = `${baseUrl}${path}`;
       window.open(url, "_blank");
     } catch (error) {
@@ -1009,7 +1009,7 @@ const EditEstimation = () => {
                         fontWeight: "bold",
                         font: "100px",
                         fontSize: "20px",
-                        border: "3px solid #03C9D7",
+                        border: "3px solid currentColor",
                       }}
                     >
                       Bal:{" "}
@@ -1055,7 +1055,7 @@ const EditEstimation = () => {
                       // className="article-container1"
                       style={{
                         padding: "10px",
-                        backgroundColor: "#03C9D7",
+                        backgroundColor: currentColor,
                         color: "#fff",
                         borderRadius: "11px",
                         marginLeft: "10px",
@@ -1077,7 +1077,7 @@ const EditEstimation = () => {
                       <thead
                         className="thead-dark"
                         style={{
-                          color: "#03C9D7",
+                          color: currentColor,
                           textAlign: "center",
                           verticalAlign: "middle",
                           fontWeight: "bold",
@@ -1324,7 +1324,7 @@ const EditEstimation = () => {
                             // colSpan="2"
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "10px",
@@ -1335,7 +1335,7 @@ const EditEstimation = () => {
                           <td
                             rowSpan="5"
                             style={{
-                              backgroundColor: "#03C9D7",
+                              backgroundColor: currentColor,
                               textAlign: "center",
                               fontWeight: "bold",
                               width: "60px !important",
@@ -1377,7 +1377,7 @@ const EditEstimation = () => {
                           <td
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "10px",
@@ -1401,7 +1401,7 @@ const EditEstimation = () => {
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 paddingLeft: "10px",
                                 fontSize: "20px",
                               }}
@@ -1424,7 +1424,7 @@ const EditEstimation = () => {
                                 width: "90px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                               }}
                             />
@@ -1437,11 +1437,13 @@ const EditEstimation = () => {
                             SHIPMENT:
                           </td>
 
-                          <td style={{ fontWeight: "bold", color: "#03C9D7" }}>
+                          <td
+                            style={{ fontWeight: "bold", color: currentColor }}
+                          >
                             <label
                               style={{
                                 fontWeight: "bold",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 paddingLeft: "10px",
                                 fontSize: "20px",
                               }}
@@ -1463,7 +1465,7 @@ const EditEstimation = () => {
                                 width: "90px",
                                 height: "27px",
                                 fontSize: "20px",
-                                color: "#03C9D7",
+                                color: currentColor,
                                 fontWeight: "Bold",
                               }}
                             />
@@ -1478,7 +1480,7 @@ const EditEstimation = () => {
                           <td
                             style={{
                               fontSize: "20px",
-                              color: "#03C9D7",
+                              color: currentColor,
                               textAlign: "left",
                               fontWeight: "Bold",
                               paddingLeft: "20px",
@@ -1510,7 +1512,7 @@ const EditEstimation = () => {
                       width: "180px",
                       height: "100px",
                       marginTop: "6px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleSaleOrderClick}
                   >
@@ -1532,7 +1534,7 @@ const EditEstimation = () => {
                       width: "180px",
                       height: "100px",
                       marginTop: "6px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                   >
                     <div
@@ -1554,7 +1556,7 @@ const EditEstimation = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleNewClick}
                   >
@@ -1575,7 +1577,7 @@ const EditEstimation = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleClearClick}
                   >
@@ -1599,7 +1601,7 @@ const EditEstimation = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     // onClick={handleStatusClick}
                   >
@@ -1620,7 +1622,7 @@ const EditEstimation = () => {
                     style={{
                       width: "180px",
                       height: "100px",
-                      background: "#03C9D7",
+                      background: currentColor,
                     }}
                     onClick={handleBackClick}
                   >
@@ -1700,7 +1702,7 @@ const EditEstimation = () => {
                       <Card
                         style={{
                           fontWeight: "Bold",
-                          border: "2px solid #03C9D7",
+                          border: "2px solid currentColor",
                           margin: "2px",
                         }}
                         className="keypad-button1"

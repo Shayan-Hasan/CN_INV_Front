@@ -119,7 +119,7 @@ const AddPayment = () => {
     event.preventDefault();
     try {
       console.log("Back");
-      navigate("/payment");
+      navigate("/Payment");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -175,7 +175,7 @@ const AddPayment = () => {
     );
     console.log(response, "Response");
     if (response.status === 200) {
-      navigate("/payment");
+      navigate("/Payment");
       alert("Payment added successfully.");
     } else {
       alert("Payment failed to add.");

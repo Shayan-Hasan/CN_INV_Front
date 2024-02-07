@@ -42,6 +42,7 @@ import AddAccount from "./pages/Account/AddAccount";
 import EditAccount from "./pages/Account/EditAccount";
 import ViewAccount from "./pages/Account/ViewAccount";
 import Sales from "./pages/Sale/Sales";
+import Estimates from "./pages/Estimate/Estimates";
 import AddSaleOrder from "./pages/Sale/AddSaleOrder";
 import EditSaleOrder from "./pages/Sale/EditSaleOrder";
 import ViewSaleOrder from "./pages/Sale/ViewSaleOrder";
@@ -66,6 +67,8 @@ import AddJournal from "./pages/Journal/AddJournal";
 import EditJournal from "./pages/Journal/EditJournal";
 import ViewShipment from "./pages/Shipment/ViewShipment";
 import ViewReceive_Log from "./pages/Receive Log/ViewReceiveLog";
+import ProductAssign from "./pages/Supplier/ProductAssign";
+import SpecialOrder from "./pages/Purchase/SpecialOrder";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
@@ -84,7 +87,7 @@ const App = () => {
     "/orders",
     "/customers",
     "/inventory",
-    "/inventory/add",
+    "/Inventory/Add",
     "/inventory/product",
     "/inventory/product/addproduct",
     "/inventory/product/editproduct/:p_id",
@@ -115,6 +118,7 @@ const App = () => {
     "/account/editaccount/:Account_id",
     "/account/viewaccount/:Account_id",
     "/sales",
+    "/estimates",
     "/sales/addSaleOrder/:store_id",
     "/sales/editSaleOrder/:so_ids",
     "/sales/viewSaleOrder/:so_id",
@@ -124,10 +128,10 @@ const App = () => {
     "/Purchase/editPurchaseOrder/:po_ids",
     "/Purchase/viewPurchaseOrder/:po_id",
     "/Purchase/Receive_log/:po_ids",
-    "/sales/addEstimation/:store_id",
-    "/sales/editEstimation/:so_ids",
-    "/sales/viewEstimation/:so_id",
-    "/sales/ConvertEstimate/:so_ids",
+    "/estimates/addEstimation/:store_id",
+    "/estimates/editEstimation/:so_ids",
+    "/estimates/viewEstimation/:so_id",
+    "/estimates/ConvertEstimate/:so_ids",
     "/receipt",
     "/receipt/AddReceipt",
     "/receipt/EditReceipt/:r_id",
@@ -188,25 +192,25 @@ const App = () => {
                         window.location.pathname
                       ) ||
                       window.location.pathname.includes(
-                        "/sales/editSaleOrder/"
+                        "/Sales/EditSaleOrder/"
                       ) ||
                       window.location.pathname.includes(
-                        "/sales/addSaleOrder/"
+                        "/Sales/AddSaleOrder/"
                       ) ||
                       window.location.pathname.includes(
-                        "/Purchase/addPurchaseOrder/"
+                        "/Purchase/AddPurchaseOrder/"
                       ) ||
                       window.location.pathname.includes(
-                        "/sales/addEstimation/"
+                        "/Estimates/AddEstimation/"
                       ) ||
                       window.location.pathname.includes(
-                        "/sales/editEstimation/"
+                        "/Estimates/EditEstimation/"
                       ) ||
                       window.location.pathname.includes(
-                        "/sales/ConvertEstimate/"
+                        "/Estimates/ConvertEstimate/"
                       ) ||
                       window.location.pathname.includes(
-                        "/Purchase/editPurchaseOrder/"
+                        "/Purchase/EditPurchaseOrder/"
                       ) ? null : (
                         <div>
                           {activeMenu ? (
@@ -227,25 +231,25 @@ const App = () => {
                             window.location.pathname
                           ) ||
                           window.location.pathname.includes(
-                            "/sales/editSaleOrder/"
+                            "/Sales/EditSaleOrder/"
                           ) ||
                           window.location.pathname.includes(
-                            "/sales/addEstimation/"
+                            "/Estimates/AddEstimation/"
                           ) ||
                           window.location.pathname.includes(
-                            "/Purchase/editPurchaseOrder/"
+                            "/Purchase/EditPurchaseOrder/"
                           ) ||
                           window.location.pathname.includes(
-                            "/Purchase/addPurchaseOrder/"
+                            "/Purchase/AddPurchaseOrder/"
                           ) ||
                           window.location.pathname.includes(
-                            "/sales/editEstimation/"
+                            "/Estimates/EditEstimation/"
                           ) ||
                           window.location.pathname.includes(
-                            "/sales/ConvertEstimate/"
+                            "/Estimates/ConvertEstimate/"
                           ) ||
                           window.location.pathname.includes(
-                            "/sales/addSaleOrder/"
+                            "/Sales/AddSaleOrder/"
                           )
                             ? ""
                             : activeMenu
@@ -257,25 +261,25 @@ const App = () => {
                           window.location.pathname
                         ) ||
                         window.location.pathname.includes(
-                          "/sales/editSaleOrder/"
+                          "/Sales/EditSaleOrder/"
                         ) ||
                         window.location.pathname.includes(
-                          "/sales/addEstimation/"
+                          "/Estimates/AddEstimation/"
                         ) ||
                         window.location.pathname.includes(
-                          "/Purchase/editPurchaseOrder/"
+                          "/Purchase/EditPurchaseOrder/"
                         ) ||
                         window.location.pathname.includes(
-                          "/Purchase/addPurchaseOrder/"
+                          "/Purchase/AddPurchaseOrder/"
                         ) ||
                         window.location.pathname.includes(
-                          "/sales/editEstimation/"
+                          "/Estimates/EditEstimation/"
                         ) ||
                         window.location.pathname.includes(
-                          "/sales/ConvertEstimate/"
+                          "/Estimates/ConvertEstimate/"
                         ) ||
                         window.location.pathname.includes(
-                          "/sales/addSaleOrder/"
+                          "/Sales/AddSaleOrder/"
                         ) ? null : (
                           <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
                             <NavBar />
@@ -295,7 +299,7 @@ const App = () => {
                             />
 
                             <Route
-                              path="/orders"
+                              path="/Orders"
                               element={
                                 <ProtectedRoute>
                                   <Orders />
@@ -303,7 +307,7 @@ const App = () => {
                               }
                             />
                             <Route
-                              path="/customers"
+                              path="/Customers"
                               element={
                                 <ProtectedRoute>
                                   <Customers />
@@ -311,7 +315,7 @@ const App = () => {
                               }
                             />
                             <Route
-                              path="/inventory"
+                              path="/Inventory"
                               element={
                                 <ProtectedRoute>
                                   <Inventory />
@@ -319,7 +323,7 @@ const App = () => {
                               }
                             />
                             <Route
-                              path="/inventory/add"
+                              path="/Inventory/Add"
                               element={
                                 <ProtectedRoute>
                                   <AddInventory />
@@ -327,7 +331,7 @@ const App = () => {
                               }
                             />
                             <Route
-                              path="/product/addproduct"
+                              path="/Product/AddProduct"
                               element={
                                 <ProtectedRoute>
                                   <AddProduct />
@@ -335,7 +339,7 @@ const App = () => {
                               }
                             />
                             <Route
-                              path="/product/editproduct/:p_id"
+                              path="/Product/EditProduct/:p_id"
                               element={
                                 <ProtectedRoute>
                                   <EditProduct />
@@ -526,6 +530,24 @@ const App = () => {
                                 </ProtectedRoute>
                               }
                             />
+
+                            <Route
+                              path="/supplier/ProductAssign/:Supplier_id"
+                              element={
+                                <ProtectedRoute>
+                                  <ProductAssign />
+                                </ProtectedRoute>
+                              }
+                            />
+
+                            <Route
+                              path="/supplier/SpecialOrder"
+                              element={
+                                <ProtectedRoute>
+                                  <SpecialOrder />
+                                </ProtectedRoute>
+                              }
+                            />
                             <Route
                               path="/account"
                               element={
@@ -563,6 +585,14 @@ const App = () => {
                               element={
                                 <ProtectedRoute>
                                   <Sales />
+                                </ProtectedRoute>
+                              }
+                            />
+                            <Route
+                              path="/estimates"
+                              element={
+                                <ProtectedRoute>
+                                  <Estimates />
                                 </ProtectedRoute>
                               }
                             />
@@ -657,7 +687,7 @@ const App = () => {
                             />
 
                             <Route
-                              path="/sales/addEstimation/:store_id"
+                              path="/estimates/addEstimation/:store_id"
                               element={
                                 <ProtectedRoute>
                                   <AddEstimation />
@@ -665,7 +695,7 @@ const App = () => {
                               }
                             />
                             <Route
-                              path="/sales/editEstimation/:so_ids"
+                              path="/estimates/editEstimation/:so_ids"
                               element={
                                 <ProtectedRoute>
                                   <EditEstimation />
@@ -673,7 +703,7 @@ const App = () => {
                               }
                             />
                             <Route
-                              path="/sales/viewEstimation/:so_id"
+                              path="/estimates/viewEstimation/:so_id"
                               element={
                                 <ProtectedRoute>
                                   <ViewEstimation />
@@ -682,7 +712,7 @@ const App = () => {
                             />
 
                             <Route
-                              path="/sales/ConvertEstimate/:so_ids"
+                              path="/estimates/ConvertEstimate/:so_ids"
                               element={
                                 <ProtectedRoute>
                                   <ConvertEstimate />

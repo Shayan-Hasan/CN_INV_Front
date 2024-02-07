@@ -128,7 +128,7 @@ const Customers = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      navigate("/customer/addCustomer");
+      navigate("/Customer/AddCustomer");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -138,7 +138,7 @@ const Customers = () => {
     try {
       console.log("edit new");
       if (Customer_id != "") {
-        navigate(`/customer/editCustomer/${Customer_id}`);
+        navigate(`/Customer/EditCustomer/${Customer_id}`);
       } else {
         alert("Please select customer to edit.");
       }
@@ -152,7 +152,7 @@ const Customers = () => {
     try {
       console.log("view store");
       if (Customer_id != "") {
-        navigate(`/customer/viewCustomer/${Customer_id}`);
+        navigate(`/Customer/ViewCustomer/${Customer_id}`);
       } else {
         alert("Please select customer to view.");
       }
