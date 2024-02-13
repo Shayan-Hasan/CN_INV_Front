@@ -12,6 +12,7 @@ import {
   Toolbar,
   Sort,
   Filter,
+  Resize,
 } from "@syncfusion/ej2-react-grids";
 import {
   GetSaleOrderDetailShipmentByID,
@@ -19,7 +20,8 @@ import {
 } from "../../api/Api";
 import { Header, Button } from "../../components";
 import { useStateContext } from "../../contexts/ContextProvider";
-import "../../styles/AddCus.css";
+import "../../styles/AddProduct.css";
+import { Container, Col, Row } from "react-bootstrap";
 
 const ViewSaleOrder = () => {
   const [AllProducts, setAllProducts] = useState("");
@@ -44,28 +46,28 @@ const ViewSaleOrder = () => {
     {
       headerText: "Code",
       field: "code",
-      width: "150",
+      width: "90",
       textAlign: "Center",
     },
 
     {
       headerText: "Product",
       field: "product",
-      width: "150",
+      width: "250",
       textAlign: "Center",
     },
 
     {
       field: "quantity",
       headerText: "Qty",
-      width: "100",
+      width: "80",
       textAlign: "Center",
     },
     {
       field: "unit_price",
       headerText: "Unit Price",
       format: "C2",
-      width: "150",
+      width: "120",
       textAlign: "Center",
     },
 
@@ -78,7 +80,7 @@ const ViewSaleOrder = () => {
     {
       field: "discount",
       headerText: "Discount",
-      width: "150",
+      width: "120",
       format: "C2",
       textAlign: "Center",
     },
@@ -87,7 +89,7 @@ const ViewSaleOrder = () => {
       field: "total",
       headerText: "Total",
       format: "C2",
-      width: "150",
+      width: "120",
       textAlign: "Center",
     },
   ];
@@ -137,310 +139,228 @@ const ViewSaleOrder = () => {
   }, []);
 
   return (
-    <div className="user-body">
-      <div style={{ paddingLeft: "14px" }}>
-        <Header title="VIEW SALE ORDER" />
-      </div>
-
-      <div className="m-2 md:m-4 p-1 md:p-2 bg-white rounded-2xl">
-        <div className="mt-4">
-          <form>
-            <div
-              style={{
-                textAlign: "left",
-                backgroundColor: "Transparent",
-                color: "black",
-              }}
-            >
-              <div class="article-container-cus">
-                <div className="flex justify-left">
-                  <div class="article-cus">
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>Customer: </label>
-                        <br />
-                        <input
-                          required
-                          type="text"
-                          name="customer"
-                          value={customer}
-                          placeholder="Customer"
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Customer PO:{" "}
-                        </label>
-                        <br />
-                        <input
-                          required
-                          value={customer_po_no}
-                          type="text"
-                          name="customer_po_no"
-                          placeholder="Customer PO NO"
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Project Name:{" "}
-                        </label>
-                        <br />
-                        <input
-                          type="text"
-                          name="contact"
-                          value={project_name}
-                          placeholder="Project Name"
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="article-cus">
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Ship Method:{" "}
-                        </label>
-                        <br />
-                        <input
-                          type="text"
-                          //step="0.01"
-                          name="ship_ment"
-                          placeholder="Ship Method"
-                          className="input"
-                          value={ship_method}
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Tracking No:{" "}
-                        </label>
-                        <br />
-                        <input
-                          type="text"
-                          name="city"
-                          value={tracking_no}
-                          placeholder="Tracking no."
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Order Status:{" "}
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <input
-                          placeholder="Order Status"
-                          value={status}
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="article-cus">
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Total Price:{" "}
-                        </label>
-                        <br />
-                        <input
-                          type="text"
-                          name="state"
-                          value={total_price}
-                          placeholder="Total"
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Amount Paid:{" "}
-                        </label>
-                        <br />
-                        <input
-                          type="text"
-                          name="postal_code"
-                          value={amount_paid}
-                          placeholder="Amount Paid"
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Amount Pending:{" "}
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <input
-                          placeholder="Amount Pending"
-                          value={amount_pending}
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="article-cus">
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>User: </label>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <input
-                          placeholder="User"
-                          value={user}
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>Tax: </label>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <input
-                          placeholder="Tax"
-                          value={tax}
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>Shipment: </label>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <input
-                          placeholder="Shipment"
-                          value={shipment}
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="col-lg-12"> */}
-                {/* <div className="form-group"> */}
-              </div>
-            </div>
-
-            <div class="article-container-cus">
-              <div class="article-cus">
-                <label style={{ fontWeight: "bold" }}>Note: </label>
-                <div className="col-lg-12">
-                  <div className="form-group">
-                    <textarea
-                      placeholder="Note"
-                      value={so_note}
-                      id="noteTextarea"
-                      //   value={street_address}
-                      //   onChange={handleChangeAddress}
-                      rows="2"
-                      className="textarea13"
-                      readOnly
-                    />
-                  </div>
+    <div className="m-0 md:m-4 p-4 md:p-8 bg-white rounded-3xl">
+      <Header title="VIEW SALE ORDER" />
+      <form>
+        <Container
+          className="g-0 justify-center"
+          fluid="true"
+          style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "18px" }}
+        >
+          <Row
+            xs={1}
+            sm={1}
+            className="justify-content-center"
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Customer: </label>
+                  <input
+                    required
+                    type="text"
+                    name="customer"
+                    value={customer}
+                    placeholder="Customer"
+                    className="input"
+                    readOnly
+                  />
                 </div>
               </div>
-            </div>
-
-            <GridComponent
-              dataSource={AllProducts}
-              allowPaging={true}
-              pageSettings={{ pageSize: 25 }}
-              allowSorting
-              allowTextWrap={true}
-              toolbar={["Search"]}
-              width="auto"
-              height={330}
-              className="custom-grid"
-            >
-              <ColumnsDirective>
-                {customersGrid.map((item, index) => (
-                  <ColumnDirective key={index} {...item} />
-                ))}
-              </ColumnsDirective>
-              <Inject
-                services={[Page, Toolbar, Selection, Edit, Sort, Filter]}
-              />
-            </GridComponent>
-            <div class="article-cus2">
-              <div className="flex justify-center">
-                <div class="article-container-cus">
-                  <div>
-                    <Button
-                      margin="10px"
-                      padding="20px"
-                      color="white"
-                      className="custom-button ml-2"
-                      bgColor={currentColor}
-                      text="Back"
-                      borderRadius="10px"
-                      onClick={handleBackClick}
-                    />
-                  </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Customer PO:</label>
+                  <input
+                    required
+                    value={customer_po_no}
+                    type="text"
+                    name="customer_po_no"
+                    placeholder="Customer PO NO"
+                    className="input"
+                    readOnly
+                  />
                 </div>
               </div>
-            </div>
-          </form>
-        </div>
-      </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Project Name:</label>
+                  <input
+                    type="text"
+                    name="contact"
+                    value={project_name}
+                    placeholder="Project Name"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Ship Method:</label>
+                  <input
+                    type="text"
+                    name="ship_ment"
+                    placeholder="Ship Method"
+                    className="input"
+                    value={ship_method}
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Tracking No:</label>
+                  <input
+                    type="text"
+                    name="city"
+                    value={tracking_no}
+                    placeholder="Tracking no."
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Order Status: </label>
+                  <input
+                    placeholder="Order Status"
+                    value={status}
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Total Price:</label>
+                  <input
+                    type="text"
+                    name="state"
+                    value={total_price}
+                    placeholder="Total"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Amount Paid:</label>
+                  <input
+                    type="text"
+                    name="postal_code"
+                    value={amount_paid}
+                    placeholder="Amount Paid"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Amount Pending: </label>
+                  <input
+                    placeholder="Amount Pending"
+                    value={amount_pending}
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">User: </label>
+                  <input
+                    placeholder="User"
+                    value={user}
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Tax: </label>
+                  <input
+                    placeholder="Tax"
+                    value={tax}
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Shipment: </label>
+                  <input
+                    placeholder="Shipment"
+                    value={shipment}
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={12} className="container-col">
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Note: </label>
+                  <textarea
+                    placeholder="Note"
+                    value={so_note}
+                    id="noteTextarea"
+                    className="textarea"
+                    style={{ height: "40px", width: "95%" }}
+                    readOnly
+                  />
+                </div>
+              </div>
+              <br />
+            </Col>
+          </Row>
+          <GridComponent
+            dataSource={AllProducts}
+            allowPaging={true}
+            pageSettings={{ pageSize: 10 }}
+            allowSorting
+            //toolbar={["Search"]}
+            allowResizing
+            className="custom-grid"
+            rowHeight={36}
+          >
+            <ColumnsDirective>
+              {customersGrid.map((item, index) => (
+                <ColumnDirective key={index} {...item} />
+              ))}
+            </ColumnsDirective>
+            <Inject
+              services={[Page, Resize, Toolbar, Selection, Edit, Sort, Filter]}
+            />
+          </GridComponent>
+        </Container>
+      </form>
+      <Row md={"auto"} className="justify-content-center">
+        <Button
+          margin="10px"
+          padding="20px"
+          color="white"
+          className="custom-button"
+          bgColor={currentColor}
+          text="Back"
+          borderRadius="10px"
+          onClick={handleBackClick}
+        />
+      </Row>
     </div>
   );
 };

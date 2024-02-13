@@ -72,6 +72,7 @@
 .card-sale {
   border: 1px solid #ddd;
   margin: 4px;
+  height: 89vh;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 16px !important;
   border-radius: 10px;
@@ -195,6 +196,7 @@
 }
 
 .action-btns-card {
+  cursor: pointer;
   width: auto;
   height: 100px !important;
   margin: 0;
@@ -240,12 +242,13 @@
   font-size: 24px;
   text-align: center;
   min-height: 77px;
-  margin-bottom: 8px !important;
+  margin-bottom: 12px !important;
   width: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+  cursor: pointer;
   /* justify-content: space-between; */
   /* color: currentColor; */
 

@@ -22,6 +22,9 @@ import Select from "react-select";
 import { useStateContext } from "../../contexts/ContextProvider";
 import "../../styles/sale.css";
 import { Card } from "react-bootstrap";
+import Sidebar from "../../components/ViewOrderProduct";
+import "../../styles/viewCustomer.css";
+import { Col, Container, Row } from "react-bootstrap";
 
 const EditEstimation = () => {
   const { currentColor } = useStateContext();
@@ -60,6 +63,8 @@ const EditEstimation = () => {
   const [unshippedList, setunshippedList] = useState([]);
   const [qtyShipped, setqtyShipped] = useState([]);
   const [projectname1, setprojectname1] = useState("");
+  const [productID, setproductID] = useState("");
+  const [toggle, setToggle] = useState(false);
 
   let param = useParams();
   // console.log(param.so_ids)
@@ -493,14 +498,20 @@ const EditEstimation = () => {
     }
   };
 
+  const handleToggle = (value) => {
+    setToggle((pre) => !pre);
+    // if (!viewOrderProductOpen) {
+    //   openViewOrderProduct();
+    // }
+    setproductID(value.product_id);
+  };
+
   const handleNewClick = async (event) => {
     event.preventDefault();
     try {
       console.log("Add new");
-      const baseUrl = "http://localhost:3000";
       const path = `/Estimates/AddEstimation/${store_id_param}`;
-      const url = `${baseUrl}${path}`;
-      window.open(url, "_blank");
+      window.open(path, "_blank");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -739,6 +750,9 @@ const EditEstimation = () => {
     const lowerCasedInput = inputValue.toLowerCase();
     return optionSearchField.includes(lowerCasedInput);
   };
+  function truncate(source, size) {
+    return source.length > size ? source.slice(0, size - 1) + "…" : source;
+  }
   const handleInputChange = (inputValue) => {
     // if (customer_ids) {
     if (inputValue && inputValue.length >= 3) {
@@ -763,18 +777,21 @@ const EditEstimation = () => {
               <div
                 style={{
                   display: "flex",
-                  flexWrap: "wrap",
-                  marginTop: "10px",
+                  marginTop: "4px",
                 }}
               >
-                <div>
+                <div
+                  style={{
+                    flex: "0 0 10%",
+                  }}
+                >
                   <img
                     className="rounded-xl"
                     src={`data:image/jpeg;base64,${item.image}`}
                     alt={`Product ${item.product_id} Image`}
                     style={{
-                      maxWidth: "60px",
-                      maxHeight: "60px",
+                      maxWidth: "50px",
+                      height: "50px",
                       objectFit: "cover",
                     }}
                   />
@@ -783,19 +800,31 @@ const EditEstimation = () => {
                 <div
                   style={{
                     flex: "0 0 80%",
-                    paddingLeft: "60px",
+                    paddingLeft: "0px",
                   }}
                 >
                   <div>
-                    <div
-                      style={{ fontWeight: "bold" }}
-                    >{`${item.code} ${item.productname}`}</div>
+                    <div style={{ fontWeight: "bold", fontSize: "18px" }}>{`${
+                      item.code
+                    } ${truncate(item.productname, 75)}`}</div>
                   </div>
-                  <div>{`${item.details}`}</div>
+                  <div style={{ fontSize: "14px" }}>{`${truncate(
+                    item.details,
+                    120
+                  )}`}</div>
                 </div>
 
                 <div
-                  style={{ paddingLeft: "90px", marginTop: "15px" }}
+                  style={{
+                    flex: "0 0 10%",
+                    fontWeight: "500",
+                    color: currentColor,
+                    textAlign: "right",
+                    verticalAlign: "middle",
+                    paddingTop: "10px",
+                    paddingBottom: "10px",
+                    fontSize: "16px",
+                  }}
                 >{`${formatCurrency(item.unit_price)}`}</div>
               </div>
             ),
@@ -954,792 +983,720 @@ const EditEstimation = () => {
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      // fontWeight:"bold",
-      fontSize: "16px", // Adjust the font size as needed
+      maxHeight: "70px",
+      height: "70px",
+      fontSize: "14px",
     }),
     option: (provided) => ({
       ...provided,
-      //fontWeight:"bold",
-      fontSize: "16px", // Adjust the font size as needed
+      maxHeight: "70px",
+      fontSize: "14px",
+    }),
+    menuList: (provided) => ({
+      ...provided,
+      maxHeight: "250px",
     }),
   };
 
   return (
-    <div className="user-body">
-      <div style={{ paddingLeft: "120px" }}>
-        <Header title="EDIT ESTIMATION" />
-      </div>
+    <div className="m-0 md:m-4 p-4 md:p-8 bg-white rounded-3xl">
+      <Container fluid className="g-0 p-0 justify-end">
+        <Row
+          xs={1}
+          sm={1}
+          className="justify-content-center"
+          style={{
+            padding: "0",
+          }}
+        >
+          <Col md={12} className="container-col">
+            <Header title="EDIT ESTIMATION" />
+          </Col>
+        </Row>
 
-      <div className="container_sale">
-        <div div class="article-container-sale">
-          <div className="flex justify-center">
-            <div class="article-sale0">
-              <div className="card-sale">
-                <div>
+        <Row
+          xs={1}
+          sm={1}
+          className="justify-content-center"
+          style={{
+            padding: "0",
+          }}
+        >
+          <Col md={9} className="container-col">
+            <div className="card-sale">
+              <Row
+                xs={1}
+                sm={1}
+                className="justify-content-center"
+                style={{
+                  padding: "0",
+                }}
+              >
+                <Col md={12} className="container-col">
                   <label
-                    style={{
-                      fontWeight: "bold",
-                      font: "100px",
-                      fontSize: "20px",
-                    }}
+                    className="label"
                     htmlFor="ProductSelect"
+                    style={{ fontSize: "18px" }}
                   >
-                    Customer:{" "}
+                    Customer:
                   </label>
-                  <br />
-                  <div>
-                    <input
-                      className="input"
-                      type="text"
-                      value={cusFlag}
-                      style={{
-                        textAlign: "center",
-                        width: "200px",
-                        marginBottom: "10px",
-                      }}
-                      onChange={handleChangeCustomer}
-                      readOnly
-                    />
-                    <span style={{ paddingLeft: "72%" }}></span>
-                    <label
-                      //
-                      style={{
-                        // paddingLeft: "70%",
-                        // width: "100%",
-                        fontWeight: "bold",
-                        font: "100px",
-                        fontSize: "20px",
-                        border: "3px solid currentColor",
-                      }}
-                    >
-                      Bal:{" "}
-                      <span
+                  <div className="sale-input-div">
+                    <div className="sale-input">
+                      <input
+                        className="input"
                         style={{
-                          paddingLeft: "1px",
+                          width: "100%",
+                          height: "36px",
                         }}
-                      >
-                        {formatCurrency(acc_from_bal)}
-                      </span>
-                    </label>
+                        type="text"
+                        value={cusFlag}
+                        readOnly
+                        disabled
+                      />
+                    </div>
+                    <div
+                      className="sale-bal ml-4"
+                      style={{ backgroundColor: currentColor }}
+                    >
+                      <label>{formatCurrency(acc_from_bal)}</label>
+                    </div>
                   </div>
-                  <br />
+                </Col>
+              </Row>
+              <br />
+              <Row
+                xs={1}
+                sm={1}
+                className="justify-content-center"
+                style={{
+                  padding: "0",
+                }}
+              >
+                <Col md={12} className="container-col">
                   <label
                     htmlFor="ProductSelect"
-                    style={{
-                      fontWeight: "bold",
-                      font: "100px",
-                      fontSize: "18px",
-                      marginTop: "6px",
-                    }}
+                    className="label"
+                    style={{ fontSize: "18px" }}
                   >
-                    Product:{" "}
+                    Product:
                   </label>
-                  <div class="article-container-select">
-                    <Select
-                      className="css-13cymwt-control2"
-                      id="product"
-                      value={selectedProduct}
-                      onChange={handleChangeProduct}
-                      options={productOptions}
-                      isSearchable
-                      placeholder="Search Product With Name / Code"
-                      isClearable
-                      styles={customStyles}
-                      onKeyDown={(event) =>
-                        handleChangeProduct1(selectedProduct, event)
-                      }
-                      filterOption={customFilter}
-                      onInputChange={handleInputChange}
-                    />
+                  <div className="sale-input-div">
+                    <div className="sale-input">
+                      <Select
+                        className="myreact-select-prod"
+                        id="product"
+                        menuPlacement="bottom"
+                        menuPosition="fixed"
+                        value={selectedProduct}
+                        onChange={handleChangeProduct}
+                        options={productOptions}
+                        isSearchable
+                        placeholder="Search Product With Name / Code"
+                        isClearable
+                        styles={customStyles}
+                        onKeyDown={(event) =>
+                          handleChangeProduct1(selectedProduct, event)
+                        }
+                        filterOption={customFilter}
+                        onInputChange={handleInputChange}
+                      />
+                    </div>
                     <button
-                      // className="article-container1"
-                      style={{
-                        padding: "10px",
-                        backgroundColor: currentColor,
-                        color: "#fff",
-                        borderRadius: "11px",
-                        marginLeft: "10px",
-                        height: "42px",
-                      }}
+                      className="sale-bal ml-4"
                       type="button"
+                      style={{
+                        backgroundColor: currentColor,
+                        fontWeight: "1000",
+                        fontSize: "18px",
+                        height: "100%",
+                      }}
                       onClick={handleAddcartClick}
                     >
-                      ➕
+                      +
                     </button>
                   </div>
-                </div>
-
-                <br />
-                <div>
-                  <div className="table-container-sale5">
-                    {/* <Card > */}
-                    <table className="table table-striped table-bordered">
-                      <thead
-                        className="thead-dark"
-                        style={{
-                          color: currentColor,
-                          textAlign: "center",
-                          verticalAlign: "middle",
-                          fontWeight: "bold",
-                          fontSize: 14,
-                          position: "sticky",
-                          top: "0",
-                          background: "white",
-                          // borderSpacing: "10px",
-                        }}
-                      >
-                        <tr
-                          className="table-sale-tr"
+                </Col>
+              </Row>
+              <br />
+              <br />
+              <Row
+                xs={1}
+                sm={1}
+                className="justify-content-center table-container-sale"
+              >
+                <div className="m-0 p-0">
+                  <table className="table table-striped table-bordered">
+                    <thead
+                      className="thead-dark"
+                      style={{
+                        backgroundColor: currentColor,
+                        verticalAlign: "middle",
+                        position: "sticky",
+                        top: "0",
+                      }}
+                    >
+                      <tr className="table-sale-tr">
+                        <th
                           style={{
-                            Header: "70%",
-                            color: "white",
-                            backgroundColor: "#03c9d7",
-                            height: "60px",
-                            fontSize: "16px",
                             textAlign: "center",
-                          }}
-                        >
-                          <td
-                            style={{
-                              textAlign: "center",
-                              width: "120px",
-                            }}
-                          >
-                            CODE
-                          </td>
-                          <td
-                            style={{
-                              textAlign: "center",
-                              minWidth: "100px",
-                            }}
-                          >
-                            PRODUCT
-                          </td>
-                          <td
-                            style={{
-                              textAlign: "center",
-                              width: "140px",
-                            }}
-                          >
-                            UNIT PRICE
-                          </td>
-                          <td
-                            style={{
-                              textAlign: "center",
-                              width: "120px",
-                            }}
-                          >
-                            QTY
-                          </td>
-                          <td
-                            style={{
-                              textAlign: "center",
-                              width: "120px",
-                            }}
-                          >
-                            DISCOUNT
-                          </td>
-                          <td
-                            style={{
-                              textAlign: "center",
-                              width: "130px",
-                            }}
-                          >
-                            TOTAL
-                          </td>
-
-                          <td
-                            style={{
-                              textAlign: "center",
-                              width: "60px",
-                            }}
-                          >
-                            DEL
-                          </td>
-                        </tr>
-                      </thead>
-                      <tbody
-                        style={{
-                          verticalAlign: "middle",
-                          // fontSize: "14px",
-                          textAlign: "center",
-                        }}
-                      >
-                        {CardList?.map((item, index) => (
-                          <tr key={index} style={{}}>
-                            <td style={{ textAlign: "center" }}>{item.code}</td>
-                            <td style={{ textAlign: "center" }}>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexWrap: "wrap",
-                                }}
-                              >
-                                <div
-                                  className="image flex gap-4"
-                                  style={{
-                                    maxWidth: "64px",
-                                    maxHeight: "64px",
-                                  }}
-                                >
-                                  <img
-                                    className="rounded-xl"
-                                    src={`data:image/jpeg;base64,${item.image}`}
-                                    alt={`Product ${item.product_id} Image`}
-                                    style={{
-                                      maxWidth: "100%",
-                                      maxHeight: "100%",
-                                      objectFit: "contain",
-                                    }}
-                                  />
-                                </div>
-                                <div
-                                  style={{
-                                    flex: "0 0 80%",
-                                    paddingLeft: "20px",
-                                    marginTop: "8px",
-                                  }}
-                                >
-                                  <div style={{ fontWeight: "bold" }}>
-                                    {item.name}
-                                  </div>
-                                  <div>{item.details}</div>
-                                </div>
-                              </div>
-                            </td>
-                            <td style={{ textAlign: "center" }}>
-                              {/* <AiOutlineMinusSquare /> */}
-
-                              <div className="centered-input">
-                                <input
-                                  className="input"
-                                  id="quantity"
-                                  type="number"
-                                  step="1.00"
-                                  min="0"
-                                  style={{
-                                    textAlign: "center",
-                                    width: "",
-                                  }}
-                                  value={item.unit_price}
-                                  onClick={() =>
-                                    handleInputClick("unit_price", index)
-                                  }
-                                  onChange={(e) =>
-                                    handleUnitPriceChange(index, e.target.value)
-                                  }
-                                />
-                              </div>
-                            </td>
-                            <td>
-                              <div className="centered-input">
-                                <input
-                                  className="input"
-                                  id="quantity"
-                                  type="number"
-                                  step="1.00"
-                                  min="0"
-                                  style={{
-                                    textAlign: "center",
-                                  }}
-                                  value={item.quantity}
-                                  onClick={() =>
-                                    handleInputClick("quantity", index)
-                                  }
-                                  onChange={(e) =>
-                                    handleQuantityChange(index, e.target.value)
-                                  }
-                                />
-                              </div>
-                            </td>
-                            <td>
-                              <div className="centered-input">
-                                <input
-                                  className="input"
-                                  id="discount"
-                                  min="0"
-                                  type="number"
-                                  step="0.01"
-                                  value={item.discount}
-                                  style={{
-                                    textAlign: "center",
-                                  }}
-                                  onClick={() =>
-                                    handleInputClick("discount", index)
-                                  }
-                                  onChange={(e) =>
-                                    handleDiscountChange(index, e.target.value)
-                                  }
-                                />
-                              </div>
-                            </td>
-                            <td
-                              style={{
-                                textAlign: "center",
-                                // backgroundColor: "#afeeee",
-                                // fontWeight:"bold"
-                              }}
-                            >
-                              {formatCurrency(item.total)}
-                            </td>
-
-                            <td>
-                              <button
-                                style={{
-                                  textAlign: "left",
-                                  marginLeft: "14px",
-                                }}
-                                type="button"
-                                onClick={() => handleDeleteClick(index)}
-                              >
-                                ❌
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    {/* </Card> */}
-                  </div>
-
-                  <div className="table-container-sale1">
-                    {/* <Card > */}
-                    <table className="table table-bordered">
-                      <tbody style={{ width: "10px" }}>
-                        <tr
-                          style={{
-                            width: "20px",
-                          }}
-                        >
-                          <td
-                            style={{
-                              width: "140px",
-                              textAlign: "right",
-                              fontWeight: "bold",
-                            }}
-                          >
-                            SUB TOTAL:
-                          </td>
-                          <td
-                            // colSpan="2"
-                            style={{
-                              fontSize: "20px",
-                              color: currentColor,
-                              textAlign: "left",
-                              fontWeight: "Bold",
-                              paddingLeft: "10px",
-                            }}
-                          >
-                            {formatCurrency(total_amount)}
-                          </td>
-                          <td
-                            rowSpan="5"
-                            style={{
-                              backgroundColor: currentColor,
-                              textAlign: "center",
-                              fontWeight: "bold",
-                              width: "60px !important",
-                            }}
-                          >
-                            <div
-                              style={{
-                                fontSize: "34px",
-                                color: "black",
-                                width: "60px !important",
-                              }}
-                            >
-                              GRAND TOTAL:
-                              <bar />
-                              <div
-                                style={{
-                                  fontSize: "64px",
-                                  color: "white",
-                                  wordWrap: "break-word",
-                                  width: "60px !important",
-                                  paddingLeft: "10px",
-                                }}
-                              >
-                                {formatCurrency(grandtotal)}
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr
-                          style={{
-                            width: "20px",
-                          }}
-                        >
-                          <td
-                            style={{ textAlign: "right", fontWeight: "bold" }}
-                          >
-                            DISCOUNT:
-                          </td>
-                          <td
-                            style={{
-                              fontSize: "20px",
-                              color: currentColor,
-                              textAlign: "left",
-                              fontWeight: "Bold",
-                              paddingLeft: "10px",
-                              fontSize: "20px",
-                            }}
-                          >
-                            {formatCurrency(totaldiscount)}
-                          </td>
-                        </tr>
-                        <tr
-                          style={{
                             width: "100px",
                           }}
                         >
+                          CODE
+                        </th>
+                        <th
+                          style={{
+                            textAlign: "center",
+                            minWidth: "100px",
+                          }}
+                        >
+                          PRODUCT
+                        </th>
+                        <th
+                          style={{
+                            textAlign: "center",
+                            width: "115px",
+                          }}
+                        >
+                          UNIT PRICE
+                        </th>
+                        <th
+                          style={{
+                            textAlign: "center",
+                            width: "90px",
+                          }}
+                        >
+                          QTY
+                        </th>
+                        <th
+                          style={{
+                            textAlign: "center",
+                            width: "100px",
+                          }}
+                        >
+                          DISCOUNT
+                        </th>
+                        <th
+                          style={{
+                            textAlign: "center",
+                            width: "100px",
+                          }}
+                        >
+                          TOTAL
+                        </th>
+                        <th
+                          style={{
+                            textAlign: "center",
+                            width: "50px",
+                          }}
+                        >
+                          DEL
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      style={{
+                        verticalAlign: "middle",
+                        fontSize: "12px",
+                        textAlign: "center",
+                      }}
+                    >
+                      {CardList?.map((item, index) => (
+                        <tr key={index}>
                           <td
-                            style={{ fontWeight: "bold", textAlign: "right" }}
+                            style={{ textAlign: "center" }}
+                            onClick={() => handleToggle(item)}
                           >
-                            TAX:
+                            {item.code}
                           </td>
-                          <td>
-                            <label
+                          <td
+                            style={{ textAlign: "center" }}
+                            onClick={() => handleToggle(item)}
+                          >
+                            <div
                               style={{
-                                fontWeight: "bold",
-                                color: currentColor,
-                                paddingLeft: "10px",
-                                fontSize: "20px",
+                                display: "flex",
+                                flexWrap: "wrap",
                               }}
                             >
-                              {"$"}
-                            </label>
-                            <input
-                              id="tax"
-                              type="number"
-                              step="1"
-                              min="0"
-                              max="100"
-                              className="input"
-                              defaultValue={0.0}
-                              value={tax}
-                              onClick={() => handleInputClick("tax", -2)}
-                              onChange={handleChangeTax}
-                              style={{
-                                textAlign: "left",
-                                width: "90px",
-                                height: "27px",
-                                fontSize: "20px",
-                                color: currentColor,
-                                fontWeight: "Bold",
-                              }}
-                            />
+                              <div
+                                className="image flex gap-4"
+                                style={{
+                                  maxWidth: "64px",
+                                  maxHeight: "64px",
+                                }}
+                              >
+                                <img
+                                  className="rounded-xl"
+                                  src={`data:image/jpeg;base64,${item.image}`}
+                                  alt={`Product ${item.product_id} Image`}
+                                  style={{
+                                    maxWidth: "100%",
+                                    maxHeight: "100%",
+                                    objectFit: "contain",
+                                  }}
+                                />
+                              </div>
+                              <div
+                                style={{
+                                  flex: "0 0 80%",
+                                  paddingLeft: "20px",
+                                  marginTop: "8px",
+                                }}
+                              >
+                                <div style={{ fontWeight: "bold" }}>
+                                  {truncate(item.name, 60)}
+                                </div>
+                                <div>{truncate(item.details, 120)}</div>
+                              </div>
+                            </div>
                           </td>
-                        </tr>
-                        <tr>
-                          <td
-                            style={{ fontWeight: "bold", textAlign: "right" }}
-                          >
-                            SHIPMENT:
+                          <td style={{ textAlign: "center" }}>
+                            <div className="centered-input">
+                              <input
+                                className="input"
+                                id="quantity"
+                                type="number"
+                                step="1.00"
+                                min="0"
+                                style={{
+                                  textAlign: "center",
+                                  fontSize: "12px",
+                                }}
+                                value={item.unit_price}
+                                onClick={() =>
+                                  handleInputClick("unit_price", index)
+                                }
+                                onChange={(e) =>
+                                  handleUnitPriceChange(index, e.target.value)
+                                }
+                              />
+                            </div>
                           </td>
 
-                          <td
-                            style={{ fontWeight: "bold", color: currentColor }}
-                          >
-                            <label
-                              style={{
-                                fontWeight: "bold",
-                                color: currentColor,
-                                paddingLeft: "10px",
-                                fontSize: "20px",
-                              }}
-                            >
-                              {"$"}
-                            </label>
-                            <input
-                              defaultValue={0.0}
-                              type="number"
-                              name="shipment"
-                              min="0"
-                              step="1.00"
-                              value={projectname2}
-                              onChange={handleChangeProjectName2}
-                              onClick={() => handleInputClick("shipment1", -3)}
-                              className="input"
-                              style={{
-                                textAlign: "left",
-                                width: "90px",
-                                height: "27px",
-                                fontSize: "20px",
-                                color: currentColor,
-                                fontWeight: "Bold",
-                              }}
-                            />
+                          <td>
+                            <div className="centered-input">
+                              <input
+                                className="input"
+                                id="quantity"
+                                type="number"
+                                step="1.00"
+                                min="0"
+                                style={{
+                                  textAlign: "center",
+                                  fontSize: "12px",
+                                }}
+                                value={item.quantity}
+                                onClick={() =>
+                                  handleInputClick("quantity", index)
+                                }
+                                onChange={(e) =>
+                                  handleQuantityChange(index, e.target.value)
+                                }
+                              />
+                            </div>
                           </td>
-                        </tr>
-                        <tr>
-                          <td
-                            style={{ fontWeight: "bold", textAlign: "right" }}
-                          >
-                            TOTAL ITEMS:
+                          <td>
+                            <div className="centered-input">
+                              <input
+                                className="input"
+                                id="discount"
+                                min="0"
+                                type="number"
+                                step="0.01"
+                                value={item.discount}
+                                style={{
+                                  textAlign: "center",
+                                  fontSize: "12px",
+                                }}
+                                onClick={() =>
+                                  handleInputClick("discount", index)
+                                }
+                                onChange={(e) =>
+                                  handleDiscountChange(index, e.target.value)
+                                }
+                              />
+                            </div>
                           </td>
                           <td
                             style={{
-                              fontSize: "20px",
-                              color: currentColor,
-                              textAlign: "left",
-                              fontWeight: "Bold",
-                              paddingLeft: "20px",
+                              textAlign: "center",
                             }}
                           >
-                            {total_item || 0}
+                            {formatCurrency(item.total)}
+                          </td>
+                          <td>
+                            <button
+                              style={{
+                                textAlign: "center",
+                                marginLeft: "0px",
+                              }}
+                              type="button"
+                              onClick={() => handleDeleteClick(index)}
+                            >
+                              ❌
+                            </button>
                           </td>
                         </tr>
-                      </tbody>
-                    </table>
-
-                    {/* </Card> */}
-                  </div>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-              </div>
+              </Row>
+              <Row
+                xs={1}
+                sm={1}
+                className="justify-content-center table-container-sale1"
+              >
+                <table
+                  className="borderless"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  <tbody>
+                    <tr>
+                      <td
+                        className="table-sum-label"
+                        style={{ paddingTop: "8px" }}
+                      >
+                        SUB TOTAL:
+                      </td>
+                      <td
+                        className="table-sum-cash"
+                        style={{
+                          color: currentColor,
+                          paddingTop: "8px",
+                        }}
+                      >
+                        {formatCurrency(total_amount)}
+                      </td>
+                      <td
+                        rowSpan="5"
+                        style={{
+                          backgroundColor: currentColor,
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          padding: "52px",
+                          maxWidth: "160px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            fontSize: "28px",
+                            color: "black",
+                          }}
+                        >
+                          GRAND TOTAL
+                          <bar />
+                          <div
+                            style={{
+                              fontSize: "56px",
+                              color: "white",
+                              wordWrap: "break-word",
+                            }}
+                          >
+                            {formatCurrency(grandtotal)}
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="table-sum-label">DISCOUNT:</td>
+                      <td
+                        className="table-sum-cash"
+                        style={{
+                          color: currentColor,
+                        }}
+                      >
+                        {formatCurrency(totaldiscount)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="table-sum-label">TAX:</td>
+                      <td className="table-sum-cash">
+                        <label
+                          style={{
+                            color: currentColor,
+                          }}
+                        >
+                          {"$"}
+                        </label>
+                        <input
+                          id="tax"
+                          type="number"
+                          step="1"
+                          min="0"
+                          max="100"
+                          className="input table-sum-tb"
+                          defaultValue={0.0}
+                          value={tax}
+                          onClick={() => handleInputClick("tax", -2)}
+                          onChange={handleChangeTax}
+                          style={{
+                            color: currentColor,
+                            width: "140px",
+                          }}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="table-sum-label">SHIPMENT:</td>
+                      <td className="table-sum-cash">
+                        <label
+                          style={{
+                            color: currentColor,
+                          }}
+                        >
+                          {"$"}
+                        </label>
+                        <input
+                          defaultValue={0.0}
+                          type="number"
+                          name="shipment"
+                          min="0"
+                          step="1.00"
+                          value={projectname2}
+                          onChange={handleChangeProjectName2}
+                          onClick={() => handleInputClick("shipment1", -3)}
+                          className="input table-sum-tb"
+                          style={{
+                            color: currentColor,
+                            width: "140px",
+                          }}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        className="table-sum-label"
+                        style={{ marginBottom: "8px" }}
+                      >
+                        TOTAL ITEMS:
+                      </td>
+                      <td
+                        className="table-sum-cash"
+                        style={{
+                          color: currentColor,
+                          marginBottom: "8px",
+                        }}
+                      >
+                        {total_item || 0}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </Row>
             </div>
-
-            <div
-              class="article-sale1"
-              style={{
-                justifyContent: "center",
-              }}
-            >
-              <div class="card-sale3">
-                <div class="article-container-sale1">
+          </Col>
+          <Col md={3} className="container-col">
+            <div class="card-sale">
+              <Row
+                xs={1}
+                sm={1}
+                className="justify-content-center"
+                style={{
+                  padding: "0px",
+                }}
+              >
+                <Col
+                  md={6}
+                  className="container-col"
+                  style={{ paddingRight: "5px", paddingBottom: "10px" }}
+                >
                   <Card
-                    className="keypad-button2"
+                    className="action-btns-card"
                     style={{
-                      width: "180px",
-                      height: "100px",
-                      marginTop: "6px",
                       background: currentColor,
                     }}
                     onClick={handleSaleOrderClick}
                   >
-                    <div
-                      style={{
-                        width: "100%",
-                        fontWeight: "bold",
-                        marginTop: "7%",
-                        fontSize: "20px",
-                        color: "white",
-                      }}
-                    >
-                      SAVE
-                    </div>
+                    <div className="action-btn">SAVE</div>
                   </Card>
+                </Col>
+                <Col
+                  md={6}
+                  className="container-col"
+                  style={{ paddingLeft: "5px", paddingBottom: "10px" }}
+                >
                   <Card
-                    className="keypad-button2"
+                    className="action-btns-card"
                     style={{
-                      width: "180px",
-                      height: "100px",
-                      marginTop: "6px",
                       background: currentColor,
                     }}
                   >
-                    <div
-                      style={{
-                        width: "100%",
-                        fontWeight: "bold",
-                        marginTop: "7%",
-                        fontSize: "20px",
-                        color: "white",
-                      }}
-                    >
-                      PRINT
-                    </div>
+                    <div className="action-btn">PRINT</div>
                   </Card>
-                </div>
-                <div class="article-container-sale1">
+                </Col>
+              </Row>
+              <Row
+                xs={1}
+                sm={1}
+                className="justify-content-center"
+                style={{
+                  padding: "0px",
+                }}
+              >
+                <Col
+                  md={6}
+                  className="container-col"
+                  style={{ paddingRight: "5px", paddingBottom: "10px" }}
+                >
                   <Card
-                    className="keypad-button"
+                    className="action-btns-card"
                     style={{
-                      width: "180px",
-                      height: "100px",
                       background: currentColor,
                     }}
                     onClick={handleNewClick}
                   >
-                    <div
-                      style={{
-                        width: "100%",
-                        fontWeight: "bold",
-                        marginTop: "7%",
-                        fontSize: "20px",
-                        color: "white",
-                      }}
-                    >
-                      NEW
-                    </div>
+                    <div className="action-btn">NEW</div>
                   </Card>
+                </Col>
+                <Col
+                  md={6}
+                  className="container-col"
+                  style={{ paddingLeft: "5px", paddingBottom: "10px" }}
+                >
                   <Card
-                    className="keypad-button"
+                    className="action-btns-card"
                     style={{
-                      width: "180px",
-                      height: "100px",
                       background: currentColor,
                     }}
                     onClick={handleClearClick}
                   >
-                    <div
-                      style={{
-                        width: "100%",
-                        fontWeight: "bold",
-                        marginTop: "7%",
-                        fontSize: "20px",
-                        color: "white",
-                      }}
-                    >
-                      CLEAR
-                    </div>
+                    <div className="action-btn">CLEAR</div>
                   </Card>
-                </div>
-
-                <div class="article-container-sale1">
+                </Col>
+              </Row>
+              <Row
+                xs={1}
+                sm={1}
+                className="justify-content-center"
+                style={{
+                  padding: "0px",
+                }}
+              >
+                <Col
+                  md={6}
+                  className="container-col"
+                  style={{ paddingRight: "5px", paddingBottom: "10px" }}
+                >
                   <Card
-                    className="keypad-button"
+                    className="action-btns-card"
                     style={{
-                      width: "180px",
-                      height: "100px",
                       background: currentColor,
                     }}
                     // onClick={handleStatusClick}
                   >
-                    <div
-                      style={{
-                        width: "100%",
-                        fontWeight: "bold",
-                        marginTop: "7%",
-                        fontSize: "20px",
-                        color: "white",
-                      }}
-                    >
-                      {/* {OrderStatus} */}
-                    </div>
+                    {/* <div className="action-btn">{OrderStatus}</div> */}
                   </Card>
+                </Col>
+                <Col
+                  md={6}
+                  className="container-col"
+                  style={{ paddingLeft: "5px", paddingBottom: "10px" }}
+                >
                   <Card
-                    className="keypad-button"
+                    className="action-btns-card"
                     style={{
-                      width: "180px",
-                      height: "100px",
                       background: currentColor,
                     }}
                     onClick={handleBackClick}
                   >
-                    <div
-                      style={{
-                        width: "100%",
-                        fontWeight: "bold",
-                        marginTop: "7%",
-                        fontSize: "20px",
-                        color: "white",
-                      }}
-                    >
-                      CANCEL
-                    </div>
+                    <div className="action-btn">CANCEL</div>
                   </Card>
-                </div>
-                <div>
-                  <div class="article-sale1">
-                    <div class="article-container-sale1">
-                      <tbody
-                        style={{ marginBottom: "16px", marginTop: "16px" }}
-                      >
-                        <tr>
-                          <td>
-                            <label
-                              style={{
-                                fontWeight: "Bold",
-                                // paddingRight: "24px",
-                              }}
-                            >
-                              Project Name:
-                            </label>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <input
-                              type="text"
-                              name="project name"
-                              value={projectname}
-                              onChange={handleChangeProjectName}
-                              placeholder="Project Name"
-                              className="input"
-                              style={{
-                                width: "360px",
-                              }}
-                            />
-                          </td>
-                        </tr>
-                      </tbody>
-                    </div>
-                  </div>
-
-                  <div className="article-container-sale1">
-                    <div>
-                      <textarea
-                        placeholder="Estimation Note: "
-                        id="noteTextarea"
-                        value={note}
-                        onChange={handleChangeNote}
-                        rows="4"
-                        style={{
-                          display: "flex",
-                          width: "360px",
-                          height: "140px",
-                          marginBottom: "20px",
-                          marginTop: "12px",
-                        }}
-                        className="textarea"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="article-container-sale1">
-                  <div className="keypad-grid1">
-                    {keypadButtons.map((number) => (
-                      <Card
-                        style={{
-                          fontWeight: "Bold",
-                          border: "2px solid currentColor",
-                          margin: "2px",
-                        }}
-                        className="keypad-button1"
-                        key={number}
-                        onClick={() => handleKeypadClick(number)}
-                      >
-                        {number}
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                </Col>
+              </Row>
+              <Row
+                xs={1}
+                sm={1}
+                className="justify-content-center"
+                style={{
+                  paddingLeft: "16px",
+                  paddingRight: "16px",
+                }}
+              >
+                <Col
+                  md={12}
+                  className="container-col"
+                  style={{ paddingLeft: "5px", paddingBottom: "6px" }}
+                >
+                  <label
+                    style={{
+                      fontWeight: "500",
+                    }}
+                  >
+                    Project Name:
+                  </label>
+                  <input
+                    type="text"
+                    name="project name"
+                    value={projectname}
+                    onChange={handleChangeProjectName}
+                    placeholder="Project Name"
+                    className="input"
+                    style={{
+                      width: "100%",
+                    }}
+                  />
+                </Col>
+                <Col
+                  md={12}
+                  className="container-col"
+                  style={{
+                    paddingRight: "5px",
+                    paddingLeft: "5px",
+                    paddingTop: "4px",
+                    paddingBottom: "16px",
+                  }}
+                >
+                  <textarea
+                    placeholder="Estimation Note: "
+                    id="noteTextarea"
+                    value={note}
+                    onChange={handleChangeNote}
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      height: "80px",
+                    }}
+                    className="textarea"
+                  />
+                </Col>
+              </Row>
+              <Row
+                xs={1}
+                sm={1}
+                className="justify-content-center"
+                style={{ padding: "0px" }}
+              >
+                {keypadButtons.map((number) => (
+                  <Col md={4} className="container-col">
+                    <Card
+                      className="keypad-button1"
+                      style={{
+                        border: "1px solid " + currentColor,
+                        color: currentColor,
+                      }}
+                      key={number}
+                      onClick={() => handleKeypadClick(number)}
+                    >
+                      {number}
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
             </div>
-          </div>
-
-          {/* <Button
-            margin="10px"
-            padding="20px"
-            color="white"
-            className="custom-button ml-2"
-            bgColor={currentColor}
-            text="Complete"
-            borderRadius="10px"
-            onClick={handleSaleOrderClick}
-          />
-          <Button
-            margin="10px"
-            padding="20px"
-            color="white"
-            className="custom-button ml-2"
-            bgColor={currentColor}
-            text="Close Tab"
-            borderRadius="10px"
-            onClick={handleBackClick}
-          /> */}
-        </div>
-      </div>
+          </Col>
+          {toggle && (
+            <div className="overlay1">
+              <Sidebar
+                close={() => setToggle(false)}
+                product_id={productID}
+                store_id={param.store_id}
+              />
+            </div>
+          )}
+        </Row>
+      </Container>
     </div>
   );
 };

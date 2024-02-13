@@ -12,6 +12,7 @@ import {
   Toolbar,
   Sort,
   Filter,
+  Resize,
 } from "@syncfusion/ej2-react-grids";
 import {
   GetPurchaseOrderDetailRecByID,
@@ -19,7 +20,8 @@ import {
 } from "../../api/Api";
 import { Header, Button } from "../../components";
 import { useStateContext } from "../../contexts/ContextProvider";
-import "../../styles/AddCus.css";
+import "../../styles/AddProduct.css";
+import { Container, Col, Row } from "react-bootstrap";
 
 const ViewPurchaseOrder = () => {
   const [AllProducts, setAllProducts] = useState("");
@@ -44,47 +46,47 @@ const ViewPurchaseOrder = () => {
     {
       headerText: "Code",
       field: "code",
-      width: "150",
+      width: "90",
       textAlign: "Center",
     },
 
     {
       headerText: "Product",
       field: "product",
-      width: "150",
+      width: "250",
       textAlign: "Center",
     },
 
     {
       field: "quantity",
       headerText: "Qty",
-      width: "150",
+      width: "80",
       textAlign: "Center",
     },
     {
       field: "unit_price",
       headerText: "Unit Price",
       format: "C2",
-      width: "150",
+      width: "120",
       textAlign: "Center",
     },
     {
       field: "qty_recv",
       headerText: "Qty Rcv'd",
-      width: "150",
+      width: "110",
       textAlign: "Center",
     },
 
     {
       field: "qty_rej",
       headerText: "Qty Reject",
-      width: "150",
+      width: "120",
       textAlign: "Center",
     },
     {
       field: "discount",
       headerText: "Discount",
-      width: "150",
+      width: "120",
       format: "C2",
       textAlign: "Center",
     },
@@ -93,7 +95,7 @@ const ViewPurchaseOrder = () => {
       field: "total",
       headerText: "Total",
       format: "C2",
-      width: "150",
+      width: "120",
       textAlign: "Center",
     },
   ];
@@ -141,268 +143,206 @@ const ViewPurchaseOrder = () => {
   }, []);
 
   return (
-    <div className="user-body">
-      <div style={{ paddingLeft: "14px" }}>
-        <Header title="VIEW PURCHASE ORDER" />
-      </div>
-      <div className="m-2 md:m-4 p-1 md:p-2 bg-white rounded-2xl">
-        <div className="mt-4">
-          <form className="container-trans">
-            <div
-              style={{
-                textAlign: "left",
-                backgroundColor: "Transparent",
-                color: "black",
-              }}
-            >
-              <div class="article-container-cus">
-                <div className="flex justify-left">
-                  <div class="article-cus">
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>PO #: </label>
-                        <br />
-                        <input
-                          type="text"
-                          name="contact"
-                          value={project_name}
-                          placeholder="Purchase Order No"
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>Vendor: </label>
-                        <br />
-                        <input
-                          required
-                          type="text"
-                          name="Vendor"
-                          value={customer}
-                          placeholder="Customer"
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Vendor Invoice No:{" "}
-                        </label>
-                        <br />
-                        <input
-                          required
-                          value={customer_po_no}
-                          type="text"
-                          name="customer_po_no"
-                          placeholder="Vendor Invoice No"
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-                  </div>
-
-                  <div class="article-cus">
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Ship Method:{" "}
-                        </label>
-                        <br />
-                        <input
-                          type="text"
-                          //step="0.01"
-                          name="ship_ment"
-                          placeholder="Ship Method"
-                          className="input"
-                          value={ship_method}
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Tracking No:{" "}
-                        </label>
-                        <br />
-                        <input
-                          type="text"
-                          name="city"
-                          value={tracking_no}
-                          placeholder="Tracking no."
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Order Status:{" "}
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <input
-                          placeholder="Order Status"
-                          value={status}
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="article-cus">
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Total Price:{" "}
-                        </label>
-                        <br />
-                        <input
-                          type="text"
-                          name="state"
-                          value={total_price}
-                          placeholder="Total"
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Amount Paid:{" "}
-                        </label>
-                        <br />
-                        <input
-                          type="text"
-                          name="postal_code"
-                          value={amount_paid}
-                          placeholder="Amount Paid"
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>
-                          Amount Pending:{" "}
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <input
-                          placeholder="Amount Pending"
-                          value={amount_pending}
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="article-cus">
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label style={{ fontWeight: "bold" }}>User: </label>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <input
-                          placeholder="User"
-                          value={user}
-                          className="input"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <label style={{ fontWeight: "bold" }}>Note: </label>
-                    {/* </div> */}
-                    {/* </div> */}
-
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <textarea
-                          style={{
-                            height: "100px",
-                            width: "340px",
-                          }}
-                          placeholder="Note"
-                          value={so_note}
-                          id="noteTextarea"
-                          //   value={street_address}
-                          //   onChange={handleChangeAddress}
-                          rows="2"
-                          className="textarea"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                  </div>
+    <div className="m-0 md:m-4 p-4 md:p-8 bg-white rounded-3xl">
+      <Header title="VIEW PURCHASE ORDER" />
+      <form>
+        <Container
+          className="g-0 justify-center"
+          fluid="true"
+          style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "18px" }}
+        >
+          <Row
+            xs={1}
+            sm={1}
+            className="justify-content-center"
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">PO #: </label>
+                  <input
+                    type="text"
+                    name="contact"
+                    value={project_name}
+                    placeholder="Purchase Order No"
+                    className="input"
+                    readOnly
+                  />
                 </div>
-                {/* <div className="col-lg-12"> */}
-                {/* <div className="form-group"> */}
               </div>
-            </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Vendor: </label>
+                  <input
+                    required
+                    type="text"
+                    name="Vendor"
+                    value={customer}
+                    placeholder="Customer"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Vendor Invoice No: </label>
+                  <input
+                    required
+                    value={customer_po_no}
+                    type="text"
+                    name="customer_po_no"
+                    placeholder="Vendor Invoice No"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Ship Method:</label>
+                  <input
+                    type="text"
+                    name="ship_ment"
+                    placeholder="Ship Method"
+                    className="input"
+                    value={ship_method}
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Tracking No: </label>
+                  <input
+                    type="text"
+                    name="city"
+                    value={tracking_no}
+                    placeholder="Tracking no."
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Order Status: </label>
+                  <input
+                    placeholder="Order Status"
+                    value={status}
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Total Price: </label>
+                  <input
+                    type="text"
+                    name="state"
+                    value={total_price}
+                    placeholder="Total"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Amount Paid: </label>
+                  <input
+                    type="text"
+                    name="postal_code"
+                    value={amount_paid}
+                    placeholder="Amount Paid"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Amount Pending: </label>
+                  <input
+                    placeholder="Amount Pending"
+                    value={amount_pending}
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">User: </label>
+                  <input
+                    placeholder="User"
+                    value={user}
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
 
-            <GridComponent
-              dataSource={AllProducts}
-              allowPaging={true}
-              pageSettings={{ pageSize: 25 }}
-              allowSorting
-              allowTextWrap={true}
-              toolbar={["Search"]}
-              width="auto"
-              height={420}
-              className="custom-grid"
-            >
-              <ColumnsDirective>
-                {customersGrid.map((item, index) => (
-                  <ColumnDirective key={index} {...item} />
-                ))}
-              </ColumnsDirective>
-              <Inject
-                services={[Page, Toolbar, Selection, Edit, Sort, Filter]}
-              />
-            </GridComponent>
-
-            <Button
-              margin="10px"
-              padding="20px"
-              color="white"
-              className="custom-button ml-2"
-              bgColor={currentColor}
-              text="Back"
-              borderRadius="10px"
-              onClick={handleBackClick}
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Note: </label>
+                  <textarea
+                    style={{
+                      height: "80px",
+                    }}
+                    placeholder="Note"
+                    value={so_note}
+                    id="noteTextarea"
+                    className="textarea"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <br />
+          <GridComponent
+            dataSource={AllProducts}
+            allowPaging={true}
+            pageSettings={{ pageSize: 12 }}
+            allowSorting
+            allowResizing
+            className="custom-grid"
+            rowHeight={36}
+          >
+            <ColumnsDirective>
+              {customersGrid.map((item, index) => (
+                <ColumnDirective key={index} {...item} />
+              ))}
+            </ColumnsDirective>
+            <Inject
+              services={[Page, Resize, Toolbar, Selection, Edit, Sort, Filter]}
             />
-          </form>
-        </div>
-      </div>
+          </GridComponent>
+        </Container>
+      </form>
+      <Row md={"auto"} className="justify-content-center">
+        <Button
+          margin="10px"
+          padding="20px"
+          color="white"
+          className="custom-button ml-2"
+          bgColor={currentColor}
+          text="Back"
+          borderRadius="10px"
+          onClick={handleBackClick}
+        />
+      </Row>
     </div>
   );
 };

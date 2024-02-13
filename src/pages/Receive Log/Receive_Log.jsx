@@ -12,8 +12,7 @@ import {
   Toolbar,
   Sort,
   Filter,
-  rowCell,
-  isEditable,
+  Resize,
 } from "@syncfusion/ej2-react-grids";
 import {
   GetAllSalesByID,
@@ -24,7 +23,8 @@ import {
 } from "../../api/Api";
 import Select from "react-select";
 import { Header, Button } from "../../components";
-import "../../styles/AddCus.css";
+import "../../styles/AddProduct.css";
+import { Container, Col, Row } from "react-bootstrap";
 // import NumberFormat from 'react-number-format/NumberFormat';
 import { useStateContext } from "../../contexts/ContextProvider";
 
@@ -95,34 +95,32 @@ const Receive_Log = () => {
 
   const customersGrid = [
     {
-      headerText: "Product",
-      field: "product",
-      width: "150",
+      field: "code",
+      headerText: "Code",
+      width: "90",
       textAlign: "Center",
     },
-
+    {
+      headerText: "Product",
+      field: "product",
+      width: "250",
+      textAlign: "Center",
+    },
+    // {
+    //   field: "details",
+    //   headerText: "Description",
+    //   width: "320",
+    //   textAlign: "Center",
+    // },
     {
       field: "total_qty",
       headerText: "Qty",
-      width: "150",
-      textAlign: "Center",
-    },
-
-    {
-      field: "code",
-      headerText: "Code",
-      width: "150",
-      textAlign: "Center",
-    },
-    {
-      field: "details",
-      headerText: "Description",
-      width: "150",
+      width: "80",
       textAlign: "Center",
     },
     {
       field: "qty_recv",
-      headerText: "Qty Rev to Date",
+      headerText: "Qty Rcv to Date",
       width: "150",
       textAlign: "Center",
     },
@@ -134,14 +132,14 @@ const Receive_Log = () => {
     },
     {
       field: "last_qty_recv",
-      headerText: "Last Qty Rev",
-      width: "150",
+      headerText: "Last Qty Rcv",
+      width: "130",
       textAlign: "Center",
     },
     {
       field: "last_qty_reject",
       headerText: "Last Qty Rej",
-      width: "150",
+      width: "130",
       textAlign: "Center",
     },
   ];
@@ -302,6 +300,8 @@ const Receive_Log = () => {
       } else {
         alert("Receive Log Failed to Update");
       }
+
+      navigate("/Purchase");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -370,320 +370,335 @@ const Receive_Log = () => {
   }, [store, store_id]);
 
   return (
-    <div className="user-body">
-      <div style={{ paddingLeft: "1px" }}>
-        <Header title="RECEIVE LOG" />
-      </div>
-
-      <div className="flex justify-left">
-        <div class="article-container-cus">
-          <div class="article-cus4">
-            <div className="col-lg-12">
-              <div className="form-group">
-                <label style={{ fontWeight: "bold" }}>PO #: </label>
-                <br />
-                <input
-                  className="input"
-                  required
-                  type="text"
-                  name="name"
-                  value={so_id_param}
-                  placeholder="Sale Order"
-                  readOnly
-                  style={{ width: "110%", marginBottom: "20px" }}
-                />
-              </div>
-            </div>
-            {/* </div>
-                    <div class="article"> */}
-
-            <div className="col-lg-12">
-              <div className="form-group">
-                <label style={{ fontWeight: "bold" }}>Supplier: </label>
-                <br />
-                <input
-                  type="text"
-                  name="email"
-                  value={customer}
-                  placeholder="Vendor Name"
-                  className="input"
-                  readOnly
-                  style={{ width: "110%" }}
-                />
-              </div>
-            </div>
-          </div>
-          <div class="article-cus4">
-            <div className="col-lg-12">
-              <div className="form-group">
-                <label style={{ fontWeight: "bold" }}>PO Date: </label>
-                <br />
-                <input
-                  required
-                  type="text"
-                  name="phone"
-                  value={so_date}
-                  placeholder="PO Date"
-                  className="input"
-                  readOnly
-                  style={{ width: "110%", marginBottom: "20px" }}
-                />
-              </div>
-            </div>
-            {/* </div>
-                    <div class="article"> */}
-            <div className="col-lg-12">
-              <div className="form-group">
-                <label style={{ fontWeight: "bold" }}>Supplier Invoice: </label>
-                <br />
-                <input
-                  type="text"
-                  name="invoice"
-                  value={invoice}
-                  placeholder="Invoice No."
-                  className="input"
-                  readOnly
-                  style={{ width: "110%" }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex justify-end">
-        <button
-          style={{
-            padding: "10px",
-            backgroundColor:
-              (isUpdateButtonDisabled && !isEditMode) || !so_id || isEditMode
-                ? "grey"
-                : currentColor,
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            margin: "3px",
-          }}
-          color="white"
-          borderRadius="10px"
-          onClick={handleAddEmployeesClick}
-          text="heh"
-          disabled={
-            (isUpdateButtonDisabled && !isEditMode) || !so_id || isEditMode
-          }
+    <div className="m-0 md:m-4 p-4 md:p-8 bg-white rounded-3xl">
+      <Header title="RECEIVE LOG" />
+      <form>
+        <Container
+          className="g-0 justify-center"
+          fluid="true"
+          style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "18px" }}
         >
-          Edit / Rcv
-        </button>
-      </div>
-      <GridComponent
-        dataSource={AllAccounts}
-        allowPaging={true}
-        pageSettings={{ pageSize: 25 }}
-        allowSorting
-        allowTextWrap={true}
-        toolbar={["Search"]}
-        width="auto"
-        rowSelected={handleRowSelected}
-        height={260}
-        className="custom-grid"
-        onChange={onChangeGrid}
-        disabled={!row_id}
-      >
-        <ColumnsDirective>
-          {customersGrid.map((item, index) => (
-            <ColumnDirective key={index} {...item} />
-          ))}
-        </ColumnsDirective>
-        <Inject services={[Page, Toolbar, Selection, Edit, Sort, Filter]} />
-      </GridComponent>
-      <div className="flex justify-end">
+          <Row
+            xs={1}
+            sm={1}
+            //className="justify-content-center"
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">PO #: </label>
+                  <input
+                    className="input"
+                    required
+                    type="text"
+                    name="name"
+                    value={so_id_param}
+                    placeholder="Sale Order"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Supplier: </label>
+                  <input
+                    type="text"
+                    name="email"
+                    value={customer}
+                    placeholder="Vendor Name"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">PO Date: </label>
+                  <br />
+                  <input
+                    required
+                    type="text"
+                    name="phone"
+                    value={so_date}
+                    placeholder="PO Date"
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Supplier Invoice: </label>
+                  <br />
+                  <input
+                    type="text"
+                    name="invoice"
+                    value={invoice}
+                    placeholder="Invoice No."
+                    className="input"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <Row
+            xs={1}
+            sm={1}
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={12} className="container-col">
+              <div className="flex justify-end">
+                <button
+                  style={{
+                    padding: "10px",
+                    backgroundColor:
+                      (isUpdateButtonDisabled && !isEditMode) ||
+                      !so_id ||
+                      isEditMode
+                        ? "grey"
+                        : currentColor,
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "5px",
+                    margin: "3px",
+                  }}
+                  color="white"
+                  borderRadius="10px"
+                  onClick={handleAddEmployeesClick}
+                  text="heh"
+                  disabled={
+                    (isUpdateButtonDisabled && !isEditMode) ||
+                    !so_id ||
+                    isEditMode
+                  }
+                >
+                  Edit / Rcv
+                </button>
+              </div>
+            </Col>
+          </Row>
+          <Row
+            xs={1}
+            sm={1}
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={12} className="container-col">
+              <GridComponent
+                dataSource={AllAccounts}
+                allowPaging={true}
+                pageSettings={{ pageSize: 16 }}
+                allowSorting
+                //toolbar={["Search"]}
+                allowResizing
+                rowSelected={handleRowSelected}
+                rowHeight={36}
+                className="custom-grid"
+                onChange={onChangeGrid}
+                disabled={!row_id}
+              >
+                <ColumnsDirective>
+                  {customersGrid.map((item, index) => (
+                    <ColumnDirective key={index} {...item} />
+                  ))}
+                </ColumnsDirective>
+                <Inject
+                  services={[
+                    Resize,
+                    Page,
+                    Toolbar,
+                    Selection,
+                    Edit,
+                    Sort,
+                    Filter,
+                  ]}
+                />
+              </GridComponent>
+            </Col>
+          </Row>
+          <Row
+            xs={1}
+            sm={1}
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={12} className="container-col">
+              <div className="flex justify-end">
+                <button
+                  style={{
+                    padding: "10px",
+                    backgroundColor: !isUpdateButtonDisabled
+                      ? "grey"
+                      : currentColor,
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "5px",
+                    margin: "3px",
+                  }}
+                  color="white"
+                  borderRadius="10px"
+                  disabled={!isUpdateButtonDisabled}
+                  onClick={handleUpdateItemClick}
+                  text="heh"
+                >
+                  Update Item
+                </button>
+
+                <button
+                  style={{
+                    padding: "10px",
+                    backgroundColor: !isUpdateButtonDisabled
+                      ? "grey"
+                      : currentColor,
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "5px",
+                    margin: "3px",
+                  }}
+                  color="white"
+                  borderRadius="10px"
+                  disabled={!isUpdateButtonDisabled}
+                  onClick={handleCancelClick}
+                  text="heh"
+                >
+                  Cancel
+                </button>
+              </div>
+            </Col>
+          </Row>
+          <Row
+            xs={1}
+            sm={1}
+            //className="justify-content-center"
+            style={{
+              padding: "0",
+            }}
+          >
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Recv'd By: </label>
+                  <input
+                    required
+                    type="text"
+                    name="recv_by"
+                    value={recv_by}
+                    placeholder="Receive By"
+                    className="input"
+                    onChange={handleChangeRecv_by}
+                    disabled={!isUpdateButtonDisabled}
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Rcv'd Date: </label>
+                  <input
+                    type="date"
+                    name="ship_date"
+                    value={formData.ship_date}
+                    className="input"
+                    onChange={handleChangeHireDate}
+                    disabled={!isUpdateButtonDisabled}
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">New Qty Recv'd: </label>
+                  <input
+                    required
+                    type="number"
+                    name="qty_shipped"
+                    step="1.00"
+                    value={qty_shipped}
+                    placeholder="Quantity Shipped"
+                    className="input"
+                    onChange={handleChangeqty_shipped}
+                    disabled={!isUpdateButtonDisabled}
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12">
+                <div className="form-group">
+                  <label className="label">Mfg Date: </label>
+                  <input
+                    type="date"
+                    name="ship_date"
+                    value={formData.mfg_date}
+                    className="input"
+                    onChange={handleChangeMfgDate}
+                    disabled={!isUpdateButtonDisabled}
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={3} className="container-col">
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">New Qty Reject: </label>
+                  <input
+                    required
+                    type="number"
+                    name="qty_shipped"
+                    step="1.00"
+                    value={qty_reject}
+                    placeholder="Quantity Shipped"
+                    className="input"
+                    onChange={handleChangeqty_reject}
+                    disabled={!isUpdateButtonDisabled}
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={9} className="container-col">
+              <div className="col-lg-12 mt-2">
+                <div className="form-group">
+                  <label className="label">Note: </label>
+                  <input
+                    style={{
+                      width: "93.5%",
+                    }}
+                    placeholder="Note "
+                    id="noteTextarea"
+                    value={acc_notes}
+                    onChange={handleChangeAccNote}
+                    rows="2"
+                    className="input"
+                    disabled={!isUpdateButtonDisabled}
+                  />
+                </div>
+              </div>
+              <br />
+            </Col>
+          </Row>
+        </Container>
+      </form>
+      <Row md={"auto"} className="justify-content-center">
         <button
           style={{
-            padding: "10px",
-            backgroundColor: !isUpdateButtonDisabled ? "grey" : currentColor,
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            margin: "3px",
-          }}
-          color="white"
-          borderRadius="10px"
-          disabled={!isUpdateButtonDisabled}
-          onClick={handleUpdateItemClick}
-          text="heh"
-        >
-          Update Item
-        </button>
-
-        <button
-          style={{
-            padding: "10px",
-            backgroundColor: !isUpdateButtonDisabled ? "grey" : currentColor,
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            margin: "3px",
-          }}
-          color="white"
-          borderRadius="10px"
-          disabled={!isUpdateButtonDisabled}
-          onClick={handleCancelClick}
-          text="heh"
-        >
-          Cancel
-        </button>
-      </div>
-
-      <div class="article-cus2">
-        <div class="article-container-cus">
-          {/* <br /> */}
-          <div className="col-lg-12" style={{ paddingRight: "190px" }}>
-            <div className="form-group">
-              <label>Recv'd By: </label>
-              <br />
-              <input
-                required
-                type="text"
-                name="recv_by"
-                value={recv_by}
-                placeholder="Receive By"
-                className="input"
-                onChange={handleChangeRecv_by}
-                disabled={!isUpdateButtonDisabled}
-                style={{ width: "170%", paddingRight: "30px" }}
-              />
-            </div>
-          </div>
-          <br />
-          <br />
-          {/* <br /> */}
-          <div className="col-lg-12" style={{ paddingRight: "190px" }}>
-            <div className="form-group">
-              <label>Rcv'd Date: </label>
-              <br />
-              <input
-                type="date"
-                name="ship_date"
-                value={formData.ship_date}
-                className="input"
-                onChange={handleChangeHireDate}
-                disabled={!isUpdateButtonDisabled}
-                style={{ width: "190%", paddingRight: "30px" }}
-              />
-            </div>
-          </div>
-          <br />
-          <div className="col-lg-12" style={{ paddingRight: "190px" }}>
-            <div className="form-group">
-              <label>New Qty Recv'd: </label>
-              <br />
-              <input
-                required
-                type="number"
-                name="qty_shipped"
-                step="1.00"
-                value={qty_shipped}
-                placeholder="Quantity Shipped"
-                className="input"
-                onChange={handleChangeqty_shipped}
-                disabled={!isUpdateButtonDisabled}
-                style={{ width: "170%", paddingRight: "30px" }}
-              />
-            </div>
-          </div>
-          <br />
-          <br />
-          <br />
-        </div>
-      </div>
-
-      <div class="article-cus2">
-        <div class="article-container-cus">
-          <div className="col-lg-12" style={{ paddingRight: "230px" }}>
-            <div className="form-group">
-              <label>Mfg Date: </label>
-              <br />
-              <input
-                type="date"
-                name="ship_date"
-                value={formData.mfg_date}
-                className="input"
-                onChange={handleChangeMfgDate}
-                disabled={!isUpdateButtonDisabled}
-                style={{ width: "200%", paddingRight: "30px" }}
-              />
-            </div>
-          </div>
-          <br />
-
-          <div className="col-lg-12" style={{ paddingRight: "190px" }}>
-            <div className="form-group">
-              <label>New Qty Reject: </label>
-              <br />
-              <input
-                required
-                type="number"
-                name="qty_shipped"
-                step="1.00"
-                value={qty_reject}
-                placeholder="Quantity Shipped"
-                className="input"
-                onChange={handleChangeqty_reject}
-                disabled={!isUpdateButtonDisabled}
-                style={{ width: "155%", paddingRight: "30px" }}
-              />
-              <br />
-              <br />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-cus2">
-        <div class="article-container-cus">
-          <div className="col-lg-12" style={{ paddingRight: "190px" }}>
-            <div className="form-group">
-              <label>Note: </label>
-
-              <br />
-              <textarea
-                style={{
-                  width: "1600px",
-                  height: "50px",
-                }}
-                placeholder="Note "
-                id="noteTextarea"
-                value={acc_notes}
-                onChange={handleChangeAccNote}
-                rows="2"
-                className="textarea"
-                disabled={!isUpdateButtonDisabled}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex justify-center">
-        {/* 
-        <Button
-          margin="7px"
-          color="white"
-          bgColor={ !forceUpdate ? "grey" : currentColor}
-          text="Save Order"
-          borderRadius="10px"
-          onClick={handleViewEmployeesClick}
-          disabled={!forceUpdate}
-        /> */}
-
-        <button
-          style={{
-            padding: "10px",
             backgroundColor: !forceUpdate ? "grey" : currentColor,
             color: "#fff",
             border: "none",
             borderRadius: "5px",
-            margin: "3px",
+            margin: "10px",
+            padding: "20px",
           }}
           color="white"
           borderRadius="10px"
@@ -695,12 +710,12 @@ const Receive_Log = () => {
         </button>
         <button
           style={{
-            padding: "10px",
             backgroundColor: currentColor,
             color: "#fff",
             border: "none",
             borderRadius: "5px",
-            margin: "3px",
+            margin: "10px",
+            padding: "20px",
           }}
           color="white"
           borderRadius="10px"
@@ -709,16 +724,7 @@ const Receive_Log = () => {
         >
           Back
         </button>
-
-        {/* <Button
-          margin="7px"
-          color="white"
-          bgColor={currentColor}
-          text="Back"
-          borderRadius="10px"
-          onClick={handleBackClick}
-        /> */}
-      </div>
+      </Row>
     </div>
   );
 };

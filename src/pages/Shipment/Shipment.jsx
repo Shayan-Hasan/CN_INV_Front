@@ -297,7 +297,6 @@ const Shipment = () => {
   return (
     <div className="m-0 md:m-4 p-4 md:p-8 bg-white rounded-3xl">
       <Header title="SHIPMENT" />
-
       <form>
         <Container
           className="g-0 justify-center"
@@ -312,7 +311,7 @@ const Shipment = () => {
               padding: "0",
             }}
           >
-            <Col md={2} className="container-col">
+            <Col md={3} className="container-col">
               <div className="col-lg-12">
                 <div className="form-group">
                   <label className="label">SO #: </label>
@@ -330,7 +329,6 @@ const Shipment = () => {
               <div className="col-lg-12">
                 <div className="form-group">
                   <label className="label">Customer: </label>
-                  <br />
                   <input
                     type="text"
                     name="email"
@@ -342,7 +340,7 @@ const Shipment = () => {
                 </div>
               </div>
             </Col>
-            <Col md={2} className="container-col">
+            <Col md={3} className="container-col">
               <div className="col-lg-12">
                 <div className="form-group">
                   <label className="label">SO Date: </label>
@@ -503,11 +501,10 @@ const Shipment = () => {
               padding: "0",
             }}
           >
-            <Col md={2} className="container-col">
+            <Col md={3} className="container-col">
               <div className="col-lg-12">
                 <div className="form-group">
                   <label className="label">Ship Date: </label>
-                  <br />
                   <input
                     type="date"
                     name="ship_date"
@@ -519,7 +516,7 @@ const Shipment = () => {
                 </div>
               </div>
             </Col>
-            <Col md={2} className="container-col">
+            <Col md={3} className="container-col">
               <div className="col-lg-12">
                 <div className="form-group">
                   <label className="label">New Qty Ship'd: </label>
@@ -556,7 +553,7 @@ const Shipment = () => {
               padding: "0",
             }}
           >
-            <Col md={4} className="container-col">
+            <Col md={6} className="container-col">
               <div className="col-lg-12">
                 <div className="form-group">
                   <label className="label">Note: </label>
@@ -571,6 +568,7 @@ const Shipment = () => {
                   />
                 </div>
               </div>
+              <br />
             </Col>
           </Row>
         </Container>

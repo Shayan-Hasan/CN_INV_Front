@@ -68,13 +68,6 @@ const Sales = () => {
     </div>
   );
 
-  const customerGridImage1 = (props) => (
-    <div>{formatCurrency(props.total)}</div>
-  );
-  const customerGridImage = (props) => (
-    <div>{formatCurrency(props.amount_pending)}</div>
-  );
-
   const customersGrid = [
     // { headerTemplate: ` `, type: "checkbox", width: "50" },
     {
@@ -174,16 +167,8 @@ const Sales = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      const baseUrl = "http://localhost:3000";
-      if (est_sale === "E") {
-        const path = `/Estimates/AddEstimation/${store_id}`;
-        const url = `${baseUrl}${path}`;
-        window.open(url, "_blank");
-      } else {
-        const path = `/Sales/AddSaleOrder/${store_id}`;
-        const url = `${baseUrl}${path}`;
-        window.open(url, "_blank");
-      }
+      const path = `/Sales/AddSaleOrder/${store_id}`;
+      window.open(path, "_blank");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -195,16 +180,8 @@ const Sales = () => {
       console.log("edit new");
       if (so_id != "") {
         const so_ids = so_id + "_" + store_id;
-        const baseUrl = "http://localhost:3000";
-        if (est_sale === "E") {
-          const path = `/Estimates/EditEstimation/${so_ids}`;
-          const url = `${baseUrl}${path}`;
-          window.open(url, "_blank");
-        } else {
-          const path = `/Sales/EditSaleOrder/${so_ids}`;
-          const url = `${baseUrl}${path}`;
-          window.open(url, "_blank");
-        }
+        const path = `/Sales/EditSaleOrder/${so_ids}`;
+        window.open(path, "_blank");
       } else {
         alert("Please Select Order");
       }
@@ -243,37 +220,12 @@ const Sales = () => {
     }
   };
 
-  const handleViewEmployeesClick1 = async (event) => {
-    event.preventDefault();
-    try {
-      console.log("edit new");
-      if (so_id != "") {
-        const so_ids = so_id + "_" + store_id;
-        const baseUrl = "http://localhost:3000";
-        if (est_sale === "E") {
-          const path = `/Estimates/ConvertEstimate/${so_ids}`;
-          const url = `${baseUrl}${path}`;
-          window.open(url, "_blank");
-        }
-      } else {
-        alert("Please Select Order");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
   const handleViewSaleClick = async (event) => {
     event.preventDefault();
     try {
       console.log("view saleorder");
       if (so_id != "") {
-        const so_ids = so_id + "_" + store_id;
-        if (est_sale === "E") {
-          navigate(`/Estimates/ViewEstimation/${so_id}`);
-        } else {
-          navigate(`/Sales/ViewSaleOrder/${so_id}`);
-        }
+        navigate(`/Sales/ViewSaleOrder/${so_id}`);
       } else {
         alert("Please Select Order");
       }
@@ -368,31 +320,16 @@ const Sales = () => {
               onClick={handleAddEmployeesClick}
             />
           </Col>
-          {est_sale === "S" && (
-            <Col md="auto" style={{ padding: "0" }}>
-              <Button
-                margin="6px"
-                color="white"
-                bgColor={currentColor}
-                text="Update"
-                borderRadius="10px"
-                onClick={handleEditEmployeesClick}
-              />
-            </Col>
-          )}
-
-          {est_sale === "E" && (
-            <Col md="auto" style={{ padding: "0" }}>
-              <Button
-                margin="6px"
-                color="white"
-                bgColor={currentColor}
-                text="Edit"
-                borderRadius="10px"
-                onClick={handleEditEmployeesClick}
-              />
-            </Col>
-          )}
+          <Col md="auto" style={{ padding: "0" }}>
+            <Button
+              margin="6px"
+              color="white"
+              bgColor={currentColor}
+              text="Update"
+              borderRadius="10px"
+              onClick={handleEditEmployeesClick}
+            />
+          </Col>
           <Col md="auto" style={{ padding: "0" }}>
             <Button
               margin="6px"
@@ -403,55 +340,26 @@ const Sales = () => {
               onClick={handleViewSaleClick}
             />
           </Col>
-          {est_sale === "S" && (
-            <Col md="auto" style={{ padding: "0" }}>
-              <Button
-                margin="6px"
-                color="white"
-                bgColor={currentColor}
-                text="Shipment"
-                borderRadius="10px"
-                onClick={handleViewEmployeesClick}
-              />
-            </Col>
-          )}
-
-          {est_sale === "S" && (
-            <Col md="auto" style={{ padding: "0" }}>
-              <Button
-                margin="6px"
-                color="white"
-                bgColor={currentColor}
-                text="View Shipment"
-                borderRadius="10px"
-                onClick={handleViewEmployeesClick2}
-              />
-            </Col>
-          )}
-
-          {est_sale === "E" && (
-            <Col md="auto" style={{ padding: "0" }}>
-              <Button
-                margin="6px"
-                color="white"
-                bgColor={currentColor}
-                text="Convert to Sale"
-                borderRadius="10px"
-                onClick={handleViewEmployeesClick1}
-              />
-            </Col>
-          )}
-          {/* <Col md="auto" style={{ padding: "0" }}>
-            <select
-              className="select-custom"
-              value={est_sale}
-              onChange={handleest_saleChange}
-            >
-              <option value="S">Sale Orders</option>
-              <option value="E">Estimations</option>
-            </select>
-          </Col> */}
-
+          <Col md="auto" style={{ padding: "0" }}>
+            <Button
+              margin="6px"
+              color="white"
+              bgColor={currentColor}
+              text="Shipment"
+              borderRadius="10px"
+              onClick={handleViewEmployeesClick}
+            />
+          </Col>
+          <Col md="auto" style={{ padding: "0" }}>
+            <Button
+              margin="6px"
+              color="white"
+              bgColor={currentColor}
+              text="View Shipment"
+              borderRadius="10px"
+              onClick={handleViewEmployeesClick2}
+            />
+          </Col>
           <Col md="auto" style={{ padding: "0" }}>
             <select
               className="select-custom"

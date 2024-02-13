@@ -12,6 +12,7 @@ import {
   Toolbar,
   Sort,
   Filter,
+  Resize,
 } from "@syncfusion/ej2-react-grids";
 import { GetShipmentDetailByid } from "../../api/Api";
 import { Header, Button } from "../../components";
@@ -26,32 +27,22 @@ const ViewShipment = () => {
   const [AllProductInStore, setAllProductInStore] = useState("");
   let param = useParams();
 
-  const formatCurrency = (number) => {
-    return number.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    });
-  };
-
   const InventoryGrid = [
-    //{ type: 'checkbox', width: '50' },
-
     {
       field: "shipment_id",
       headerText: "Ship ID",
-      width: "80",
+      width: "60",
       textAlign: "Center",
     },
 
     {
       field: "code",
       headerText: "Code",
-      width: "80",
+      width: "70",
       textAlign: "Center",
     },
     {
-      field: "details",
+      field: "name",
       headerText: "Product Description",
       width: "150",
       textAlign: "Center",
@@ -60,7 +51,7 @@ const ViewShipment = () => {
     {
       field: "qty_ship",
       headerText: "Qty Ship'd",
-      width: "90",
+      width: "80",
       textAlign: "Center",
     },
 
@@ -92,13 +83,6 @@ const ViewShipment = () => {
       console.error("Error:", error);
     }
   };
-
-  //   const handleRowSelected = (args) => {
-  //     const selectedRowData = args.data;
-  //     setCode(selectedRowData.code);
-  //     console.log(selectedRowData.code);
-  //     // console.log('Selected Product Code:', productcode);
-  //   };
 
   useEffect(() => {
     //console.log("id "+param.p_id);
@@ -159,7 +143,15 @@ const ViewShipment = () => {
                 ))}
               </ColumnsDirective>
               <Inject
-                services={[Page, Toolbar, Selection, Edit, Sort, Filter]}
+                services={[
+                  Resize,
+                  Page,
+                  Toolbar,
+                  Selection,
+                  Edit,
+                  Sort,
+                  Filter,
+                ]}
               />
             </GridComponent>
           </Col>

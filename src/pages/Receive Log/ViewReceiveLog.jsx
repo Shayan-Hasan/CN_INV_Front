@@ -12,11 +12,13 @@ import {
   Toolbar,
   Sort,
   Filter,
+  Resize,
 } from "@syncfusion/ej2-react-grids";
 import { GetReceiveLogDetailByid } from "../../api/Api";
 import { Header, Button } from "../../components";
 import { useStateContext } from "../../contexts/ContextProvider";
-import "../../styles/viewCustomer.css";
+import "../../styles/AddProduct.css";
+import { Container, Col, Row } from "react-bootstrap";
 
 const ViewReceiveLog = () => {
   const navigate = useNavigate();
@@ -38,17 +40,9 @@ const ViewReceiveLog = () => {
     {
       field: "log_id",
       headerText: "Log ID",
-      width: "110",
+      width: "60",
       textAlign: "Center",
     },
-
-    {
-      field: "quantity",
-      headerText: "Qty",
-      width: "100",
-      textAlign: "Center",
-    },
-
     {
       field: "code",
       headerText: "Code",
@@ -57,35 +51,41 @@ const ViewReceiveLog = () => {
     },
 
     {
-      field: "details",
+      field: "name",
       headerText: "Description",
       width: "150",
+      textAlign: "Center",
+    },
+    {
+      field: "quantity",
+      headerText: "Qty",
+      width: "100",
       textAlign: "Center",
     },
 
     {
       field: "qty_recv",
       headerText: "Qty Rcv",
-      width: "130",
+      width: "120",
       textAlign: "Center",
     },
 
     {
       field: "qty_rej",
       headerText: "Qty Rej",
-      width: "130",
+      width: "120",
       textAlign: "Center",
     },
     {
       field: "running_qty_rcv",
       headerText: "Run'g Qty Rcv",
-      width: "140",
+      width: "150",
       textAlign: "Center",
     },
     {
       field: "running_qty_rej",
       headerText: "Run'g Qty Rej",
-      width: "140",
+      width: "150",
       textAlign: "Center",
     },
     {
@@ -103,13 +103,13 @@ const ViewReceiveLog = () => {
     {
       field: "mfg_date",
       headerText: "Mfg Date",
-      width: "130",
+      width: "140",
       textAlign: "Center",
     },
     {
       field: "note",
       headerText: "Note",
-      width: "150",
+      width: "120",
       textAlign: "Center",
     },
   ];
@@ -144,40 +144,63 @@ const ViewReceiveLog = () => {
   }, []);
 
   return (
-    <div className="user-body">
+    <div className="m-0 md:m-4 p-4 md:p-8 bg-white rounded-3xl">
       <Header title="RECEIVE LOG DETAILS" />
-
-      <div className="flex justify-end">
-        <Button
-          margin="7px"
-          color="white"
-          bgColor={currentColor}
-          text="Back"
-          borderRadius="10px"
-          onClick={handleBackClick}
-        />
-      </div>
-
-      <GridComponent
-        dataSource={AllProductInStore}
-        allowPaging={true}
-        pageSettings={{ pageSize: 25 }}
-        allowSorting
-        allowTextWrap={true}
-        toolbar={["Search"]}
-        width="auto"
-        height={670}
-        className="custom-grid"
+      <Container
+        className="g-0 p-8 justify-center"
+        fluid="true"
+        style={{ paddingTop: "10px" }}
       >
-        {/* rowSelected={handleRowSelected} */}
-        <ColumnsDirective>
-          {InventoryGrid.map((item, index) => (
-            <ColumnDirective key={index} {...item} />
-          ))}
-        </ColumnsDirective>
-        <Inject services={[Page, Toolbar, Selection, Edit, Sort, Filter]} />
-      </GridComponent>
-      {/* <button onClick={handleSubmit}>Submit</button> */}
+        <Row xs={2} className="button-row justify-content-end font-normal">
+          <Col md="auto" style={{ padding: "0" }}>
+            <Button
+              margin="7px"
+              color="white"
+              bgColor={currentColor}
+              text="Back"
+              borderRadius="10px"
+              onClick={handleBackClick}
+            />
+          </Col>
+        </Row>
+        <Row
+          xs={1}
+          sm={1}
+          className="justify-content-center"
+          style={{
+            padding: "0",
+          }}
+        >
+          <Col md={12} className="container-col">
+            <GridComponent
+              dataSource={AllProductInStore}
+              allowPaging={true}
+              pageSettings={{ pageSize: 16 }}
+              allowSorting
+              allowResizing
+              className="custom-grid"
+              rowHeight={36}
+            >
+              <ColumnsDirective>
+                {InventoryGrid.map((item, index) => (
+                  <ColumnDirective key={index} {...item} />
+                ))}
+              </ColumnsDirective>
+              <Inject
+                services={[
+                  Resize,
+                  Page,
+                  Toolbar,
+                  Selection,
+                  Edit,
+                  Sort,
+                  Filter,
+                ]}
+              />
+            </GridComponent>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

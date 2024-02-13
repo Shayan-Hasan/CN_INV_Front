@@ -10,7 +10,7 @@ const validateEmail = (mail) => {
 
 function validateName(name) {
   TimeoutUtility.resetTimeout();
-  if (/^[A-Za-z0-9\s-]+$/.test(name)) {
+  if (/^[A-Za-z0-9\s-,.+?()&*]+$/.test(name)) {
     return true;
   }
   return false;

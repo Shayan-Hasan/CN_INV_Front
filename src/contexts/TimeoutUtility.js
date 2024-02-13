@@ -15,7 +15,7 @@ export default class TimeoutUtility {
       };
       localStorage.setItem("userData", JSON.stringify(userData));
       window.location.reload();
-    }, 30 * 60 * 1000);
+    }, 300 * 60 * 1000);
   };
 
   static attachEventListeners = (callback) => {

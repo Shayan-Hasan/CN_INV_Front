@@ -155,10 +155,8 @@ const Purchase = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      const baseUrl = "http://localhost:3000";
-      const path = `/Purchase/addPurchaseOrder/${store_id}`;
-      const url = `${baseUrl}${path}`;
-      window.open(url, "_blank");
+      const path = `/Purchase/AddPurchaseOrder/${store_id}`;
+      window.open(path, "_blank");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -170,10 +168,8 @@ const Purchase = () => {
       console.log("edit new");
       if (po_id != "") {
         const po_ids = po_id + "_" + store_id;
-        const baseUrl = "http://localhost:3000";
-        const path = `/Purchase/editPurchaseOrder/${po_ids}`;
-        const url = `${baseUrl}${path}`;
-        window.open(url, "_blank");
+        const path = `/Purchase/EditPurchaseOrder/${po_ids}`;
+        window.open(path, "_blank");
       } else {
         alert("Please select purchase order.");
       }
@@ -202,7 +198,6 @@ const Purchase = () => {
     try {
       console.log("view ReceiveLog");
       if (po_id != "") {
-        const po_ids = po_id + "_" + store_id;
         navigate(`/Purchase/ViewReceiveLog/${po_id}`);
       } else {
         alert("Please select purchase order.");
@@ -217,7 +212,6 @@ const Purchase = () => {
     try {
       console.log("view purchaseorder");
       if (po_id != "") {
-        const so_ids = po_id + "_" + store_id;
         navigate(`/Purchase/ViewPurchaseOrder/${po_id}`);
       } else {
         alert("Please! Select Purchase Order");

@@ -19,7 +19,6 @@ import "../../styles/sale.css";
 import { Card } from "react-bootstrap";
 import Sidebar from "../../components/ViewOrderProduct";
 import "../../styles/viewCustomer.css";
-import "../../styles/AddProduct.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { Header } from "../../components";
 
@@ -427,9 +426,9 @@ const AddSaleOrder = () => {
                     }}
                   >
                     <div>
-                      <div
-                        style={{ fontWeight: "bold", fontSize: "18px" }}
-                      >{`${item.code} ${item.productname}`}</div>
+                      <div style={{ fontWeight: "bold", fontSize: "18px" }}>{`${
+                        item.code
+                      } ${truncate(item.productname, 75)}`}</div>
                     </div>
                     <div style={{ fontSize: "14px" }}>{`${truncate(
                       item.details,
@@ -553,10 +552,8 @@ const AddSaleOrder = () => {
     event.preventDefault();
     try {
       console.log("Add new");
-      const baseUrl = "http://localhost:3000";
-      const path = `/sales/addSaleOrder/${param.store_id}`;
-      const url = `${baseUrl}${path}`;
-      window.open(url, "_blank");
+      const path = `/Sales/AddSaleOrder/${param.store_id}`;
+      window.open([path], "_blank");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -875,16 +872,16 @@ const AddSaleOrder = () => {
       ...provided,
       maxHeight: "70px",
       height: "70px",
-      // fontWeight:"bold",
       fontSize: "14px",
-      // zIndex: "2",
     }),
     option: (provided) => ({
       ...provided,
       maxHeight: "70px",
-      //fontWeight:"bold",
       fontSize: "14px",
-      // zIndex: "2",
+    }),
+    menuList: (provided) => ({
+      ...provided,
+      maxHeight: "250px",
     }),
   };
 
@@ -914,6 +911,7 @@ const AddSaleOrder = () => {
                 padding: "4px",
                 paddingLeft: "8px",
                 paddingRight: "8px",
+                borderRadius: "5px",
               }}
             >
               ORDER STATUS: {orderstatuslable}
@@ -991,6 +989,8 @@ const AddSaleOrder = () => {
                       <Select
                         className="myreact-select-prod"
                         id="product"
+                        menuPlacement="bottom"
+                        menuPosition="fixed"
                         value={selectedProduct}
                         onChange={handleChangeProduct}
                         options={productOptions}
@@ -1059,7 +1059,7 @@ const AddSaleOrder = () => {
                         <th
                           style={{
                             textAlign: "center",
-                            width: "140px",
+                            width: "115px",
                           }}
                         >
                           UNIT PRICE
@@ -1067,7 +1067,7 @@ const AddSaleOrder = () => {
                         <th
                           style={{
                             textAlign: "center",
-                            width: "120px",
+                            width: "90px",
                           }}
                         >
                           QTY
@@ -1075,7 +1075,7 @@ const AddSaleOrder = () => {
                         <th
                           style={{
                             textAlign: "center",
-                            width: "120px",
+                            width: "100px",
                           }}
                         >
                           DISCOUNT
@@ -1083,7 +1083,7 @@ const AddSaleOrder = () => {
                         <th
                           style={{
                             textAlign: "center",
-                            width: "120px",
+                            width: "100px",
                           }}
                         >
                           TOTAL
@@ -1092,7 +1092,7 @@ const AddSaleOrder = () => {
                         <th
                           style={{
                             textAlign: "center",
-                            width: "130px",
+                            width: "90px",
                           }}
                         >
                           SHIP QTY
@@ -1101,7 +1101,7 @@ const AddSaleOrder = () => {
                         <th
                           style={{
                             textAlign: "center",
-                            width: "60px",
+                            width: "50px",
                           }}
                         >
                           DEL
@@ -1121,16 +1121,7 @@ const AddSaleOrder = () => {
                             style={{ textAlign: "center" }}
                             onClick={() => handleToggle(item)}
                           >
-                            {item.code}{" "}
-                            {toggle && (
-                              <div className="overlay1">
-                                <Sidebar
-                                  close={() => setToggle(false)}
-                                  product_id={productID}
-                                  store_id={param.store_id}
-                                />
-                              </div>
-                            )}
+                            {item.code}
                           </td>
                           <td
                             style={{ textAlign: "center" }}
@@ -1168,9 +1159,9 @@ const AddSaleOrder = () => {
                                 }}
                               >
                                 <div style={{ fontWeight: "bold" }}>
-                                  {item.name}
+                                  {truncate(item.name, 60)}
                                 </div>
-                                <div>{truncate(item.details, 90)}</div>
+                                <div>{truncate(item.details, 120)}</div>
                               </div>
                             </div>
                           </td>
@@ -1279,7 +1270,7 @@ const AddSaleOrder = () => {
                             <button
                               style={{
                                 textAlign: "center",
-                                marginLeft: "4px",
+                                marginLeft: "0px",
                               }}
                               type="button"
                               onClick={() => handleDeleteClick(index)}
@@ -1487,8 +1478,6 @@ const AddSaleOrder = () => {
                     </tr>
                   </tbody>
                 </table>
-
-                {/* </Card> */}
               </Row>
             </div>
           </Col>
@@ -1624,14 +1613,14 @@ const AddSaleOrder = () => {
                 <Col
                   md={6}
                   className="container-col"
-                  style={{ paddingLeft: "5px", paddingBottom: "10px" }}
+                  style={{ paddingLeft: "5px", paddingBottom: "6px" }}
                 >
                   <label
                     style={{
                       fontWeight: "500",
                     }}
                   >
-                    Ship Method:{" "}
+                    Ship Method:
                   </label>
                   <input
                     type="text"
@@ -1648,7 +1637,7 @@ const AddSaleOrder = () => {
                 <Col
                   md={6}
                   className="container-col"
-                  style={{ paddingRight: "5px", paddingBottom: "10px" }}
+                  style={{ paddingRight: "5px", paddingBottom: "6px" }}
                 >
                   <label
                     style={{
@@ -1672,7 +1661,7 @@ const AddSaleOrder = () => {
                 <Col
                   md={6}
                   className="container-col"
-                  style={{ paddingLeft: "5px", paddingBottom: "10px" }}
+                  style={{ paddingLeft: "5px", paddingBottom: "6px" }}
                 >
                   <label
                     style={{
@@ -1696,7 +1685,7 @@ const AddSaleOrder = () => {
                 <Col
                   md={6}
                   className="container-col"
-                  style={{ paddingRight: "5px", paddingBottom: "10px" }}
+                  style={{ paddingRight: "5px", paddingBottom: "6px" }}
                 >
                   <label
                     style={{
@@ -1724,8 +1713,8 @@ const AddSaleOrder = () => {
                   style={{
                     paddingRight: "5px",
                     paddingLeft: "5px",
-                    paddingTop: "10px",
-                    paddingBottom: "10px",
+                    paddingTop: "4px",
+                    paddingBottom: "16px",
                   }}
                 >
                   <textarea
@@ -1748,7 +1737,6 @@ const AddSaleOrder = () => {
                 className="justify-content-center"
                 style={{ padding: "0px" }}
               >
-                {/* <div className="keypad-grid1"> */}
                 {keypadButtons.map((number) => (
                   <Col md={4} className="container-col">
                     <Card
@@ -1768,6 +1756,15 @@ const AddSaleOrder = () => {
               </Row>
             </div>
           </Col>
+          {toggle && (
+            <div className="overlay1">
+              <Sidebar
+                close={() => setToggle(false)}
+                product_id={productID}
+                store_id={param.store_id}
+              />
+            </div>
+          )}
         </Row>
       </Container>
     </div>
