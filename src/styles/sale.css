@@ -1,0 +1,289 @@
+.container_sale {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.article-container-sale {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.article-container-sale3 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.article-container-sale1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+}
+.overlay1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+.article-sale {
+  flex: 0 0 50%;
+  padding: 10px;
+}
+.article-sale0 {
+  flex: 0 0 70%;
+  padding: 10px;
+}
+
+.article-sale1 {
+  flex: 0 0 16%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.article-sale3 {
+  flex: 0 0 50%;
+  box-sizing: border-box;
+  /* padding: 10px; */
+}
+
+.user-body {
+  width: fit-content;
+  height: fit-content;
+  justify-content: space-around;
+}
+
+.css-13cymwt-control-sale {
+  width: 100%;
+  height: 100%;
+}
+
+.article-container-select {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  justify-content: space-around;
+  /* flex-wrap: wrap; */
+}
+
+.card-sale {
+  border: 1px solid #ddd;
+  margin: 4px;
+  height: 89vh;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px !important;
+  border-radius: 10px;
+  overflow: hidden; /* Hide any content that overflows the container */
+}
+
+.card-sale3 {
+  border: 1px solid #ddd;
+  margin: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: 10px;
+  height: 100% !important;
+  overflow: hidden; /* Hide any content that overflows the container */
+}
+
+.card-sale-keypad {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-container-sale {
+  margin: 0px !important;
+  /* min-height: 400px; */
+  height: 44vh;
+  overflow-y: auto;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  /* width: 100%; */
+}
+
+.table-container-sale03 {
+  margin: 0px !important;
+  /* width: 78 */
+  /* 0px; */
+  max-height: 70vh;
+  /* min-width: 800px; */
+  overflow-y: auto;
+  /* overflow-x: auto; */
+  border-collapse: collapse;
+  /* border: 1px solid #ddd; */
+  border-radius: 10px;
+  /* width: 100%; */
+}
+
+.table-container-sale1 {
+  margin: 0px !important;
+  overflow-y: auto;
+  border-collapse: collapse;
+  border-radius: 10px !important;
+  /* border: 1px solid #ddd;
+  border-radius: 10px !important; */
+  /* width: 100%; */
+}
+.borderless td,
+.borderless th {
+  border: none;
+}
+.table-container-sale3 {
+  margin-top: 10px;
+  max-width: 499%;
+  height: 480px;
+  overflow-y: auto;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  border-radius: 12px;
+  /* width: 100%; */
+}
+
+.table-container-sale4 {
+  margin-top: 10px;
+  max-width: 499%;
+  height: 440px;
+  overflow-y: auto;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  border-radius: 12px;
+  /* width: 100%; */
+}
+
+.table-container-sale5 {
+  margin-top: 10px;
+  max-width: 499%;
+  height: 512px;
+
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  border-radius: 12px;
+  /* width: 100%; */
+}
+
+.table-sale-tr {
+  /* color: #03c9d7; */
+  text-align: center !important;
+  font-size: 14px !important;
+  font-weight: bold;
+  height: 40px !important;
+  /* color: white; */
+}
+
+.table-sale-tr th {
+  position: sticky;
+  top: 0;
+}
+
+.table-sum-label {
+  width: 200px !important;
+  text-align: right !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  padding-top: 0px;
+  padding-bottom: 0px !important;
+}
+
+.table-sum-cash {
+  width: auto !important;
+  text-align: left !important;
+  padding-left: 8px !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  padding-top: 0px;
+  padding-bottom: 0px !important;
+}
+
+.table-sum-tb {
+  text-align: left !important;
+  margin-left: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.action-btns-card {
+  cursor: pointer;
+  width: auto;
+  height: 100px !important;
+  margin: 0;
+  padding: 0%;
+  font-weight: Bold;
+  font-size: 18px;
+  text-align: center;
+}
+.action-btn {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Adjust the styles based on your design preferences */
+.centered-input input {
+  width: 80%; /* Adjust the width as needed */
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.keypad-grid1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* justify-content: space-between; */
+}
+
+.keypad-button1 {
+  /* color: currentColor; */
+  font-weight: Bold;
+  font-size: 24px;
+  text-align: center;
+  min-height: 77px;
+  margin-bottom: 12px !important;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  /* justify-content: space-between; */
+  /* color: currentColor; */
+
+  border: 2px solid #03c9d7;
+  /* border-radius: 10px; */
+  /* padding: 10px; */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* background-color: currentColor; */
+}
+
+.overlay-freeze {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 99999; /* Ensure the overlay is on top of other elements */
+}
+
+.table tr:hover td {
+  background-color: #ffd7a3 !important;
+  cursor: pointer;
+}

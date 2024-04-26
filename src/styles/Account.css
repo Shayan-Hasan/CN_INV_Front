@@ -1,0 +1,41 @@
+.article-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.article {
+  flex: 0 0 27%;
+  /* padding: 20px; */
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+/*     
+  .label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    box-sizing: border-box;
+  } */
+
+.input1 {
+  height: 27px;
+  width: 120%;
+  padding: 8px;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.textarea1 {
+  height: 100px;
+  width: 120%;
+  padding: 8px;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

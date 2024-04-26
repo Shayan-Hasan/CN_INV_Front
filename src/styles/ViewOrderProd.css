@@ -1,0 +1,36 @@
+.App {
+  font-family: sans-serif;
+  /* text-align: center; */
+}
+
+.sidebar1 {
+  /* width: 20vw; */
+  height: 100vh;
+  position: fixed;
+  /* top: 0; */
+  left: 0;
+  bottom: 0;
+  background: white;
+  /* display: grid; */
+  /* place-items: center; */
+}
+
+.sidebar1 div {
+  /* cursor: pointer; */
+  /* position: absolute; */
+  left: 1em;
+  top: 1em;
+}
+
+.bar-body {
+  /* margin-top: 20px; */
+  /* margin-left: 6px;
+    margin-bottom: 20px;
+    margin-right: 20px; */
+}
+
+.line {
+  border-bottom: 0px solid #888;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
